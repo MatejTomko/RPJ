@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "619818095591",
+    "firebase_url": "https://spravca-darcov-krvi-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "spravca-darcov-krvi",
+    "storage_bucket": "spravca-darcov-krvi.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:619818095591:android:1c00f0deb7e67b7e25a342",
+        "android_client_info": {
+          "package_name": "com.example.blood_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "619818095591-39m2bb88logcqh3ugl9uf4lclt5boca4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAR0dmhXTrgxamIQVUTU6Jy8UbhkDL0L64"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "619818095591-39m2bb88logcqh3ugl9uf4lclt5boca4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
