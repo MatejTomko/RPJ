@@ -8,6 +8,7 @@ import 'package:blood_app/registration.dart';
 void main() => runApp(MaterialApp(
   initialRoute: "/",
   routes:{
+
     "/":(context) => First(),
     "/home": (context) => Home(),
     "/login": (context) => Login(),
