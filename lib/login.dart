@@ -93,18 +93,6 @@ class _LoginState extends State<Login>{
               const SizedBox(
                 height: 130,
               ),
-              TextButton(
-                onPressed: (){
-                  //TODO prepojenie na homescreen pre navstevnika
-                },
-                child: Text(
-                  "Pokračovať bez registrácie",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-              ),
             ],
           )
         ),

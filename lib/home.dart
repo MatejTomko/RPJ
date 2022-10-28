@@ -14,6 +14,9 @@ class _HomeState extends State<Home> {
         title: Text("Home"),
         backgroundColor: Colors.red[900],
       ),
+      body: Center(
+        child: Text("Pripravuje sa!"),
+      )
     );
   }
 }
