@@ -4,6 +4,8 @@ import 'package:firebase_core/firebase_core.dart';
 class DatabaseManager{
 
   final CollectionReference darcaList = FirebaseFirestore.instance.collection('Darca');
+  final CollectionReference odberList = FirebaseFirestore.instance.collection('Odber');
+
 
   Future<void> createDarcaData(
       String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo) async {
@@ -24,6 +26,30 @@ class DatabaseManager{
 
     try{
       await darcaList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> createOdberData(
+      String idDarca,mnozstvo,datum) async {
+    return await odberList.doc().set({
+      'datum':datum,
+      'idDarca':idDarca,
+      'mnozstvo':mnozstvo,
+    });
+  }
+
+  Future getOdberList() async{
+    List itemsList=[];
+
+    try{
+      await odberList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
       })
       );

@@ -1,5 +1,6 @@
 class darca{
-  String meno,adresa,priezvisko,idDarca,krvnaskupina,pocetodberov,poslednyodber,rodnecislo;
+  String meno,adresa,priezvisko,idDarca,krvnaskupina,pocetodberov,rodnecislo;
+  DateTime poslednyodber;
 
   darca(
       this.meno,
@@ -8,7 +9,7 @@ class darca{
       this.idDarca,
       this.krvnaskupina,
       this.pocetodberov,
-      this.poslednyodber,
-      this.rodnecislo);
+      this.rodnecislo,
+      this.poslednyodber);
 
 }
