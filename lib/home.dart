@@ -73,9 +73,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type:   BottomNavigationBarType.fixed,
-        items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label:"Home" ),
-          BottomNavigationBarItem(icon: Icon(Icons.message),label:"Odbery"),
+        selectedItemColor: Colors.red[700],
+        items: const [
+          BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label:"Domov",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.message),
+              label:"Odbery"
+          ),
         ],
       ),
 

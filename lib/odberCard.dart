@@ -19,12 +19,12 @@ class OdberCard extends StatelessWidget {
                 children: [
                   Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Mnozstvo: ${_odber.mnozstvo}"),
+                      child: Text("Množstvo: ${_odber.mnozstvo}"),
                   )
                 ],
               ),
               Row(children: [
-                Text("Datum: ${_odber.datum}"),
+                Text("Dátum: ${_odber.datum}"),
               ],)
             ],
           ),

@@ -30,7 +30,6 @@ class _profilePageState extends State<profilePage> {
   List userDarcaList = [];
   darca user=new darca("", "", "", "", "", "", "",DateTime.now());
 
-
   @override
   void initState() {
     getDocId();
@@ -63,93 +62,97 @@ class _profilePageState extends State<profilePage> {
       });
     }
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Profile"),
+        title: Text("Profil darcu"),
         backgroundColor: Colors.red[900],
       ),
-      body: Center(
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+          child: Container(
+            margin: EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              border: Border.all(color: Colors.black26),
+              color: Color.fromRGBO(245,245,245, 1.0),
+            ),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                Text(
-                  "Meno a Priezvisko",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
+                SizedBox(height: 20),
+                Container(
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.symmetric(horizontal: 10.0),
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child:
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text.rich(
+                        TextSpan(
+                          children: [
+                            const WidgetSpan(child: Icon(Icons.person_outline_outlined,)),
+                            TextSpan(text: "${user.meno} ${user.priezvisko}",
+                            style: const TextStyle(
+                              color: Colors.black,
+                              fontSize: 24,
+                            )),
+                          ]
+                        )
+                      ),
+                      if (user.krvnaskupina=="A+") Image(image: AssetImage("assets/a_positive.png"), width: 40),
+                      if (user.krvnaskupina=="A-") Image(image: AssetImage("assets/a_negative.png"), width: 40,),
+                      if (user.krvnaskupina=="B+") Image(image: AssetImage("assets/b_positive.png"), width: 40,),
+                      if (user.krvnaskupina=="B-") Image(image: AssetImage("assets/b_negative.png"), width: 40,),
+                      if (user.krvnaskupina=="AB+") Image(image: AssetImage("assets/ab_positive.png"), width: 40,),
+                      if (user.krvnaskupina=="AB-") Image(image: AssetImage("assets/ab_negative.png"), width: 40,),
+                      if (user.krvnaskupina=="0+") Image(image: AssetImage("assets/zero_positive.png"), width: 40,),
+                      if (user.krvnaskupina=="0+") Image(image: AssetImage("assets/zero_negative.png"), width: 40,),
+                    ],
                   ),
                 ),
-                Text(
-                  user.meno +" "+user.priezvisko,
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
+                Align(
+                  alignment: Alignment.topLeft,
+                  child: Column(
+                    children: [
+                      Text(
+                        "Rodné číslo: ${user.rodnecislo}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "Počet odberov: ${user.pocetodberov}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                      const Text(
+                        "Posledný odber: ",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                      Text(
+                        "${user.poslednyodber}",
+                        style: const TextStyle(
+                          color: Colors.black,
+                          fontSize: 20,
+                        ),
+                      ),
+                    ],
                   ),
-                ),
-                Text(
-                  "rodnecislo",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  user.rodnecislo,
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  "Krvna skupina",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  user.krvnaskupina,
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  "Pocet odberov",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  user.pocetodberov,
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  "Posledny odber",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-                Text(
-                  "${user.poslednyodber}",
-                  style: TextStyle(
-                    color: Colors.red[800],
-                    fontSize: 18,
-                  ),
-                ),
-
+                )
               ],
-            )
-        ),
+            ),
+          )
       ),
 
     );
