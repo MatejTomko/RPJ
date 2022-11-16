@@ -59,14 +59,57 @@ class _liekyPageState extends State<liekyPage> {
         backgroundColor: Colors.red[900],
       ),
 
-      body: SafeArea(
-        child: ListView.builder(
-            itemCount: userLiekyListDisplay.length,
-            itemBuilder:(context, index) {
-              lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
+      body: Container(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextField(
+                onChanged: (value) {
+                },
+                decoration: const InputDecoration(
+                    labelText: "",
+                    hintText: "Vyhľadaj liek",
+                    prefixIcon: Icon(Icons.search),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                    ),
+                ),
+              ),
+            ),
+            Container(
+              height: 50,
+              width: 100,
+              decoration: BoxDecoration(
+                color: Colors.red[900],
+                borderRadius: BorderRadius.circular(50),
+              ),
+              child: TextButton(
+                onPressed: (){
+                  ///TODO akcia
+                },
+                style: TextButton.styleFrom(
+                  shape: const StadiumBorder(
+                    side: BorderSide(color: Color.fromRGBO(183, 28, 28, 1), style: BorderStyle.solid),
+                  ),
+                ),
+                child: const Text(
+                  "Hľadaj",
+                  style: TextStyle(color: Colors.white,fontSize: 25),
+                ),
+              ),
+            ),
 
-              return liekyCard(liek1);
-            }) ,
+            Expanded(
+              child: ListView.builder(
+                  itemCount: userLiekyListDisplay.length,
+                  itemBuilder:(context, index) {
+                    lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
+                    return liekyCard(liek1);
+                  }),
+            ),
+          ],
+        ),
       ),
     );
   }
