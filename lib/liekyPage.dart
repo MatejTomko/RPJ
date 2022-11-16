@@ -21,11 +21,12 @@ class _liekyPageState extends State<liekyPage> {
   int _idDarca=1000;
   List userLiekyListPomocny = [];
   List userLiekyListDisplay = [];
+  String vyrazHladaj= "";
+  TextEditingController liekController = new TextEditingController();
 
 
   @override
   void initState() {
-    fetchDatabaseList();
     super.initState();
   }
 
@@ -41,11 +42,10 @@ class _liekyPageState extends State<liekyPage> {
         userLiekyListPomocny=resultant;
         for(var i=0;i< userLiekyListPomocny.length;i++){
           String help=userLiekyListPomocny[i]['liek'].toString().toLowerCase();
-          if(help.contains("sumamed")){
+          if(help.contains(vyrazHladaj)){
             userLiekyListDisplay.add(userLiekyListPomocny[i]);
           }
         }
-        print(userLiekyListDisplay.length);
       });
     }
   }
@@ -67,6 +67,7 @@ class _liekyPageState extends State<liekyPage> {
               child: TextField(
                 onChanged: (value) {
                 },
+                controller: liekController,
                 decoration: const InputDecoration(
                     labelText: "",
                     hintText: "Vyhľadaj liek",
@@ -86,7 +87,10 @@ class _liekyPageState extends State<liekyPage> {
               ),
               child: TextButton(
                 onPressed: (){
-                  ///TODO akcia
+                  vyrazHladaj=liekController.text;
+                  if(vyrazHladaj.length>2){
+                    fetchDatabaseList();
+                  }
                 },
                 style: TextButton.styleFrom(
                   shape: const StadiumBorder(
