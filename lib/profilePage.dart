@@ -111,7 +111,7 @@ class _profilePageState extends State<profilePage> {
                       if (user.krvnaskupina=="AB+") Image(image: AssetImage("assets/ab_positive.png"), width: 40,),
                       if (user.krvnaskupina=="AB-") Image(image: AssetImage("assets/ab_negative.png"), width: 40,),
                       if (user.krvnaskupina=="0+") Image(image: AssetImage("assets/zero_positive.png"), width: 40,),
-                      if (user.krvnaskupina=="0+") Image(image: AssetImage("assets/zero_negative.png"), width: 40,),
+                      if (user.krvnaskupina=="0-") Image(image: AssetImage("assets/zero_negative.png"), width: 40,),
                     ],
                   ),
                 ),

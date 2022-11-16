@@ -5,6 +5,8 @@ class DatabaseManager{
 
   final CollectionReference darcaList = FirebaseFirestore.instance.collection('Darca');
   final CollectionReference odberList = FirebaseFirestore.instance.collection('Odber');
+  final CollectionReference liekyList = FirebaseFirestore.instance.collection('Lieky');
+
 
 
   Future<void> createDarcaData(
@@ -50,6 +52,31 @@ class DatabaseManager{
 
     try{
       await odberList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> createLiekyData(
+      String kedynajskor,liek,mozemdarovat,poznamka) async {
+    return await liekyList.doc().set({
+      'kedy najskôr':kedynajskor,
+      'liek':liek,
+      'môžem darovať':mozemdarovat,
+      'poznámka':poznamka,
+    });
+  }
+
+  Future getLiekyList() async{
+    List itemsList=[];
+
+    try{
+      await liekyList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
       })
       );

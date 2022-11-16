@@ -16,8 +16,9 @@ class odberyPage extends StatefulWidget {
 }
 
 class _odberyPageState extends State<odberyPage> {
-  int _idDarca=1000;
-  List userOdberyList = [];
+  String _idDarca="1000";
+  List userOdberyListPomocny = [];
+  List userOdberyListDisplay = [];
 
 
   @override
@@ -34,11 +35,11 @@ class _odberyPageState extends State<odberyPage> {
       print('Unable to retrieve');
     }else{
       setState(() {
-        userOdberyList=resultant;
-        for(var i=0;i< userOdberyList.length;i++){
-          String help=userOdberyList[i]['idDarca'].toString();
-          if(help != "1000"){
-            userOdberyList.remove(userOdberyList[i]);
+        userOdberyListPomocny=resultant;
+        for(var i=0;i< userOdberyListPomocny.length;i++){
+          String help=userOdberyListPomocny[i]['idDarca'].toString();
+          if(help == _idDarca ){
+            userOdberyListDisplay.add(userOdberyListPomocny[i]);
           }
         }
       });
@@ -55,9 +56,9 @@ class _odberyPageState extends State<odberyPage> {
       ),
       body: SafeArea(
         child: ListView.builder(
-          itemCount: userOdberyList.length,
+          itemCount: userOdberyListDisplay.length,
           itemBuilder:(context, index) {
-            odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'].toDate());
+            odber odb1=new odber(userOdberyListDisplay[index]['idDarca'],userOdberyListDisplay[index]['mnozstvo'],userOdberyListDisplay[index]['datum'].toDate());
 
             return OdberCard(odb1);
           }) ,
