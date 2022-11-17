@@ -4,6 +4,8 @@ import 'package:blood_app/kamennaOC.dart';
 import 'package:blood_app/kamennaOCCard.dart';
 import 'package:blood_app/lieky.dart';
 import 'package:blood_app/liekyCard.dart';
+import 'package:blood_app/mobilnaOCCardZaciatocna.dart';
+import 'package:blood_app/mobilnaOCZaciatocna.dart';
 import 'package:blood_app/odber.dart';
 import 'package:blood_app/odberCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -31,8 +33,8 @@ class MyScrollBehaviour extends ScrollBehavior{
 class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
   late TabController tabController;
   List userMobilneOCList= [];
+  List userMobilneOCListZaciatocny= [];
   List userKamenneOCList = [];
-  List display= [];
   dynamic resultantMob;
   dynamic resultantKam;
 
@@ -54,9 +56,8 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
       setState(() {
         for(var i=0;i< resultantKam.length;i++){
             userKamenneOCList.add(resultantKam[i]);
+            userMobilneOCListZaciatocny.add(resultantKam[i]['meno']);
         }
-        display=userKamenneOCList;
-        print(userKamenneOCList.length);
       });
     }
 
@@ -68,19 +69,18 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
         for(var i=0;i< resultantMob.length;i++){
           userMobilneOCList.add(resultantMob[i]);
         }
-        print(userMobilneOCList.length);
       });
     }
 
   }
 
-  Future<void> displayMobilneOC()async{
+  /*Future<void> displayMobilneOC()async{
     display=[];
   }
 
   Future<void> displayKamenneOC()async{
     display=[];
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -119,15 +119,34 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
             Container(
               child: Expanded(
                 child: ListView.builder(
-                    itemCount: display.length,
+                    itemCount: userKamenneOCList.length,
                     itemBuilder:(context, index) {
-                      kamennaOC koc=new kamennaOC(display[index]['adresa'],display[index]['email'],display[index]['hodinypi'],display[index]['hodinypo'],display[index]['hodinysr'],display[index]['hodinyst'],display[index]['hodinyut'],display[index]['informacie'],display[index]['mapy'],display[index]['meno'],display[index]['objednavacie']);
+                      kamennaOC koc=new kamennaOC(userKamenneOCList[index]['adresa'],userKamenneOCList[index]['email'],userKamenneOCList[index]['hodinypi'],userKamenneOCList[index]['hodinypo'],userKamenneOCList[index]['hodinysr'],userKamenneOCList[index]['hodinyst'],userKamenneOCList[index]['hodinyut'],userKamenneOCList[index]['informacie'],userKamenneOCList[index]['mapy'],userKamenneOCList[index]['meno'],userKamenneOCList[index]['objednavacie']);
                       return kamennaOCCard(koc);
                     }),
               ),
             ),
             //prvy widget v tomto je prvy tab a druhy je druhy
-            Icon(Icons.access_time_outlined)
+            Container(
+              child: Expanded(
+                child: ListView.builder(
+                    itemCount: userMobilneOCListZaciatocny.length,
+                    itemBuilder:(context, index) {
+                      List pomocnyMobilneOC= [];
+                      if(resultantMob==null){
+                        print('Unable to retrieve');
+                      }else{
+                          for(var i=0;i< userMobilneOCList.length;i++){
+                            if(userMobilneOCList[i]['oc']==userMobilneOCListZaciatocny[index]){
+                              pomocnyMobilneOC.add(userMobilneOCList[i]);
+                            }
+                          }
+                        }
+                      mobilnaOCZaciatocna mocz=new mobilnaOCZaciatocna(userMobilneOCListZaciatocny[index],pomocnyMobilneOC);
+                      return mobilnaOCCardZaciatocna(mocz);
+                    }),
+              ),
+            ),
           ],
         ),
       )
