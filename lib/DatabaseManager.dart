@@ -6,8 +6,8 @@ class DatabaseManager{
   final CollectionReference darcaList = FirebaseFirestore.instance.collection('Darca');
   final CollectionReference odberList = FirebaseFirestore.instance.collection('Odber');
   final CollectionReference liekyList = FirebaseFirestore.instance.collection('Lieky');
-
-
+  final CollectionReference kamenneOCList = FirebaseFirestore.instance.collection('KamenneOC');
+  final CollectionReference mobilneOCList = FirebaseFirestore.instance.collection('MobilneOC');
 
   Future<void> createDarcaData(
       String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo) async {
@@ -77,6 +77,64 @@ class DatabaseManager{
 
     try{
       await liekyList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> createKamenneOCData(
+      String adresa,email,hodinypi,hodinypo,hodinysr,hodinyut,hodinyst,informacie,mapy,meno,objednavacie) async {
+    return await kamenneOCList.doc().set({
+      'adresa':adresa,
+      'email':email,
+      'hodinypi':hodinypi,
+      'hodinypo':hodinypo,
+      'hodinysr':hodinysr,
+      'hodinyut':hodinyut,
+      'hodinyst':hodinyst,
+      'informacie':informacie,
+      'mapy':mapy,
+      'meno':meno,
+      'objednavacie':objednavacie,
+    });
+  }
+
+  Future getKamenneOCList() async{
+    List itemsList=[];
+
+    try{
+      await kamenneOCList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> createMobilneOCData(
+      String cas,datum,mapy,miesto,oc) async {
+    return await mobilneOCList.doc().set({
+      'cas':cas,
+      'datum':datum,
+      'mapy':mapy,
+      'miesto':miesto,
+      'oc':oc,
+    });
+  }
+
+  Future getMobilneOCList() async{
+    List itemsList=[];
+
+    try{
+      await mobilneOCList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
       })
       );

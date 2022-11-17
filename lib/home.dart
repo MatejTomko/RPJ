@@ -1,6 +1,7 @@
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/darca.dart';
 import 'package:blood_app/liekyPage.dart';
+import 'package:blood_app/ocPage.dart';
 import 'package:blood_app/odberyPage.dart';
 import 'package:blood_app/profilePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -58,6 +59,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     profilePage(),
     odberyPage(),
     liekyPage(),
+    ocPage(),
   ];
   int _selectedIndex= 0;
 
@@ -88,6 +90,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
               icon: Icon(Icons.account_tree_rounded),
               label:"Lieky"
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.place),
+              label:"OC"
           ),
         ],
       ),
