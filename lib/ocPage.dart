@@ -1,4 +1,4 @@
-import 'dart:ffi';
+import 'dart:ffi' as ffi;
 
 import 'package:blood_app/kamennaOC.dart';
 import 'package:blood_app/kamennaOCCard.dart';
@@ -20,7 +20,16 @@ class ocPage extends StatefulWidget {
   State<ocPage> createState() => _ocPageState();
 }
 
-class _ocPageState extends State<ocPage> {
+class MyScrollBehaviour extends ScrollBehavior{
+  @override
+  Widget buildOverscrollIndicator(
+      BuildContext context, Widget child, ScrollableDetails details) {
+    return child;
+  }
+}
+
+class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
+  late TabController tabController;
   List userMobilneOCList= [];
   List userKamenneOCList = [];
   List display= [];
@@ -31,6 +40,7 @@ class _ocPageState extends State<ocPage> {
   void initState() {
     fetchDatabaseList();
     super.initState();
+    tabController = TabController(length: 3,initialIndex: 0, vsync: this);
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
@@ -78,58 +88,49 @@ class _ocPageState extends State<ocPage> {
       appBar: AppBar(
         title: Text("Odberné centrá"),
         backgroundColor: Colors.red[900],
-      ),
-
-      body: Container(
-        child: Row(
-          children: [
-            /*Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width/2,
-              decoration: BoxDecoration(
-                color: Colors.red[900],
-              ),
-              child: TextButton(
-                onPressed: (){
-                  //TODO prepojenie na home screen;
-                },
-                child: const Text(
-                  "Kamenne",
-                  style: TextStyle(color: Colors.white,fontSize: 14),
-                ),
-              ),
-            ),
-            /// Mobilne
-            Container(
-              height: 50,
-              width: MediaQuery.of(context).size.width/2,
-              decoration: BoxDecoration(
-                color: Colors.red[900],
-              ),
-              child: TextButton(
-                onPressed: (){
-                  //TODO prepojenie na home screen
-                },
-                child: const Text(
-                  "Mobilne",
-                  style: TextStyle(color: Colors.white,fontSize: 14),
-                ),
-              ),
-            ),*/
-
-            //TREBA OPRAVIT TIE TLACITKA HORE BO KED ICH ZOBRAZIM TA LISTVIEW SA DOGUBI
-
-            Expanded(
-              child: ListView.builder(
-                  itemCount: display.length,
-                  itemBuilder:(context, index) {
-                    kamennaOC koc=new kamennaOC(display[index]['adresa'],display[index]['email'],display[index]['hodinypi'],display[index]['hodinypo'],display[index]['hodinysr'],display[index]['hodinyst'],display[index]['hodinyut'],display[index]['informacie'],display[index]['mapy'],display[index]['meno'],display[index]['objednavacie']);
-                    return kamennaOCCard(koc);
-                  }),
-            ),
-          ],
+        bottom: PreferredSize(
+          preferredSize: Size.fromHeight(40),
+          child: ListView(
+            physics: BouncingScrollPhysics(),
+            shrinkWrap: true,
+            children: [
+              Expanded(
+                flex: 5,
+                  child: TabBar(
+                    indicatorColor: Colors.white,
+                    controller: tabController,
+                    tabs: const [
+                      Tab(child: Text("Kamenné")),
+                      Tab(child: Text("Mobilné")),
+                    ],
+                  ))
+            ],
+          ),
         ),
       ),
+
+      body: Theme(
+        data: ThemeData(
+            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
+        ),
+        child: TabBarView(
+          controller: tabController,
+          children: [
+            Container(
+              child: Expanded(
+                child: ListView.builder(
+                    itemCount: display.length,
+                    itemBuilder:(context, index) {
+                      kamennaOC koc=new kamennaOC(display[index]['adresa'],display[index]['email'],display[index]['hodinypi'],display[index]['hodinypo'],display[index]['hodinysr'],display[index]['hodinyst'],display[index]['hodinyut'],display[index]['informacie'],display[index]['mapy'],display[index]['meno'],display[index]['objednavacie']);
+                      return kamennaOCCard(koc);
+                    }),
+              ),
+            ),
+            //prvy widget v tomto je prvy tab a druhy je druhy
+            Icon(Icons.access_time_outlined)
+          ],
+        ),
+      )
     );
   }
 }

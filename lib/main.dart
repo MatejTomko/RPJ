@@ -19,6 +19,9 @@ Future main() async {
     },
     theme: ThemeData(
       primarySwatch: Colors.red,
+      colorScheme: ColorScheme.fromSwatch(
+        accentColor: Colors.red,
+      )
     ),
   ));
 }

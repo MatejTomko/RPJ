@@ -13,6 +13,7 @@ class kamennaOCDetails extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         title: Text(_koc.meno),
+        backgroundColor: Colors.red[900],
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),

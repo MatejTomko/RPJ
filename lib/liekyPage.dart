@@ -106,11 +106,12 @@ class _liekyPageState extends State<liekyPage> {
 
             Expanded(
               child: ListView.builder(
+                shrinkWrap: true,
                   itemCount: userLiekyListDisplay.length,
                   itemBuilder:(context, index) {
-                    lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
-                    return liekyCard(liek1);
-                  }),
+                  lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
+                  return liekyCard(liek1);
+                }),
             ),
           ],
         ),

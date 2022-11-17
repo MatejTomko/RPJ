@@ -14,32 +14,46 @@ class kamennaOCCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text(_kamennaOC.meno),
-                    )
-                  ],
+          child: Column(
+            children: [
+              InkWell(
+                child: Padding(
+                  padding: const EdgeInsets.all(15.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            _kamennaOC.meno,
+                            style: const TextStyle(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            _kamennaOC.adresa,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            )
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-                Row(children: [
-                  Text(_kamennaOC.adresa),
-                ],
-                ),
-                ListTile(
-                  onTap: (){Navigator.push(
+                onTap: (){
+                  Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (context) => kamennaOCDetails(_kamennaOC)));
-
-                  },
-                ),
-              ],
-            ),
+                },
+              ),
+            ],
           )
       ),
     );

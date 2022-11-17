@@ -18,9 +18,11 @@ class liekyCard extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Kedy najskôr: ${_lieky.kedynajskor}"),
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.only(bottom: 10.0),
+                        child: Text("Kedy najskôr: ${_lieky.kedynajskor}"),
+                      ),
                     )
                   ],
                 ),
