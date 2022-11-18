@@ -24,6 +24,9 @@ class kamennaOCCard extends StatelessWidget {
                     children: [
                       Row(
                         children: [
+                          Icon(Icons.place_outlined,
+                          color: Colors.red[700]
+                          ),
                           Text(
                             _kamennaOC.meno,
                             style: const TextStyle(

@@ -13,50 +13,50 @@ class mobilnaOCCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Card(
-          child: Column(
-            children: [
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
+    return Card(
+        child: Column(
+          children: [
+            InkWell(
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Expanded(
+                          child: Text(
                             _mobilnaOC.miesto,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                              _mobilnaOC.cas,
-                              style: const TextStyle(
-                                fontSize: 16,
-                              )
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text(
+                            _mobilnaOC.cas,
+                            style: const TextStyle(
+                              fontSize: 16,
+                            )
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => mobilnaOCDetails(_mobilnaOC)));
-                },
               ),
-            ],
-          )
-      ),
+              onTap: (){
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => mobilnaOCDetails(_mobilnaOC)));
+              },
+            ),
+          ],
+        )
     );
   }
 }

@@ -25,16 +25,14 @@ class mobilnaOCCardZaciatocnaDetails extends StatelessWidget{
           data: ThemeData(
               colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
           ),
-                child: Expanded(
-                  child: ListView.builder(
-                      itemCount: _mobilnaOCZaciatocna.listMobilnychOC.length,
-                      itemBuilder:(context, index) {
-                        print('_mobilnaOCZaciatocna.listMobilnychOC.length');
-                        mobilnaOC moc=new mobilnaOC(_mobilnaOCZaciatocna.listMobilnychOC[index]['cas'],_mobilnaOCZaciatocna.listMobilnychOC[index]['datum'],_mobilnaOCZaciatocna.listMobilnychOC[index]['mapy'],_mobilnaOCZaciatocna.listMobilnychOC[index]['miesto'],_mobilnaOCZaciatocna.listMobilnychOC[index]['oc']);
-                        return mobilnaOCCard(moc);
-                      }),
-                ),
-              ),
+          child: ListView.builder(
+              itemCount: _mobilnaOCZaciatocna.listMobilnychOC.length,
+              itemBuilder:(context, index) {
+                print('_mobilnaOCZaciatocna.listMobilnychOC.length');
+                mobilnaOC moc=new mobilnaOC(_mobilnaOCZaciatocna.listMobilnychOC[index]['cas'],_mobilnaOCZaciatocna.listMobilnychOC[index]['datum'].toString(),_mobilnaOCZaciatocna.listMobilnychOC[index]['mapy'],_mobilnaOCZaciatocna.listMobilnychOC[index]['miesto'],_mobilnaOCZaciatocna.listMobilnychOC[index]['oc']);
+                return mobilnaOCCard(moc);
+              }),
+        ),
 
     );
   }
