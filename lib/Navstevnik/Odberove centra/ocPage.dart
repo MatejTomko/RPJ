@@ -1,18 +1,18 @@
 import 'dart:ffi' as ffi;
 
-import 'package:blood_app/kamennaOC.dart';
-import 'package:blood_app/kamennaOCCard.dart';
-import 'package:blood_app/lieky.dart';
-import 'package:blood_app/liekyCard.dart';
-import 'package:blood_app/mobilnaOCCardZaciatocna.dart';
-import 'package:blood_app/mobilnaOCZaciatocna.dart';
-import 'package:blood_app/odber.dart';
-import 'package:blood_app/odberCard.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOCCard.dart';
+import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
+import 'package:blood_app/Navstevnik/Lieky/liekyCard.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/vyjazdoveOCcard.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/vyjazdoveOC.dart';
+import 'package:blood_app/Darca/Odber/odber.dart';
+import 'package:blood_app/Darca/Odber/odberCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'DatabaseManager.dart';
+import '../../DatabaseManager.dart';
 
 class ocPage extends StatefulWidget {
   const ocPage({Key? key}) : super(key: key);
@@ -142,8 +142,8 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
                             }
                           }
                         }
-                      mobilnaOCZaciatocna mocz=new mobilnaOCZaciatocna(userMobilneOCListZaciatocny[index],pomocnyMobilneOC);
-                      return mobilnaOCCardZaciatocna(mocz);
+                      vyjazdoveOC vyjoc=new vyjazdoveOC(userMobilneOCListZaciatocny[index],pomocnyMobilneOC);
+                      return vyjazdoveOCcard(vyjoc);
                     }),
               ),
             ),

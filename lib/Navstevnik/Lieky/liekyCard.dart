@@ -1,7 +1,7 @@
-import 'package:blood_app/lieky.dart';
+import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'odber.dart';
+import '../../Darca/Odber/odber.dart';
 
 class liekyCard extends StatelessWidget {
   final lieky _lieky;

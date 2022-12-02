@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:blood_app/home.dart';
-import 'package:blood_app/login.dart';
-import 'package:blood_app/registration.dart';
+import 'package:blood_app/Autentifikacia/login.dart';
+import 'package:blood_app/Autentifikacia/registration.dart';
 
 
 class First extends StatefulWidget{
