@@ -1,8 +1,8 @@
-class mobilnaOCZaciatocna{
+class vyjazdoveOC{
 String meno;
 List listMobilnychOC;
 
-mobilnaOCZaciatocna(
+vyjazdoveOC(
     this.meno,
     this.listMobilnychOC,
     );

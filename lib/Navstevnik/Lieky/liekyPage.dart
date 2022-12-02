@@ -1,15 +1,15 @@
 import 'dart:ffi';
 
 
-import 'package:blood_app/lieky.dart';
-import 'package:blood_app/liekyCard.dart';
-import 'package:blood_app/odber.dart';
-import 'package:blood_app/odberCard.dart';
+import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
+import 'package:blood_app/Navstevnik/Lieky/liekyCard.dart';
+import 'package:blood_app/Darca/Odber/odber.dart';
+import 'package:blood_app/Darca/Odber/odberCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'DatabaseManager.dart';
+import '../../DatabaseManager.dart';
 
 class liekyPage extends StatefulWidget {
   const liekyPage({Key? key}) : super(key: key);

@@ -1,6 +1,6 @@
+import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'odber.dart';
 
 class OdberCard extends StatelessWidget {
   final odber _odber;

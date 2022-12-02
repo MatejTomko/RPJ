@@ -1,5 +1,5 @@
-import 'package:blood_app/kamennaOC.dart';
-import 'package:blood_app/mobilnaOC.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
