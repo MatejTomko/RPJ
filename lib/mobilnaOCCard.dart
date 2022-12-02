@@ -1,5 +1,5 @@
-import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCDetails.dart';
-import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
+import 'package:blood_app/mobilnaOCDetails.dart';
+import 'package:blood_app/mobilnaOC.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';

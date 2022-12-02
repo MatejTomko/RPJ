@@ -1,17 +1,17 @@
-import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
-import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOCDetails.dart';
-import 'package:blood_app/Navstevnik/Odberove%20centra/vyjazdoveOCcardDetails.dart';
+import 'package:blood_app/kamennaOC.dart';
+import 'package:blood_app/kamennaOCDetails.dart';
+import 'package:blood_app/mobilnaOCCardZaciatocnaDetails.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'kamennaOC.dart';
-import 'vyjazdoveOC.dart';
+import 'mobilnaOCZaciatocna.dart';
 
 //toto su tie karty ze VYJAZDOVE ODBERY OC PRESOV
-class vyjazdoveOCcard extends StatelessWidget {
-  final vyjazdoveOC _vyjazdoveOC;
+class mobilnaOCCardZaciatocna extends StatelessWidget {
+  final mobilnaOCZaciatocna _mobilnaOCZaciatocna;
 
-  vyjazdoveOCcard(this._vyjazdoveOC);
+  mobilnaOCCardZaciatocna(this._mobilnaOCZaciatocna);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +28,7 @@ class vyjazdoveOCcard extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                            "Výjazdove odbery "+_vyjazdoveOC.meno,
+                            "Výjazdove odbery "+_mobilnaOCZaciatocna.meno,
                             style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.w500,
@@ -43,7 +43,7 @@ class vyjazdoveOCcard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => vyjazdoveOCcardDetails(_vyjazdoveOC)));
+                          builder: (context) => mobilnaOCCardZaciatocnaDetails(_mobilnaOCZaciatocna)));
                 },
               ),
             ],

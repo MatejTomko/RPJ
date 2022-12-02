@@ -1,12 +1,9 @@
 import 'package:blood_app/DatabaseManager.dart';
-import 'package:blood_app/Darca/Profil/darca.dart';
-import 'package:blood_app/Navstevnik/Informacie/benefityPage.dart';
-import 'package:blood_app/Navstevnik/Informacie/napisteNamPage.dart';
-import 'package:blood_app/Navstevnik/Informacie/oceneniaPage.dart';
-import 'package:blood_app/Navstevnik/Lieky/liekyPage.dart';
-import 'package:blood_app/Navstevnik/Odberove%20centra/ocPage.dart';
-import 'package:blood_app/Darca/Odber/odberyPage.dart';
-import 'package:blood_app/Darca/Profil/profilePage.dart';
+import 'package:blood_app/darca.dart';
+import 'package:blood_app/liekyPage.dart';
+import 'package:blood_app/ocPage.dart';
+import 'package:blood_app/odberyPage.dart';
+import 'package:blood_app/profilePage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -63,9 +60,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     odberyPage(),
     liekyPage(),
     ocPage(),
-    oceneniaPage(),
-    benefityPage(),
-    napisteNamPage(),
   ];
   int _selectedIndex= 0;
 
@@ -100,18 +94,6 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
               icon: Icon(Icons.place),
               label:"OC"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Ocenenia",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Benefity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Napište Nám",
           ),
         ],
       ),
