@@ -24,7 +24,7 @@ class _oceneniaPageState extends State<oceneniaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ocenenia"),
+        title: const Text("Ocenenia"),
         backgroundColor: Colors.red[900],
       ),
 
@@ -33,51 +33,96 @@ class _oceneniaPageState extends State<oceneniaPage> {
         Container(
         child: Column(
           children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: Column(
-                children: [
-                  Text(
-                    "Ocenenia za darovanie",
-                    style: const TextStyle(
-                      color: Colors.red,
-                      fontSize: 32,
+              Padding(
+                padding: const EdgeInsets.fromLTRB(15.0,0,15,0),
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.all(8.0),
+                      child: Text(
+                        "Ocenenia za darovanie",
+                        style: TextStyle(
+                          color: Color.fromRGBO(211, 47, 47, 1),
+                          fontSize: 24,
+                        ),
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Za účelom získania ocenenia sa odber krvi alebo plazmy započíta darcovi ako jeden odber,"
-                        "odber krvných doštičiek sa započíta ako dva odbery.",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
+                    const Text(
+                      "Za účelom získania ocenenia sa odber krvi alebo plazmy započíta darcovi ako jeden odber,"
+                          "odber krvných doštičiek sa započíta ako dva odbery.",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  const Text(
-                    "Oceňovanie darcov krvi plaketami prof. MUDr. Jana Janského alebo medailou prof. MUDr. Jána Kňazovického za mnohonásobné darovanie krvi vykonáva Slovenský Červený kríž. "
-                        "Po dosiahnutí nároku na udelenie príslušnej plakety si darca vyplní tlačivo,,Návrh na udelenie ocenenia“, a vhodí ho do schránky na odbernom pracovisku. "
-                        "Plaketa s kartičkou držiteľa plakety bude darcovi doručená zo strany Slovenského Červeného kríža poštou.",
-                    style: TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
+                    const Text(
+                      "Oceňovanie darcov krvi plaketami prof. MUDr. Jana Janského alebo medailou prof. MUDr. Jána Kňazovického za mnohonásobné darovanie krvi vykonáva Slovenský Červený kríž. "
+                          "Po dosiahnutí nároku na udelenie príslušnej plakety si darca vyplní tlačivo,,Návrh na udelenie ocenenia“, a vhodí ho do schránky na odbernom pracovisku. "
+                          "Plaketa s kartičkou držiteľa plakety bude darcovi doručená zo strany Slovenského Červeného kríža poštou.",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Počet odberov, za ktoré môžete získať ocenenie",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
+                    SizedBox(height: 10),
+                    const Text("Počet odberov, za ktoré môžete získať ocenenie: ",
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "Muži Ženy Bronzová plaketa 10 10 Strieborná plaketa 20 20 Zlatá plaketa 40 30 Diamantová plaketa 80 60 Kňazovického medaila 100 80",
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontSize: 20,
+                    const SizedBox(height: 15),
+                    DataTable(
+                      columns: const [
+                        DataColumn(label: Text(
+                            'Plaketa',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+                        )),
+                        DataColumn(label: Text(
+                            'Muži',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+                        )),
+                        DataColumn(label: Text(
+                            'Ženy',
+                            style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)
+                        )),
+                      ],
+                      rows: const [
+                        DataRow(cells: [
+                          DataCell(Text('Bronzová plaketa')),
+                          DataCell(Text('10')),
+                          DataCell(Text('10')),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text('Strieborná plaketa')),
+                          DataCell(Text('20')),
+                          DataCell(Text('20')),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text('Zlatá plaketa')),
+                          DataCell(Text('40')),
+                          DataCell(Text('30')),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text('Diamantová plaketa')),
+                          DataCell(Text('80')),
+                          DataCell(Text('60')),
+                        ]),
+                        DataRow(cells: [
+                          DataCell(Text('Kňazovického medaila')),
+                          DataCell(Text('100')),
+                          DataCell(Text('80')),
+                        ]),
+                      ],
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            )
+
           ],
         ),
       ),
