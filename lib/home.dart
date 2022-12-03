@@ -7,9 +7,12 @@ import 'package:blood_app/Navstevnik/Lieky/liekyPage.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/ocPage.dart';
 import 'package:blood_app/Darca/Odber/odberyPage.dart';
 import 'package:blood_app/Darca/Profil/profilePage.dart';
+import 'package:blood_app/Navstevnik/Otazky/otazkyPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'Navstevnik/Informacie/domovPage.dart';
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -59,6 +62,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 
   List<Widget> pages=
   [
+    domovPage(),
     profilePage(),
     odberyPage(),
     liekyPage(),
@@ -66,6 +70,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     oceneniaPage(),
     benefityPage(),
     napisteNamPage(),
+    otazkyPage(),
   ];
   int _selectedIndex= 0;
 
@@ -86,8 +91,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
         selectedItemColor: Colors.red[700],
         items: const [
           BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label:"Domov",
+            icon: Icon(Icons.home),
+            label:"Domov",
+          ),
+          BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label:"Profil",
           ),
           BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
@@ -112,6 +121,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
             icon: Icon(Icons.pest_control),
             label:"Napište Nám",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.pest_control),
+            label:"Faq",
           ),
         ],
       ),

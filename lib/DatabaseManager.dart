@@ -8,6 +8,8 @@ class DatabaseManager{
   final CollectionReference liekyList = FirebaseFirestore.instance.collection('Lieky');
   final CollectionReference kamenneOCList = FirebaseFirestore.instance.collection('KamenneOC');
   final CollectionReference mobilneOCList = FirebaseFirestore.instance.collection('MobilneOC');
+  final CollectionReference otazkyList = FirebaseFirestore.instance.collection('Otazky');
+
 
   Future<void> createDarcaData(
       String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo) async {
@@ -144,4 +146,28 @@ class DatabaseManager{
       return null;
     }
   }
+
+  Future<void> createOtazkyData(
+      String otazka,odpoved) async {
+    return await otazkyList.doc().set({
+      'otazka':otazka,
+      'odpoved':odpoved,
+    });
+  }
+
+  Future getOtazkyist() async{
+    List itemsList=[];
+
+    try{
+      await otazkyList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
 }
