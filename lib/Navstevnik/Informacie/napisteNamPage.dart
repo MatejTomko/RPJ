@@ -44,153 +44,152 @@ class napisteNamPageState extends State<napisteNamPage> {
       backgroundColor: Colors.red[900],
     ),
       body:
-      Form(
-      key: _formKey,
-      child: Padding(
-        padding: const EdgeInsets.all(20.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            TextFormField(
-              controller: _controllermeno,
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.person),
-                hintText: 'Meno a priezvisko',
-                labelText: 'Meno a Priezvisko',
-              ),
-              onChanged: ((value) {
-                _meno=value;
-              }),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Prosím zadajte meno a priezvisko';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _controlleremail,
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.email),
-                hintText: 'E-mail',
-                labelText: 'E-mail',
-              ),
-              onChanged: ((value) {
-                _email=value;
-              }),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Prosím zadajte E-mail';
-                }
-                return null;
-              },
+      SingleChildScrollView(
+        child: Form(
+        key: _formKey,
+        child: Container(
+          padding: const EdgeInsets.all(20.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              TextFormField(
+                controller: _controllermeno,
+                decoration: const InputDecoration(
+                  icon: const Icon(Icons.person),
+                  hintText: 'Meno a priezvisko',
+                  labelText: 'Meno a Priezvisko',
 
-            ),
-            DropdownButton(
-              hint: _dropDownValue=="" ?
-              Text('Vyberte oblasť záujmu')
-                  :
-              Text(
-                _dropDownValue,
-                style: TextStyle(color: Colors.blue)
-              ),
-                isExpanded: true,
-                iconSize: 30.0,
-                style: TextStyle(color: Colors.blue),
-                items: ['Medicínska oblasť','Technická podpora','Iné'].map((val){
-                return DropdownMenuItem<String>(
-                  value:val,
-                  child: Text(val),
-              );
-
-
-            },
-            ).toList(),
-                onChanged: (val){
-                  setState(() {
-                    _dropDownValue=val!;
-                  });
-                }
-
-            ),
-
-            TextFormField(
-              controller: _controllersprava,
-              decoration: const InputDecoration(
-                icon: const Icon(Icons.message),
-                hintText: 'Vaša správa',
-                labelText: 'Vaša správa',
-              ),
-              onChanged: ((value) {
-                _sprava=value;
-              }),
-              validator: (value) {
-                if (value!.isEmpty) {
-                  return 'Prosím zadajte správu';
-                }
-                return null;
-              },
-            ),
-
-            Row(
-              children: [
-                Checkbox(
-                  checkColor: Colors.white,
-                  fillColor: MaterialStateProperty.resolveWith(getColor),
-                  value: isChecked,
-                  onChanged: (bool? value) {
-                    setState(() {
-                      isChecked = value!;
-                    });
-                  },
                 ),
-                const Text(
-                  "Súhlasím so spracovaním osobných údajov",
-                  style: TextStyle(
-                    fontSize: 18,
-                  ),
-                )
-              ],
-            ),
-            SizedBox(height: 20),
-            Container(
-              height: 50,
-              width: 250,
-              decoration: BoxDecoration(
-                color: Colors.red[900],
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: TextButton(
-                onPressed: () async{
-                  if(_formKey.currentState!.validate() && isChecked==true){
-                    await napistenamDb.add({
-                      'menopriezvisko':_meno,
-                      'oblast':_dropDownValue,
-                      'email':_email,
-                      'sprava':_sprava,
-                    }).then((value) => print('Správa odoslaná'));
-                    _controllersprava.clear();
-                    _controlleremail.clear();
-                    _controllermeno.clear();
-
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Správa odoslaná")));
-
+                onChanged: ((value) {
+                  _meno=value;
+                }),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Prosím zadajte meno a priezvisko';
                   }
+                  return null;
                 },
-                child: const Text(
-                  "Odoslať",
-                  style: TextStyle(color: Colors.white,fontSize: 25),
+              ),
+              TextFormField(
+                controller: _controlleremail,
+                decoration: const InputDecoration(
+                  icon: const Icon(Icons.email),
+                  hintText: 'E-mail',
+                  labelText: 'E-mail',
+                ),
+                onChanged: ((value) {
+                  _email=value;
+                }),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Prosím zadajte E-mail';
+                  }
+                  return null;
+                },
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
+                child: DropdownButton(
+                  hint: _dropDownValue=="" ?
+                  Text('Vyberte oblasť záujmu')
+                      :
+                  Text(
+                    _dropDownValue,
+                    style: TextStyle(color: Colors.black87)
+                  ),
+                    isExpanded: true,
+                    iconSize: 30.0,
+                    style: TextStyle(color: Colors.black87),
+                    items: ['Medicínska oblasť','Technická podpora','Iné'].map((val){
+                    return DropdownMenuItem<String>(
+                      value:val,
+                      child: Text(val),
+                  );
+                },
+                ).toList(),
+                    onChanged: (val){
+                      setState(() {
+                        _dropDownValue=val!;
+                      });
+                    }
+
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 130,
-
-            ),
-          ],
+              TextFormField(
+                controller: _controllersprava,
+                decoration: const InputDecoration(
+                  icon: const Icon(Icons.message),
+                  hintText: 'Vaša správa',
+                  labelText: 'Vaša správa',
+                ),
+                onChanged: ((value) {
+                  _sprava=value;
+                }),
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return 'Prosím zadajte správu';
+                  }
+                  return null;
+                },
+              ),
+              Row(
+                children: [
+                  Checkbox(
+                    checkColor: Colors.white,
+                    fillColor: MaterialStateProperty.resolveWith(getColor),
+                    value: isChecked,
+                    onChanged: (bool? value) {
+                      setState(() {
+                        isChecked = value!;
+                      });
+                    },
+                  ),
+                  const Text(
+                    "Súhlasím so spracovaním osobných údajov",
+                    style: TextStyle(
+                      fontSize: 18,
+                    ),
+                  )
+                ],
+              ),
+              SizedBox(height: 20),
+              Container(
+                height: 50,
+                width: 250,
+                child: TextButton(
+                  style:  TextButton.styleFrom(
+                    foregroundColor: Colors.red[100],
+                    backgroundColor: Colors.red[900],
+                    shape: StadiumBorder(),
+                  ),
+                  onPressed: () async{
+                    if(_formKey.currentState!.validate() && isChecked==true){
+                      await napistenamDb.add({
+                        'menopriezvisko':_meno,
+                        'oblast':_dropDownValue,
+                        'email':_email,
+                        'sprava':_sprava,
+                      }).then((value) => print('Správa odoslaná'));
+                      _controllersprava.clear();
+                      _controlleremail.clear();
+                      _controllermeno.clear();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Správa odoslaná")));
+                    }
+                  },
+                  child: const Text(
+                    "Odoslať",
+                    style: TextStyle(color: Colors.white,fontSize: 25),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 130,
+              ),
+            ],
+          ),
         ),
-      ),
     ),
+      ),
     );
   }
 }
