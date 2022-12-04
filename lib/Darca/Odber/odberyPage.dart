@@ -58,7 +58,7 @@ class _odberyPageState extends State<odberyPage> {
         child: ListView.builder(
           itemCount: userOdberyListDisplay.length,
           itemBuilder:(context, index) {
-            odber odb1=new odber(userOdberyListDisplay[index]['idDarca'],userOdberyListDisplay[index]['mnozstvo'],userOdberyListDisplay[index]['datum'].toDate());
+            odber odb1=new odber(userOdberyListDisplay[index]['idDarca'],userOdberyListDisplay[index]['mnozstvo'],userOdberyListDisplay[index]['datum'].toDate(),userOdberyListDisplay[index]['typ'],userOdberyListDisplay[index]['autoodber'],userOdberyListDisplay[index]['komplikacia'],userOdberyListDisplay[index]['koniec'],userOdberyListDisplay[index]['tlakkrvi'],userOdberyListDisplay[index]['vyjazd'],userOdberyListDisplay[index]['zaciatok'],userOdberyListDisplay[index]['trvanie']);
 
             return OdberCard(odb1);
           }) ,

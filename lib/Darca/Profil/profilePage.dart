@@ -1,3 +1,7 @@
+import 'dart:ffi';
+
+import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
+import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -29,7 +33,15 @@ class _profilePageState extends State<profilePage> {
   }
 
   List userDarcaList = [];
-  darca user=new darca("", "", "", "", "", "", "",DateTime.now());
+  List userOdberList = [];
+  darca user=new darca("", "", "", "", "", "", "",DateTime.now(),"");
+  int pocetOdberov=0;
+  int zachraneneZivoty=0;
+  int plaketa1=0;
+  int plaketa2=10;
+  double percent=0.0;
+  String pl1="";
+  String pl2="";
 
   @override
   void initState() {
@@ -58,11 +70,75 @@ class _profilePageState extends State<profilePage> {
             user.pocetodberov=userDarcaList[i]['pocetodberov'];
             user.poslednyodber=userDarcaList[i]['poslednyodber'].toDate();
             user.rodnecislo=userDarcaList[i]['rodnecislo'].toString();
+            user.email=userDarcaList[i]['email'].toString();
           }
         }
       });
     }
+
+    dynamic resultant2=await databaseManager.getOdberList();
+    if(resultant2==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        userOdberList=resultant2;
+        for(var i=0;i< userOdberList.length;i++){
+          String help=userOdberList[i]['idDarca'].toString();
+          if(help == "1000"){
+            if((userOdberList[i]['typ'].toString())=="doštičky"){
+              pocetOdberov+=2;
+            }else{
+              pocetOdberov+=1;
+            }
+          }
+        }
+      });
+    }
+    zachraneneZivoty=pocetOdberov*3;
+    if(pocetOdberov<10){
+      plaketa1=0;
+      plaketa2=10;
+      int pomocny=pocetOdberov-plaketa1;
+      int pomocny2=plaketa2-plaketa1;
+      percent=1.0*pomocny/pomocny2;
+    }else if(pocetOdberov>=10 && pocetOdberov<20){
+      plaketa1=10;
+      plaketa2=20;
+      int pomocny=pocetOdberov-plaketa1;
+      int pomocny2=plaketa2-plaketa1;
+      percent=1.0*pomocny/pomocny2;
+    }else if(pocetOdberov>=20 && pocetOdberov<40){
+      plaketa1=20;
+      plaketa2=40;
+      int pomocny=pocetOdberov-plaketa1;
+      int pomocny2=plaketa2-plaketa1;
+      percent=1.0*pomocny/pomocny2;
+    }else if(pocetOdberov>=40 && pocetOdberov<80){
+      plaketa1=40;
+      plaketa2=80;
+      int pomocny=pocetOdberov-plaketa1;
+      int pomocny2=plaketa2-plaketa1;
+      percent=1.0*pomocny/pomocny2;
+    }else if(pocetOdberov>=80 && pocetOdberov<100){
+      plaketa1=80;
+      plaketa2=100;
+      int pomocny=pocetOdberov-plaketa1;
+      int pomocny2=plaketa2-plaketa1;
+      percent=1.0*pomocny/pomocny2;
+    }else if(pocetOdberov>=100){
+      plaketa1=100;
+      plaketa2=100;
+      percent=1.0;
+      //TODO urobit inak
+    }
+    user.pocetodberov=this.pocetOdberov as String;
+    pl1=plaketa1.toString();
+    pl2=plaketa2.toString();
+    //TODO TOTO JE NA MUZOV HORE, UROBIT AJ PRE ZENY!!
   }
+
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,7 +193,7 @@ class _profilePageState extends State<profilePage> {
                         ),
                         SizedBox(height: 3),
                         Text(
-                            '${user.pocetodberov}',
+                            '$zachraneneZivoty',
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.red[700],
@@ -175,7 +251,7 @@ class _profilePageState extends State<profilePage> {
                         ),
                         SizedBox(height: 3),
                         Text(
-                          '${user.pocetodberov}',
+                          '$pocetOdberov',
                           style: TextStyle(
                             fontSize: 20,
                             color: Colors.red[700],
@@ -233,7 +309,7 @@ class _profilePageState extends State<profilePage> {
                       animation: true,
                       animationDuration: 1200,
                       lineHeight: 12.0,
-                      percent: 0.7,
+                      percent: percent,
                       backgroundColor: Colors.grey[300],
                       progressColor: Colors.red[800],
                       barRadius: Radius.circular(12),
@@ -244,8 +320,10 @@ class _profilePageState extends State<profilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: const [
+
+                        //TODO NEJDE TU DAT CISLA !!!
                         Text(
-                          "0",
+                          '0',
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black54,
@@ -275,7 +353,12 @@ class _profilePageState extends State<profilePage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey.shade100,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => preukazDarcu(user) ));
+                        },
                         icon: const Icon(
                           Icons.add_card_sharp,
                           size: 32,
@@ -299,7 +382,12 @@ class _profilePageState extends State<profilePage> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.grey.shade100,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => odberObjednanie()asa ));
+                        },
                         icon: const Icon(
                           Icons.contact_mail,
                           size: 32,

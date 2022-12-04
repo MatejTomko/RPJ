@@ -12,7 +12,7 @@ class DatabaseManager{
 
 
   Future<void> createDarcaData(
-      String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo) async {
+      String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo,email) async {
     return await darcaList.doc().set({
       'adresa':adresa,
       'idDarca':idDarca,
@@ -22,6 +22,7 @@ class DatabaseManager{
       'poslednyodber':poslednyodber,
       'priezvisko':priezvisko,
       'rodnecislo':rodnecislo,
+      'email':email,
     });
   }
 
@@ -41,11 +42,19 @@ class DatabaseManager{
   }
 
   Future<void> createOdberData(
-      String idDarca,mnozstvo,datum) async {
+      String idDarca,mnozstvo,trvanie,datum,typ,autoodber,komplikacia,koniec,tlakkrvi,vyjazd,zaciatok) async {
     return await odberList.doc().set({
       'datum':datum,
       'idDarca':idDarca,
       'mnozstvo':mnozstvo,
+      'typ':typ,
+      'autoodber':autoodber,
+      'komplikacia':komplikacia,
+      'koniec':koniec,
+      'tlakkrvi':tlakkrvi,
+      'vyjazd':vyjazd,
+      'zaciatok':zaciatok,
+      'trvanie':trvanie,
     });
   }
 
