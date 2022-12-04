@@ -386,7 +386,7 @@ class _profilePageState extends State<profilePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => odberObjednanie()asa ));
+                                  builder: (context) => odberObjednanie() ));
                         },
                         icon: const Icon(
                           Icons.contact_mail,
