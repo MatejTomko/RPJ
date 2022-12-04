@@ -10,7 +10,6 @@ class domovPageProcesDarovania extends StatefulWidget {
   @override
   State<domovPageProcesDarovania> createState() => _domovPageProcesDarovaniaState();
 }
-
 class _domovPageProcesDarovaniaState extends State<domovPageProcesDarovania> {
 
   @override
@@ -19,17 +18,16 @@ class _domovPageProcesDarovaniaState extends State<domovPageProcesDarovania> {
   }
 
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: const Text("Proces darovania krvi"),
-          backgroundColor: Colors.red[900],
-        ),
-      body: Text(
-        "https://www.youtube.com/watch?v=2VN4p3dIs7E",
+      appBar: AppBar(
+        title: const Text("Proces darovania krvi"),
+        backgroundColor: Colors.red[900],
       ),
+      body: Container(
+        child: Text("https://www.youtube.com/watch?v=2VN4p3dIs7E"),
+      )
     );
   }
 }

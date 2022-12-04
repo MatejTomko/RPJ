@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class odberObjednanie extends StatefulWidget {
 
@@ -49,21 +50,41 @@ class odberObjednanieState extends State<odberObjednanie> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                TextFormField(
+                TextField(
                   controller: _controllerdatum,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.calendar_month),
-                    hintText: 'Dátum',
-                    labelText: 'Dátum',
+                  decoration: InputDecoration(
+                    icon: Icon(Icons.calendar_month_outlined),
+                    labelText: "Zadajte dátum",
                   ),
-                  onChanged: ((value) {
-                    _datum=value;
-                  }),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Prosím zadajte dátum';
-                    }
-                    return null;
+                  readOnly: true,
+                  onTap: () async{
+                   DateTime? zvolenyDatum = await showDatePicker(
+                     context: context,
+                     initialDate: DateTime.now(),
+                     firstDate: DateTime.now(),
+                     lastDate: DateTime(2101),
+                     selectableDayPredicate: (DateTime date){
+                       if (date.weekday == DateTime.saturday) {
+                         return false;
+                       }
+                       return true;
+                     },
+
+                   );
+
+                   if (zvolenyDatum != null) {
+                     print(zvolenyDatum);
+                     String formattedDate = DateFormat('dd. MM. yyyy').format(zvolenyDatum);
+                     print(formattedDate);
+                     setState(() {
+                       if (zvolenyDatum.weekday == DateTime.saturday || zvolenyDatum.weekday == DateTime.saturday) {
+
+                       }
+                       _controllerdatum.text = formattedDate;
+                     });
+                   }else{
+                     print("Datum nebol zvoleny");
+                   }
                   },
                 ),
                 Padding(

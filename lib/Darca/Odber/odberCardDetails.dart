@@ -20,191 +20,212 @@ class odberCardDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Detaily odberu"),
+        title: Text("Detaily odberu: "),
         backgroundColor: Colors.red[900],
       ),
       body: Container(
+        margin: EdgeInsets.all(15),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            SizedBox(height: 3),
-            Text(
-              "Začiatok odberu",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            Row(
+              children: [
+                Text(
+                  "Začiatok odberu: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.zaciatok,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              _odber.zaciatok,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Koniec odberu: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.koniec,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              "Koniec odberu",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Trvanie: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.trvanie+" min.",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              _odber.koniec,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Komplikácie:",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.komplikacia,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              "Trvanie",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Výjazd: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.vyjazd,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              _odber.trvanie+" min.",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Autoodber: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.autoodber,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              "Komplikacia",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Tlak krvi: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.tlakkrvi,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              _odber.komplikacia,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Datum: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.datum.toString(),
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              "Vyjazd",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Množstvo: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.mnozstvo+" ml",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-            SizedBox(height: 3),
-            Text(
-              _odber.vyjazd,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              "Autoodber",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              _odber.autoodber,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              "Tlak krvi",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              _odber.tlakkrvi,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              "Datum",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              _odber.datum.toString(),
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              "Množstvo",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              _odber.mnozstvo+" ml",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              "Typ odberu",
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-            SizedBox(height: 3),
-            Text(
-              _odber.typ,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.grey.shade500,
-                fontWeight: FontWeight.bold,
-              ),
+            SizedBox(height: 20),
+            Row(
+              children: [
+                Text(
+                  "Typ odberu: ",
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  _odber.typ,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
