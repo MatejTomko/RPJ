@@ -1,3 +1,4 @@
+import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:blood_app/Navstevnik/Informacie/benefityPage.dart';
@@ -8,11 +9,12 @@ import 'package:blood_app/Navstevnik/Odberove%20centra/ocPage.dart';
 import 'package:blood_app/Darca/Odber/odberyPage.dart';
 import 'package:blood_app/Darca/Profil/profilePage.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazkyPage.dart';
+import 'package:blood_app/viacPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
 import 'Navstevnik/Informacie/domovPage.dart';
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -64,13 +66,16 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
   [
     domovPage(),
     profilePage(),
+    odberObjednanie(),
     odberyPage(),
-    liekyPage(),
-    ocPage(),
-    oceneniaPage(),
-    benefityPage(),
-    napisteNamPage(),
-    otazkyPage(),
+    viacPage(),
+    //liekyPage(),
+    //ocPage(),
+    // oceneniaPage(),
+    // benefityPage(),
+    // napisteNamPage(),
+    // otazkyPage(),
+
   ];
   int _selectedIndex= 0;
 
@@ -99,33 +104,34 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
               label:"Profil",
           ),
           BottomNavigationBarItem(
+              icon: Icon(Icons.water_drop),
+              label:"Darovať"
+          ),
+          BottomNavigationBarItem(
               icon: Icon(Icons.calendar_month),
               label:"Odbery"
           ),
+
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.pest_control),
+          //   label:"Ocenenia",
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.pest_control),
+          //   label:"Benefity",
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.pest_control),
+          //   label:"Napište Nám",
+          // ),
+          // BottomNavigationBarItem(
+          //   icon: Icon(Icons.pest_control),
+          //   label:"Faq",
+          // ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.account_tree_rounded),
-              label:"Lieky"
-          ),
-          BottomNavigationBarItem(
-              icon: Icon(Icons.place),
-              label:"OC"
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Ocenenia",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Benefity",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Napište Nám",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.pest_control),
-            label:"Faq",
-          ),
+            icon: Icon(Icons.menu_outlined),
+            label: "Viac",
+          )
         ],
       ),
 

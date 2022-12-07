@@ -88,7 +88,8 @@ class _domovPageState extends State<domovPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => domovPagePredOdberom()));
+                                      builder: (context) => domovPagePredOdberom())
+                              );
                             },
                           ),
                         ],
