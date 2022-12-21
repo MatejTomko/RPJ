@@ -1,15 +1,16 @@
+import 'package:blood_app/Admin/AdminVseobecny/editaciaMobilnaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCDetails.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'kamennaOC.dart';
+import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 
 //toto je uz jednotliva mobilna oc
-class mobilnaOCCard extends StatelessWidget {
+class upravaMobilnaOCCard extends StatelessWidget {
   final mobilnaOC _mobilnaOC;
 
-  mobilnaOCCard(this._mobilnaOC);
+  upravaMobilnaOCCard(this._mobilnaOC);
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class mobilnaOCCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => mobilnaOCDetails(_mobilnaOC)));
+                        builder: (context) => editaciaMobilnaOC(_mobilnaOC)));
               },
             ),
           ],

@@ -10,8 +10,13 @@ class mobilnaOCDetails extends StatelessWidget{
 
   mobilnaOCDetails(this._moc);
 
+
   @override
   Widget build(BuildContext context) {
+    DateTime datePomocny=_moc.datum;
+    String stringPomocny=datePomocny.toString();
+    var datumbezcasu=stringPomocny.split(" ");
+
     return Scaffold(
       appBar: AppBar(
         title: Text(_moc.miesto),
@@ -50,21 +55,22 @@ class mobilnaOCDetails extends StatelessWidget{
                         ),
                       ),
                       SizedBox(height: 5),
-                      const Text(
-                        "Trvanie: ",
+                      Text(
+                        "Datum: ${datumbezcasu[0]}",
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                         ),
                       ),
-                      SizedBox(height:5),
-                      const Text(
-                        "Poznámka: ",
+                      SizedBox(height: 5),
+                      Text(
+                        "Trvanie: "+_moc.cas,
                         style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 20,
                         ),
                       ),
+
 
                     ],
                   ),

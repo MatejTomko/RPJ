@@ -1,3 +1,4 @@
+import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
 import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
@@ -69,6 +70,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     odberObjednanie(),
     odberyPage(),
     viacPage(),
+    upravaMobilnaOCPage(),
     //liekyPage(),
     //ocPage(),
     // oceneniaPage(),
@@ -131,6 +133,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_outlined),
             label: "Viac",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: "Pomocne",
           )
         ],
       ),

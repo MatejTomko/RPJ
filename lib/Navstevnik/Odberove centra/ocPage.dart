@@ -42,7 +42,7 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
   void initState() {
     fetchDatabaseList();
     super.initState();
-    tabController = TabController(length: 3,initialIndex: 0, vsync: this);
+    tabController = TabController(length: 2,initialIndex: 0, vsync: this);
   }
 
   DatabaseManager databaseManager=new DatabaseManager();

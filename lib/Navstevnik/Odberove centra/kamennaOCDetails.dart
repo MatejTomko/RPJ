@@ -58,12 +58,73 @@ class kamennaOCDetails extends StatelessWidget{
                             fontSize: 20,
                           ),
                         ),
+                        SizedBox(height:3),
+                        Text(
+                          "Pondelok: "+_koc.hodinypo,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height:3),
+                        Text(
+                          "Utorok: "+_koc.hodinyut,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height:3),
+                        Text(
+                          "Streda: "+_koc.hodinyst,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height:3),
+                        Text(
+                          "Štvrtok: "+_koc.hodinysr,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height:3),
+                        Text(
+                          "Piatok: "+_koc.hodinypi,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
                         SizedBox(height:5),
                         const Text(
                           "Kontakt: ",
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 20,
+                          ),
+                        ),
+                        Text(
+                          "Email: "+_koc.email,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          "Informácie: "+_koc.informacie,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
+                          ),
+                        ),
+                        Text(
+                          "Objednávanie: "+_koc.objednavacie,
+                          style: TextStyle(
+                            fontWeight: FontWeight.w500,
+                            fontSize: 16,
                           ),
                         ),
                       ],
