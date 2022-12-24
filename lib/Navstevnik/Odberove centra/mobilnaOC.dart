@@ -1,6 +1,6 @@
 class mobilnaOC{
   String cas,mapy,miesto,oc;
-  DateTime datum;
+  String datum;
 
   mobilnaOC(
       this.cas,

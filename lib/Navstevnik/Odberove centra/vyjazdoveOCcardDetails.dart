@@ -29,7 +29,7 @@ class vyjazdoveOCcardDetails extends StatelessWidget{
               itemCount: _vyjazdoveOC.listMobilnychOC.length,
               itemBuilder:(context, index) {
                 print('_mobilnaOCZaciatocna.listMobilnychOC.length');
-                mobilnaOC moc=new mobilnaOC(_vyjazdoveOC.listMobilnychOC[index]['cas'],_vyjazdoveOC.listMobilnychOC[index]['mapy'],_vyjazdoveOC.listMobilnychOC[index]['miesto'],_vyjazdoveOC.listMobilnychOC[index]['oc'],_vyjazdoveOC.listMobilnychOC[index]['datum'].toDate());
+                mobilnaOC moc=new mobilnaOC(_vyjazdoveOC.listMobilnychOC[index]['cas'],_vyjazdoveOC.listMobilnychOC[index]['mapy'],_vyjazdoveOC.listMobilnychOC[index]['miesto'],_vyjazdoveOC.listMobilnychOC[index]['oc'],_vyjazdoveOC.listMobilnychOC[index]['datum']);
                 return mobilnaOCCard(moc);
               }),
         ),

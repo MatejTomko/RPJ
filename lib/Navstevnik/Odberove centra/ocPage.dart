@@ -61,7 +61,8 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
       });
     }
 
-    resultantMob = await databaseManager.getMobilneOCList();
+    List mobilneDb=await databaseManager.getMobilneOCList();
+    resultantMob = mobilneDb[0];
     if(resultantMob==null){
       print('Unable to retrieve');
     }else{

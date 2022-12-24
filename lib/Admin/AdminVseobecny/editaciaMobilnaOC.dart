@@ -1,3 +1,4 @@
+
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCCard.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
@@ -10,27 +11,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:intl/intl.dart';
 
+//TODO nech to posunie to upravaMobilnaOCPage po updatnuti
+//TODO nech ked zadavame daco tak nech to nepreskakju vzdy na prve miesto v inpute
+//TODO nech to vie vybrat OC lebo nejde teraz xd
+
 //toto je ked kliknes na vyjazdove odbery oc presov
 class editaciaMobilnaOC extends StatefulWidget{
   final mobilnaOC _mobilnaOC;
-  editaciaMobilnaOC(this._mobilnaOC);
+  final String _userMobilnaOcId;
+  editaciaMobilnaOC(this._mobilnaOC,this._userMobilnaOcId);
 
   @override
   editaciaMobilnaOCState createState() {
-    return editaciaMobilnaOCState(_mobilnaOC);
+    return editaciaMobilnaOCState(_mobilnaOC,_userMobilnaOcId);
   }
 }
 
 class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
   final _formKey = GlobalKey<FormState>();
   final mobilnaOC _mobilnaOC;
+  final String _userMobilnaOcId;
   int lennazaciatku=1;
 
-  editaciaMobilnaOCState(this._mobilnaOC);
+  editaciaMobilnaOCState(this._mobilnaOC,this._userMobilnaOcId);
 
   String _miesto="";
   String _cas="";
-  DateTime _datum=DateTime.now();
+  String _datum=DateTime.now().toString().split(" ")[0];
   String _oc="";
   String _mapy="";
   var _controllermiesto=TextEditingController();
@@ -44,6 +51,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
   @override
   Widget build(BuildContext context) {
 
+
     if(lennazaciatku==1){
       _miesto=_mobilnaOC.miesto;
       _cas=_mobilnaOC.cas;
@@ -52,6 +60,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
       _datum=_mobilnaOC.datum;
       lennazaciatku=0;
     }
+    print(_userMobilnaOcId);
 
     _controllercas.text=_cas;
     _controlleroc.text=_oc;
@@ -69,6 +78,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
 
       body:
       SingleChildScrollView(
+
         child: Form(
           key: _formKey,
           child: Container(
@@ -103,6 +113,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                   onChanged: ((value) {
                     _cas =value;
                     _controllercas.text=value;
+
                   }),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -176,8 +187,8 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                     );
 
                     if (zvolenyDatum != null) {
-                      String formattedDate = DateFormat('dd. MM. yyyy').format(zvolenyDatum);
-                      _datum=zvolenyDatum;
+                      String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
+                      _datum=zvolenyDatum.toString();
                       _controllerdatum.text = formattedDate;
                     }else{
                       print("Datum nebol zvoleny");
@@ -201,22 +212,58 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       if(_formKey.currentState!.validate() ){
 
                         if(_controllerdatum.text==""){
-                          _controllerdatum.text=DateTime.now().toString();
+                          String a=DateTime.now().toString().split(" ")[0];
+                          _controllerdatum.text=a;
                         }
-                        //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
-                       var db=FirebaseFirestore.instance.collection("MobilneOC").doc("1").update({
+                       var db=FirebaseFirestore.instance.collection("MobilneOC").doc(_userMobilnaOcId).update({
                          "cas":_controllercas.text,
                          "datum":_controllerdatum.text,
                          "mapy":_controllermapy.text,
                          "miesto":_controllermiesto.text,
                          "oc":_controlleroc.text,
                        });
+                        _mobilnaOC.miesto=_controllermiesto.text;
+                        _mobilnaOC.datum=_controllerdatum.text;
+                        _mobilnaOC.mapy=_controllermapy.text;
+                        _mobilnaOC.oc=_controlleroc.text;
+                        _mobilnaOC.cas=_controllercas.text;
                         //_controllerdatum.clear();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC updatnutá")));
+
+                        //TODO
+                        //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
                       }
                     },
                     child: const Text(
                       "Update",
+                      style: TextStyle(color: Colors.white,fontSize: 25),
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 130,
+                ),
+
+                SizedBox(height: 20),
+                Container(
+                  height: 50,
+                  width: 250,
+                  child: TextButton(
+                    style:  TextButton.styleFrom(
+                      foregroundColor: Colors.red[100],
+                      backgroundColor: Colors.red[900],
+                      shape: StadiumBorder(),
+                    ),
+                    onPressed: () async{
+                      await FirebaseFirestore.instance.collection("MobilneOC").doc(_userMobilnaOcId).delete();
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC vymazana")));
+
+
+                      //TODO
+                      //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
+                    },
+                    child: const Text(
+                      "Vymaž OC",
                       style: TextStyle(color: Colors.white,fontSize: 25),
                     ),
                   ),

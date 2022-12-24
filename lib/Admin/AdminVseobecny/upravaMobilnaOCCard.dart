@@ -9,12 +9,13 @@ import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 //toto je uz jednotliva mobilna oc
 class upravaMobilnaOCCard extends StatelessWidget {
   final mobilnaOC _mobilnaOC;
+  final String userMobilnaocId;
 
-  upravaMobilnaOCCard(this._mobilnaOC);
+  upravaMobilnaOCCard(this._mobilnaOC,this.userMobilnaocId);
 
   @override
   Widget build(BuildContext context) {
-    DateTime datePomocny=_mobilnaOC.datum;
+    String datePomocny=_mobilnaOC.datum;
     String stringPomocny=datePomocny.toString();
     var datumbezcasu=stringPomocny.split(" ");
     return Card(
@@ -56,7 +57,7 @@ class upravaMobilnaOCCard extends StatelessWidget {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => editaciaMobilnaOC(_mobilnaOC)));
+                        builder: (context) => editaciaMobilnaOC(_mobilnaOC,userMobilnaocId)));
               },
             ),
           ],

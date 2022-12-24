@@ -13,7 +13,7 @@ class mobilnaOCDetails extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    DateTime datePomocny=_moc.datum;
+    String datePomocny=_moc.datum;
     String stringPomocny=datePomocny.toString();
     var datumbezcasu=stringPomocny.split(" ");
 

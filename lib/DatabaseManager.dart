@@ -1,3 +1,4 @@
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -143,13 +144,18 @@ class DatabaseManager{
 
   Future getMobilneOCList() async{
     List itemsList=[];
+    List idecka=[];
+    List returnovat=[];
 
     try{
       await mobilneOCList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
+        idecka.add(element.id);
       })
       );
-      return itemsList;
+      returnovat.add(itemsList);
+      returnovat.add(idecka);
+      return returnovat;
     }catch(e){
       print(e.toString());
       return null;

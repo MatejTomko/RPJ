@@ -13,7 +13,7 @@ class mobilnaOCCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    DateTime datePomocny=_mobilnaOC.datum;
+    String datePomocny=_mobilnaOC.datum;
     String stringPomocny=datePomocny.toString();
     var datumbezcasu=stringPomocny.split(" ");
     return Card(

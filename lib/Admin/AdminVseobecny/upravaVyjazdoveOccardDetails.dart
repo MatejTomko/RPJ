@@ -11,8 +11,9 @@ import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 
 class upravaVyjazdoveOCcardDetails extends StatelessWidget{
   final vyjazdoveOC _vyjazdoveOC;
+  final List userMobilneOcListId;
 
-  upravaVyjazdoveOCcardDetails(this._vyjazdoveOC);
+  upravaVyjazdoveOCcardDetails(this._vyjazdoveOC,this.userMobilneOcListId);
 
   @override
   Widget build(BuildContext context) {
@@ -29,8 +30,8 @@ class upravaVyjazdoveOCcardDetails extends StatelessWidget{
         child: ListView.builder(
             itemCount: _vyjazdoveOC.listMobilnychOC.length,
             itemBuilder:(context, index) {
-              mobilnaOC moc=new mobilnaOC(_vyjazdoveOC.listMobilnychOC[index]['cas'],_vyjazdoveOC.listMobilnychOC[index]['mapy'],_vyjazdoveOC.listMobilnychOC[index]['miesto'],_vyjazdoveOC.listMobilnychOC[index]['oc'],_vyjazdoveOC.listMobilnychOC[index]['datum'].toDate());
-              return upravaMobilnaOCCard(moc);
+              mobilnaOC moc=new mobilnaOC(_vyjazdoveOC.listMobilnychOC[index]['cas'],_vyjazdoveOC.listMobilnychOC[index]['mapy'],_vyjazdoveOC.listMobilnychOC[index]['miesto'],_vyjazdoveOC.listMobilnychOC[index]['oc'],_vyjazdoveOC.listMobilnychOC[index]['datum']);
+              return upravaMobilnaOCCard(moc,userMobilneOcListId[index]);
             }),
       ),
 

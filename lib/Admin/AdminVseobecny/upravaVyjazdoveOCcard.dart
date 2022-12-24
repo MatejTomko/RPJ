@@ -11,8 +11,8 @@ import 'package:blood_app/Navstevnik/Odberove%20centra/vyjazdoveOC.dart';
 //toto su tie karty ze VYJAZDOVE ODBERY OC PRESOV
 class upravaVyjazdoveOCcard extends StatelessWidget {
   final vyjazdoveOC _vyjazdoveOC;
-
-  upravaVyjazdoveOCcard(this._vyjazdoveOC);
+  final List userMobilneOcListId;
+  upravaVyjazdoveOCcard(this._vyjazdoveOC,this.userMobilneOcListId);
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +44,7 @@ class upravaVyjazdoveOCcard extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => upravaVyjazdoveOCcardDetails(_vyjazdoveOC)));
+                          builder: (context) => upravaVyjazdoveOCcardDetails(_vyjazdoveOC,userMobilneOcListId)));
                 },
               ),
             ],
