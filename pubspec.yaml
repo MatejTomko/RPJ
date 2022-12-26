@@ -44,6 +44,8 @@ dependencies:
   percent_indicator: ^4.2.2
   syncfusion_flutter_barcodes: ^20.3.59
   intl: ^0.17.0
+  flutter_map: ^3.1.0
+
 
 dev_dependencies:
   flutter_test:

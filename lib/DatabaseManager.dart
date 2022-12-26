@@ -10,6 +10,8 @@ class DatabaseManager{
   final CollectionReference kamenneOCList = FirebaseFirestore.instance.collection('KamenneOC');
   final CollectionReference mobilneOCList = FirebaseFirestore.instance.collection('MobilneOC');
   final CollectionReference otazkyList = FirebaseFirestore.instance.collection('Otazky');
+  final CollectionReference napisteNamList = FirebaseFirestore.instance.collection('NapisteNam');
+
 
 
   Future<void> createDarcaData(
@@ -175,6 +177,47 @@ class DatabaseManager{
 
     try{
       await otazkyList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future getOtazkyListId() async{
+    List itemsList=[];
+
+    try{
+      await otazkyList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.id);
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future<void> createNapisteNamData(
+      String email,menopriezvisko,oblast,sprava) async {
+    return await napisteNamList.doc().set({
+      'email':email,
+      'menopriezvisko':menopriezvisko,
+      'oblast':oblast,
+      'sprava':sprava,
+
+    });
+  }
+
+  Future getNapisteNamList() async{
+    List itemsList=[];
+
+    try{
+      await napisteNamList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
       })
       );

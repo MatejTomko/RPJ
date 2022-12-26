@@ -1,4 +1,6 @@
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
+import 'package:blood_app/Admin/AdminVseobecny/upravaOtazkyPage.dart';
+import 'package:blood_app/Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
 import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
@@ -14,6 +16,7 @@ import 'package:blood_app/viacPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
 import 'Navstevnik/Informacie/domovPage.dart';
 
 class Home extends StatefulWidget {
@@ -71,6 +74,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     odberyPage(),
     viacPage(),
     upravaMobilnaOCPage(),
+    upravaOtazkyPage(),
+    zobrazovanieNapisteNamPage(),
     //liekyPage(),
     //ocPage(),
     // oceneniaPage(),
@@ -137,7 +142,15 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
             icon: Icon(Icons.help),
             label: "Pomocne",
-          )
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: "OtazkyAdd",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: "NapisteNam",
+          ),
         ],
       ),
 

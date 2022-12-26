@@ -2,8 +2,10 @@
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'kamennaOC.dart';
+import 'package:latlong2/latlong.dart';
 
 class kamennaOCDetails extends StatelessWidget{
   final kamennaOC _koc;
@@ -165,10 +167,26 @@ class kamennaOCDetails extends StatelessWidget{
               ),
             ),
           ),
-          body: const Center(
-            child: Text("Mapa"),
-            //TODO tutak bude mapa
-          ),
+          body:
+            FlutterMap(
+              options: MapOptions(
+                center: LatLng(49.002666, 21.238214),
+                zoom: 9.2,
+              ),
+              nonRotatedChildren: [
+                AttributionWidget.defaultWidget(
+                  source: 'OpenStreetMap contributors',
+                  onSourceTapped: null,
+                ),
+              ],
+              children: [
+                TileLayer(
+                  urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                  userAgentPackageName: 'com.example.app',
+                ),
+              ],
+            ),
+
           /*Column(
             children: [
               Text(_moc.datum),
