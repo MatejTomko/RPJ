@@ -11,6 +11,8 @@ class DatabaseManager{
   final CollectionReference mobilneOCList = FirebaseFirestore.instance.collection('MobilneOC');
   final CollectionReference otazkyList = FirebaseFirestore.instance.collection('Otazky');
   final CollectionReference napisteNamList = FirebaseFirestore.instance.collection('NapisteNam');
+  final CollectionReference rezervaciaList = FirebaseFirestore.instance.collection('Rezervacia');
+
 
 
 
@@ -218,6 +220,31 @@ class DatabaseManager{
 
     try{
       await napisteNamList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+      })
+      );
+      return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+
+  Future<void> createRezervaciaData(
+      String datum,idDarca,oc) async {
+    return await napisteNamList.doc().set({
+      'datum':datum,
+      'idDarca':idDarca,
+      'oc':oc,
+    });
+  }
+
+  Future getRezervaciaList() async{
+    List itemsList=[];
+
+    try{
+      await rezervaciaList.get().then((snapshot) => snapshot.docs.forEach((element) {
         itemsList.add(element.data());
       })
       );
