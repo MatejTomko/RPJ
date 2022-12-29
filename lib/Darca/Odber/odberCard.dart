@@ -13,24 +13,55 @@ class OdberCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
         child:InkWell(
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Text("Množstvo: ${_odber.mnozstvo}"),
-                    )
-                  ],
+          child: Row(
+            children: <Widget>[
+              Expanded(
+                flex: 4,
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.5,
+                  height: MediaQuery.of(context).size.width * 0.2,
+                  decoration: BoxDecoration(
+                    color: Colors.grey,
+                    borderRadius: BorderRadius.only(topLeft: Radius.circular(10), bottomLeft: Radius.circular(10)),
+                  ),
+                  child: Container(
+                    padding: EdgeInsets.all(10),
+                    child: Center(
+                      child: Text(
+                        "${_odber.datum}",
+                        style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ),
+                  )
                 ),
-                Row(children: [
-                  Text("Dátum: ${_odber.datum}"),
-                ],)
-              ],
-            ),
+              ),
+              SizedBox(width: 10),
+              Expanded(
+                flex: 10,
+                child: Container(
+                  child: Row(
+                    children: [
+                      Icon(Icons.water_drop),
+                      Text(
+                        "celá krv ", //TODO nech berie z DB typ odberu
+                      ),
+                      Text(
+                        "| ${_odber.mnozstvo} ml",
+                        style: TextStyle(fontWeight: FontWeight.bold
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ],
           ),
           onTap: (){
             Navigator.push(
