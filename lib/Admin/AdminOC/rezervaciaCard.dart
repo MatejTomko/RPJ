@@ -1,4 +1,5 @@
 import 'package:blood_app/Admin/AdminOC/rezervacia.dart';
+import 'package:blood_app/Admin/AdminOC/rezervaciaCardDetails.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Darca/Odber/odberCardDetails.dart';
 import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
@@ -27,18 +28,26 @@ class RezervaciaCard extends StatelessWidget {
                     )
                   ],
                 ),
+                Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: Text("Meno: ${_rezervacia.meno}"),
+                    )
+                  ],
+                ),
                 Row(children: [
                   Text("Dátum: ${_rezervacia.datum}"),
                 ],)
               ],
             ),
           ),
-          /*onTap: (){
+          onTap: (){
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => odberCardDetails(_odber)));
-          },*/
+                    builder: (context) => rezervaciaCardDetails(_rezervacia)));
+          },
         ),
       ),
     );

@@ -2,7 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class odber{
   String idDarca,mnozstvo,typ,autoodber,komplikacia,koniec,tlakkrvi,vyjazd,zaciatok,trvanie;
-  DateTime datum;
+  String datum;
 
   odber(
       this.idDarca,

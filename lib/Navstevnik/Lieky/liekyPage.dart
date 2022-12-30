@@ -46,6 +46,9 @@ class _liekyPageState extends State<liekyPage> {
             userLiekyListDisplay.add(userLiekyListPomocny[i]);
           }
         }
+        if(userLiekyListDisplay.length==0){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Žiaden výsledok")));
+        }
       });
     }
   }
@@ -90,6 +93,9 @@ class _liekyPageState extends State<liekyPage> {
                   vyrazHladaj=liekController.text;
                   if(vyrazHladaj.length>2){
                     fetchDatabaseList();
+                  }else{
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+
                   }
                 },
                 style: TextButton.styleFrom(

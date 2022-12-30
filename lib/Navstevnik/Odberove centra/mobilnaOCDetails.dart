@@ -2,8 +2,11 @@ import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_map/flutter_map.dart';
 import 'package:sliding_up_panel/sliding_up_panel.dart';
 import 'mobilnaOC.dart';
+import 'package:latlong2/latlong.dart';
+
 
 class mobilnaOCDetails extends StatelessWidget{
   final mobilnaOC _moc;
@@ -110,9 +113,28 @@ class mobilnaOCDetails extends StatelessWidget{
             ),
           ),
         ),
-        body: const Center(
-          child: Text("Mapa"),
-          //TODO tutak bude mapa
+        body: FlutterMap(
+          options: MapOptions(
+            center: LatLng(48.996630, 21.254610),
+            zoom: 15,
+          ),
+          nonRotatedChildren: [
+            AttributionWidget.defaultWidget(
+              source: 'OpenStreetMap contributors',
+              onSourceTapped: null,
+            ),
+          ],
+          children: [
+            TileLayer(
+              urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+              userAgentPackageName: 'com.example.app',
+            ),
+            MarkerLayer(
+              markers: [
+                Marker(point: LatLng(48.996630, 21.254610), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
+              ],
+            ),
+          ],
         ),
         /*Column(
             children: [

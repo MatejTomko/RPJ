@@ -22,6 +22,8 @@ class kontrolaTerminovPage extends StatefulWidget {
 class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
   String _idDarca="1000";
   List userRezervaciaList=[];
+  List userDarcaList=[];
+
 
 
   @override
@@ -46,7 +48,21 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
         }
       });
     }
+
+    dynamic resultant2 = await databaseManager.getDarcaList();
+    if(resultant2==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        for(var i=0;i< resultant2.length;i++){
+            userDarcaList.add(resultant2[i]);
+        }
+      });
+    }
+
   }
+
+
 
 
   @override
@@ -60,7 +76,13 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
         child: ListView.builder(
             itemCount: userRezervaciaList.length,
             itemBuilder:(context, index) {
-              rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate());
+              String meno="";
+              for(var i=0;i<userDarcaList.length;i++){
+                if(userDarcaList[i]['idDarca'].toString()==userRezervaciaList[index]['idDarca'].toString()){
+                  meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+                }
+              }
+              rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
               return RezervaciaCard(rz);
             }) ,
       ),

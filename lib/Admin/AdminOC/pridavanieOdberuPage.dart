@@ -66,7 +66,6 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
   @override
   void initState() {
-    fetchDatabaseList();
     super.initState();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
   }
@@ -86,6 +85,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
           if(resultant[i]["idDarca"]==vyrazHladaj){
             userOdberyList.add(resultant[i]);
           }
+        }
+        if(userOdberyList.length==0){
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Žiaden výsledok")));
         }
       });
     }
@@ -456,6 +458,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             vyrazHladaj=_controllerVyhladavanie.text;
                             if(vyrazHladaj.length>2){
                               fetchDatabaseList();
+                            }else{
+                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Minimalne 3 znaky!")));
                             }
                           },
                           style: TextButton.styleFrom(
@@ -475,7 +479,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             shrinkWrap: true,
                             itemCount: userOdberyList.length,
                             itemBuilder:(context, index) {
-                              odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'].toDate(),userOdberyList[index]['typ'],userOdberyList[index]['autoodber'],userOdberyList[index]['komplikacia'],userOdberyList[index]['koniec'],userOdberyList[index]['tlakkrvi'],userOdberyList[index]['vyjazd'],userOdberyList[index]['zaciatok'],userOdberyList[index]['trvanie']);
+                              odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'],userOdberyList[index]['typ'],userOdberyList[index]['autoodber'],userOdberyList[index]['komplikacia'],userOdberyList[index]['koniec'],userOdberyList[index]['tlakkrvi'],userOdberyList[index]['vyjazd'],userOdberyList[index]['zaciatok'],userOdberyList[index]['trvanie']);
                               return OdberCardVyhladavanie(odb1);
                             }),
                       ),
