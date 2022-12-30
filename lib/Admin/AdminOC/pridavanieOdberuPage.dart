@@ -159,8 +159,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                           controller: _controllerautoodber,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.timelapse_outlined),
-                            hintText: 'Čas',
-                            labelText: 'Čas',
+                            hintText: 'Auto odber',
+                            labelText: 'Auto odber',
                           ),
                           onChanged: ((value) {
                             _autoodber =value;
@@ -222,7 +222,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllerkomplikacia,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Komplikácia pri odbere',
@@ -241,7 +241,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllerzaciatok,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Začiatok odberu',
@@ -260,7 +260,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllerkoniec,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Koniec odberu',
@@ -280,7 +280,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllermnozstvo,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Množstvo odberu',
@@ -299,7 +299,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllertlakkrvi,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Tlak krvi',
@@ -318,7 +318,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllertrvanie,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Trvanie odberu',
@@ -337,7 +337,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                         ),
 
                         TextFormField(
-                          controller: _controllertyp,
+                          controller: _controllervyjazd,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
                             hintText: 'Výjazd',

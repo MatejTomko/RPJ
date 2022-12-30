@@ -50,7 +50,7 @@ class OdberCard extends StatelessWidget {
                     children: [
                       Icon(Icons.water_drop),
                       Text(
-                        "celá krv ", //TODO nech berie z DB typ odberu
+                        _odber.typ, //TODO nech berie z DB typ odberu
                       ),
                       Text(
                         "| ${_odber.mnozstvo} ml",

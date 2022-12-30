@@ -170,8 +170,8 @@ class kamennaOCDetails extends StatelessWidget{
           body:
             FlutterMap(
               options: MapOptions(
-                center: LatLng(49.002666, 21.238214),
-                zoom: 9.2,
+                center: LatLng(48.996630, 21.254610),
+                zoom: 15,
               ),
               nonRotatedChildren: [
                 AttributionWidget.defaultWidget(
@@ -183,6 +183,11 @@ class kamennaOCDetails extends StatelessWidget{
                 TileLayer(
                   urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                   userAgentPackageName: 'com.example.app',
+                ),
+                MarkerLayer(
+                  markers: [
+                    Marker(point: LatLng(48.996630, 21.254610), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
+                  ],
                 ),
               ],
             ),
