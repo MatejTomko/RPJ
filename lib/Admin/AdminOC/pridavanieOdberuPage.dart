@@ -60,7 +60,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
   late TabController tabController;
   List userOdberyList= [];
+  List userOdberyListid=[];
   dynamic resultant;
+  dynamic resultantid;
 
 
 
@@ -74,7 +76,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
   fetchDatabaseList() async{
 
-    resultant = await databaseManager.getOdberList();
+    List resulty=await databaseManager.getOdberList2();
+    resultant = resulty[0];
+    resultantid=resulty[1];
     //display=userKamenneOCList;
     if(resultant==null){
       print('Unable to retrieve');
@@ -84,6 +88,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
         for(var i=0;i< resultant.length;i++){
           if(resultant[i]["idDarca"]==vyrazHladaj){
             userOdberyList.add(resultant[i]);
+            userOdberyListid.add(resultantid[i]);
           }
         }
         if(userOdberyList.length==0){
@@ -479,8 +484,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             shrinkWrap: true,
                             itemCount: userOdberyList.length,
                             itemBuilder:(context, index) {
+                              print(userOdberyList[index]);
                               odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'],userOdberyList[index]['typ'],userOdberyList[index]['autoodber'],userOdberyList[index]['komplikacia'],userOdberyList[index]['koniec'],userOdberyList[index]['tlakkrvi'],userOdberyList[index]['vyjazd'],userOdberyList[index]['zaciatok'],userOdberyList[index]['trvanie']);
-                              return OdberCardVyhladavanie(odb1);
+                              return OdberCardVyhladavanie(odb1,userOdberyListid[index].toString());
                             }),
                       ),
                     ],

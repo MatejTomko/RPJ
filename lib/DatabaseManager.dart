@@ -166,6 +166,27 @@ class DatabaseManager{
     }
   }
 
+
+
+  Future getOdberList2() async{
+    List itemsList=[];
+    List id=[];
+    List returnovat=[];
+    try{
+      await odberList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+        id.add([element.id]);
+      })
+      );
+      returnovat.add(itemsList);
+      returnovat.add(id);
+      return returnovat;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
   Future<void> createOtazkyData(
       String otazka,odpoved) async {
     return await otazkyList.doc().set({

@@ -115,6 +115,7 @@ class odberObjednanieState extends State<odberObjednanie> {
 
                   ),
                 ),
+                const Text("Tu dat ze vyber typ odberu krv/plazma/Dosticky, ja ptm dam nech to da do DB"),
 
 
                 SizedBox(height: 20),

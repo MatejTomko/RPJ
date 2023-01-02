@@ -1,5 +1,7 @@
 import 'dart:ffi';
 
+import 'package:blood_app/Admin/AdminOC/rezervacia.dart';
+import 'package:blood_app/Admin/AdminOC/rezervaciaCard.dart';
 import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
 import 'package:blood_app/DatabaseManager.dart';
@@ -34,6 +36,7 @@ class _profilePageState extends State<profilePage> {
 
   List userDarcaList = [];
   List userOdberList = [];
+  List userRezervaciaList = [];
   darca user=new darca("", "", "", "", "", "", "",DateTime.now(),"");
   int pocetOdberov=0;
   int zachraneneZivoty=0;
@@ -131,10 +134,25 @@ class _profilePageState extends State<profilePage> {
       percent=1.0;
       //TODO urobit inak
     }
-    user.pocetodberov=this.pocetOdberov as String;
+    user.pocetodberov=this.pocetOdberov.toString();
     pl1=plaketa1.toString();
     pl2=plaketa2.toString();
     //TODO TOTO JE NA MUZOV HORE, UROBIT AJ PRE ZENY!!
+
+
+    dynamic resultant3 = await databaseManager.getRezervaciaList();
+    if(resultant3==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        for(var i=0;i< resultant3.length;i++){
+          String help=resultant3[i]['idDarca'].toString();
+          if(help == "1000"){
+            userRezervaciaList.add(resultant3[i]);
+          }
+        }
+      });
+    }
   }
 
 
@@ -146,7 +164,8 @@ class _profilePageState extends State<profilePage> {
         title: Text("Profil darcu"),
         backgroundColor: Colors.red[900],
       ),
-      body: Padding(
+      body:
+      Padding(
         padding: const EdgeInsets.all(1.0),
         child: Column(
           children: [
@@ -406,15 +425,21 @@ class _profilePageState extends State<profilePage> {
                 ],
               ),
             ),
-            const Text(
-              "Objednany aktualne(pribudne)",
-              style: TextStyle(
-                color: Colors.black54,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+            const Text("Tu neukazuje listview ta opravit!")
+            //TODO
+            /*ListView.builder(
+                  itemCount: userRezervaciaList.length,
+                  itemBuilder:(context, index) {
+                    String meno=user.meno;
+                    rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
+                    return RezervaciaCardUser(rz);
+                  }) ,*/
+
           ],
+
         ),
+
+
 
       )
     );
