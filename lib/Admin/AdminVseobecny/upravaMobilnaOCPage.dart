@@ -38,13 +38,16 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
   var _controllermiesto=TextEditingController();
   var _controllercas=TextEditingController();
   var _controllerdatum=TextEditingController();
-  var _controllermapy=TextEditingController();
+  var _controllerlat=TextEditingController();
+  var _controllerlng=TextEditingController();
   var _controlleroc=TextEditingController();
   String _miesto="";
   String _cas="";
   String _datum=DateTime.now().toString().split(" ")[0];
   String _oc="";
-  String _mapy="";
+  String _lat="";
+  String _lng="";
+
 
   late TabController tabController;
   List userKamenneOCList= [];
@@ -177,15 +180,33 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                           },
                         ),
                         TextFormField(
-                          controller: _controllermapy,
+                          controller: _controllerlat,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
-                            hintText: 'Miesto na mapach',
-                            labelText: 'Mapy',
+                            hintText: 'Miesto na mapach Lat',
+                            labelText: 'Lat',
                           ),
                           onChanged: ((value) {
-                            _mapy=value;
-                            _controllermapy.text=_mapy;
+                            _lat=value;
+                            _controllerlat.text=_lat;
+                          }),
+                          validator: (value) {
+                            if (value!.isEmpty) {
+                              return 'Prosím zadajte lokáciu';
+                            }
+                            return null;
+                          },
+                        ),
+                        TextFormField(
+                          controller: _controllerlng,
+                          decoration: const InputDecoration(
+                            icon: const Icon(Icons.place),
+                            hintText: 'Miesto na mapach Lng',
+                            labelText: 'Lng',
+                          ),
+                          onChanged: ((value) {
+                            _lng=value;
+                            _controllerlng.text=_lng;
                           }),
                           validator: (value) {
                             if (value!.isEmpty) {
@@ -273,14 +294,15 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                                 var db=FirebaseFirestore.instance.collection("MobilneOC").add({
                                   "cas":_controllercas.text,
                                   "datum":_controllerdatum.text,
-                                  "mapy":_controllermapy.text,
+                                  "mapy":_controllerlat.text+" "+_controllerlng.text,
                                   "miesto":_controllermiesto.text,
                                   "oc":_controlleroc.text,
                                 });
 
                                 _controllerdatum.clear();
                                 _controllercas.clear();
-                                _controllermapy.clear();
+                                _controllerlat.clear();
+                                _controllerlng.clear();
                                 _controllermiesto.clear();
 
 

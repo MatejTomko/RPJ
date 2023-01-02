@@ -12,6 +12,8 @@ class mobilnaOCDetails extends StatelessWidget{
   final mobilnaOC _moc;
 
   mobilnaOCDetails(this._moc);
+  double lat=0;
+  double lng=0;
 
 
   @override
@@ -19,6 +21,10 @@ class mobilnaOCDetails extends StatelessWidget{
     String datePomocny=_moc.datum;
     String stringPomocny=datePomocny.toString();
     var datumbezcasu=stringPomocny.split(" ");
+
+    String latlng=_moc.mapy;
+    lat=double.parse(latlng.split(" ")[0]);
+    lng=double.parse(latlng.split(" ")[1]);
 
     return Scaffold(
       appBar: AppBar(
@@ -115,7 +121,7 @@ class mobilnaOCDetails extends StatelessWidget{
         ),
         body: FlutterMap(
           options: MapOptions(
-            center: LatLng(48.996630, 21.254610),
+            center: LatLng(lat, lng),
             zoom: 15,
           ),
           nonRotatedChildren: [
@@ -131,7 +137,7 @@ class mobilnaOCDetails extends StatelessWidget{
             ),
             MarkerLayer(
               markers: [
-                Marker(point: LatLng(48.996630, 21.254610), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
+                Marker(point: LatLng(lat, lng), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
               ],
             ),
           ],

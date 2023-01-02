@@ -31,7 +31,7 @@ class rezervaciaCardDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "Robi sa: ",
+                  "Robi sa: Tu dame ze ozancit ako vybaveny",
                   style: TextStyle(
                     fontSize: 18,
                     color: Colors.black,

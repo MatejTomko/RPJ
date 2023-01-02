@@ -11,9 +11,14 @@ class kamennaOCDetails extends StatelessWidget{
   final kamennaOC _koc;
 
   kamennaOCDetails(this._koc);
+  double lat=0;
+  double lng=0;
 
   @override
   Widget build(BuildContext context) {
+    String latlng=_koc.mapy;
+    lat=double.parse(latlng.split(" ")[0]);
+    lng=double.parse(latlng.split(" ")[1]);
     return Scaffold(
       appBar: AppBar(
         title: Text(_koc.meno),
@@ -167,10 +172,11 @@ class kamennaOCDetails extends StatelessWidget{
               ),
             ),
           ),
+
           body:
             FlutterMap(
               options: MapOptions(
-                center: LatLng(48.996630, 21.254610),
+                center: LatLng(lat, lng),
                 zoom: 15,
               ),
               nonRotatedChildren: [
@@ -186,7 +192,7 @@ class kamennaOCDetails extends StatelessWidget{
                 ),
                 MarkerLayer(
                   markers: [
-                    Marker(point: LatLng(48.996630, 21.254610), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
+                    Marker(point: LatLng(lat, lng), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
                   ],
                 ),
               ],

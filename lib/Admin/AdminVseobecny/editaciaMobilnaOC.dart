@@ -39,11 +39,14 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
   String _cas="";
   String _datum=DateTime.now().toString().split(" ")[0];
   String _oc="";
-  String _mapy="";
+  String _lat="";
+  String _lng="";
+
   var _controllermiesto=TextEditingController();
   var _controllercas=TextEditingController();
   var _controllerdatum=TextEditingController();
-  var _controllermapy=TextEditingController();
+  var _controllerlat=TextEditingController();
+  var _controllerlng=TextEditingController();
   var _controlleroc=TextEditingController();
 
 
@@ -56,7 +59,8 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
       _miesto=_mobilnaOC.miesto;
       _cas=_mobilnaOC.cas;
       _oc=_mobilnaOC.oc;
-      _mapy=_mobilnaOC.mapy;
+      _lat=_mobilnaOC.mapy.split(" ")[0];
+      _lng=_mobilnaOC.mapy.split(" ")[1];
       _datum=_mobilnaOC.datum;
       lennazaciatku=0;
     }
@@ -64,7 +68,8 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
 
     _controllercas.text=_cas;
     _controlleroc.text=_oc;
-    _controllermapy.text=_mapy;
+    _controllerlat.text=_lat;
+    _controllerlng.text=_lng;
     _controllermiesto.text=_miesto;
 
     CollectionReference mobilneocDb=FirebaseFirestore.instance.collection('MobilneOC');
@@ -123,15 +128,33 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                   },
                 ),
                 TextFormField(
-                  controller: _controllermapy,
+                  controller: _controllerlat,
                   decoration: const InputDecoration(
                     icon: const Icon(Icons.place),
-                    hintText: 'Miesto na mapach',
-                    labelText: 'Mapy',
+                    hintText: 'Miesto na mapach Lat',
+                    labelText: 'Lat',
                   ),
                   onChanged: ((value) {
-                    _mapy=value;
-                    _controllermapy.text=_mapy;
+                    _lat=value;
+                    _controllerlat.text=_lat;
+                  }),
+                  validator: (value) {
+                    if (value!.isEmpty) {
+                      return 'Prosím zadajte lokáciu';
+                    }
+                    return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _controllerlng,
+                  decoration: const InputDecoration(
+                    icon: const Icon(Icons.place),
+                    hintText: 'Miesto na mapach Lng',
+                    labelText: 'Lng',
+                  ),
+                  onChanged: ((value) {
+                    _lng=value;
+                    _controllerlng.text=_lng;
                   }),
                   validator: (value) {
                     if (value!.isEmpty) {
@@ -218,13 +241,13 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                        var db=FirebaseFirestore.instance.collection("MobilneOC").doc(_userMobilnaOcId).update({
                          "cas":_controllercas.text,
                          "datum":_controllerdatum.text,
-                         "mapy":_controllermapy.text,
+                         "mapy":_controllerlat.text+" "+_controllerlng.text,
                          "miesto":_controllermiesto.text,
                          "oc":_controlleroc.text,
                        });
                         _mobilnaOC.miesto=_controllermiesto.text;
                         _mobilnaOC.datum=_controllerdatum.text;
-                        _mobilnaOC.mapy=_controllermapy.text;
+                        _mobilnaOC.mapy=_controllerlat.text+" "+_controllerlng.text;
                         _mobilnaOC.oc=_controlleroc.text;
                         _mobilnaOC.cas=_controllercas.text;
                         //_controllerdatum.clear();

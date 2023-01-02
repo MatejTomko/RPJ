@@ -405,9 +405,17 @@ class _profilePageState extends State<profilePage> {
                   )
                 ],
               ),
-            )
+            ),
+            const Text(
+              "Objednany aktualne(pribudne)",
+              style: TextStyle(
+                color: Colors.black54,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
           ],
         ),
+
       )
     );
   }
