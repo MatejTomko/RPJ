@@ -1,14 +1,17 @@
 
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCCard.dart';
+import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCCard.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/vyjazdoveOC.dart';
+import 'package:blood_app/viacPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
+import 'package:blood_app/main.dart';
 import 'package:intl/intl.dart';
 
 //TODO nech to posunie to upravaMobilnaOCPage po updatnuti
@@ -49,7 +52,16 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
   var _controllerlng=TextEditingController();
   var _controlleroc=TextEditingController();
 
-
+  @override
+  void initState() {
+    super.initState();
+    _controllermiesto.addListener(() {
+      final String text = _miesto;
+      _controllermiesto.text = _controllermiesto.value.copyWith(
+        text: text,
+      ) as String;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -97,10 +109,10 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                     hintText: 'Nazov',
                     labelText: 'Nazov',
                   ),
-                  onChanged: ((value) {
+                  /*onChanged: ((value) {
                     _miesto=value;
                     _controllermiesto.text=value;
-                  }),
+                  }),*/
                   validator: (value) {
                     if (value!.isEmpty) {
                       return 'Prosím zadajte názov';
@@ -252,10 +264,10 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                         _mobilnaOC.cas=_controllercas.text;
                         //_controllerdatum.clear();
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC updatnutá")));
-
-                        //TODO
-                        //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
                       }
+                      //TODO
+                      //hotovo by Matej
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       "Update",

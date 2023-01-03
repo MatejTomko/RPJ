@@ -64,6 +64,12 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
     fetchDatabaseList();
     super.initState();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
+    _controllermiesto.addListener(() {
+      final String text = _miesto;
+      _controllermiesto.value = _controllermiesto.value.copyWith(
+        text: text,
+      );
+    });
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
@@ -135,8 +141,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
           child: TabBarView(
             controller: tabController,
             children: [
-              Container(
-
+              SingleChildScrollView(
                 child: Form(
                   key: _formKey,
                   child: Container(
@@ -145,17 +150,18 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                       children: [
                         TextFormField(
                           controller: _controllermiesto,
+                          autofocus: true,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.home),
                             hintText: 'Nazov',
                             labelText: 'Nazov',
                           ),
-                          onChanged: ((value) {
+                          /*onChanged: ((value) {
                             _miesto=value;
                             _controllermiesto.text=value;
-                          }),
+                          }),*/
                           validator: (value) {
-                            if (value!.isEmpty) {
+                            if (value!.isEmpty || value == null || value.isEmpty) {
                               return 'Prosím zadajte názov';
                             }
                             return null;
@@ -168,10 +174,10 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                             hintText: 'Čas',
                             labelText: 'Čas',
                           ),
-                          onChanged: ((value) {
+                          /*onChanged: ((value) {
                             _cas =value;
                             _controllercas.text=value;
-                          }),
+                          }),*/
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Prosím zadajte čas';
@@ -236,9 +242,10 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                             },
                             ).toList(),
                             onChanged:(val){
-                              _oc=val!;
-                            } ,
-
+                              setState(() {
+                                _oc=val!;
+                              });
+                            },
                           ),
                         ),
 

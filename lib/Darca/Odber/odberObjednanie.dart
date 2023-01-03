@@ -18,7 +18,8 @@ class odberObjednanieState extends State<odberObjednanie> {
   var _controllerdatum=TextEditingController();
   var _controllercas=TextEditingController();
 
-  String _dropDownValue="";
+  String _dropDownValue=""; //centre
+  String _dropDownValue2=""; // typ odberu
   String _datum="";
 
   Color getColor(Set<MaterialState> states){
@@ -91,7 +92,7 @@ class odberObjednanieState extends State<odberObjednanie> {
                   padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
                   child: DropdownButton(
                       hint: _dropDownValue=="" ?
-                      Text('Vyberte odberné centrum')
+                      Text('Zvoľte odberné centrum')
                           :
                       Text(
                           _dropDownValue,
@@ -115,8 +116,33 @@ class odberObjednanieState extends State<odberObjednanie> {
 
                   ),
                 ),
-                const Text("Tu dat ze vyber typ odberu krv/plazma/Dosticky, ja ptm dam nech to da do DB"),
-
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
+                  child: DropdownButton(
+                      hint: _dropDownValue2=="" ?
+                      Text('Zvoľte typ odberu')
+                          :
+                      Text(
+                          _dropDownValue2,
+                          style: TextStyle(color: Colors.black54)
+                      ),
+                      isExpanded: true,
+                      iconSize: 30.0,
+                      style: TextStyle(color: Colors.black87),
+                      items: ['Celá krv','Krvná plazma','Krvné doštičky'].map((val){
+                        return DropdownMenuItem<String>(
+                          value:val,
+                          child: Text(val),
+                        );
+                      },
+                      ).toList(),
+                      onChanged: (val){
+                        setState(() {
+                          _dropDownValue2=val!;
+                        });
+                      }
+                  ),
+                ),//TODO pre daneka - nech odosiela do DB typ odberu
 
                 SizedBox(height: 20),
                 Container(
