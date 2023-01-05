@@ -205,7 +205,7 @@ class _viacPageState extends State<viacPage> {
               ),
               Divider(),
               GestureDetector(
-                onTap: () async {
+                onTap: () async{
                   /*Navigator.push(
                       context,
                       MaterialPageRoute(
