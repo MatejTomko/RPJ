@@ -21,6 +21,8 @@ import 'package:flutter/material.dart';
 import 'Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
 import 'Navstevnik/Informacie/domovPage.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
@@ -54,6 +56,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      navigatorKey: navigatorKey,
       home: MyBottomNavigationBar(),
     );
   }
