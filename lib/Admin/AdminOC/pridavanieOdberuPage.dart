@@ -5,7 +5,9 @@ import 'package:blood_app/Darca/Odber/odberCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 
 import '../../DatabaseManager.dart';
 
@@ -100,6 +102,10 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
 
   }
+  bool _genderHasError = false;
+
+  var genderOptions = ['Male', 'Female', 'Other'];
+  String _dropDownValueTypOdberu = "";
 
 
   @override
@@ -131,30 +137,33 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
         body: Theme(
           data: ThemeData(
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
+            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey),
+            primarySwatch: Colors.red,
           ),
+
           child: TabBarView(
             controller: tabController,
             children: [
               Container(
                 child:SingleChildScrollView(
-                child: Form(
+                child: FormBuilder(
                   key: _formKey,
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        TextFormField(
+                        FormBuilderTextField(
+                          name:"idDarca",
                           controller: _controlleridDarca,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.home),
                             hintText: 'idDarca',
                             labelText: 'idDarca',
                           ),
-                          onChanged: ((value) {
+                          /*onChanged: ((value) {
                             _idDarca=value;
                             _controlleridDarca.text=value;
-                          }),
+                          }),*/
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Prosím zadajte id darcu';
@@ -162,7 +171,34 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             return null;
                           },
                         ),
-                        TextFormField(
+                        SizedBox(height: 10),
+                        FormBuilderRadioGroup<String>(
+                          decoration: const InputDecoration(
+                              icon: const Icon(Icons.timelapse_outlined),
+                              labelText: 'Auto odber',
+                              labelStyle: TextStyle(
+                                fontSize: 22,
+                              ),
+                              border: InputBorder.none,
+                          ),
+                          initialValue: null,
+                          name: 'auto_odber',
+                          validator: FormBuilderValidators.compose(
+                              [FormBuilderValidators.required()]),
+                          options:
+                          ['Áno', 'Nie']
+                              .map((moznosti) => FormBuilderFieldOption(
+                            value: moznosti,
+                            child: Text(moznosti),
+                          ))
+                              .toList(growable: false),
+                          onChanged: ((value) {
+                            _autoodber =value!;
+                            _controllerautoodber.text=value;
+                          }),
+                          controlAffinity: ControlAffinity.trailing,
+                        ),
+                        /*TextFormField(
                           controller: _controllerautoodber,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.timelapse_outlined),
@@ -179,8 +215,35 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             }
                             return null;
                           },
+                        ),*/
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
+                          child: DropdownButton(
+                              hint: _dropDownValueTypOdberu=="" ?
+                              Text('Zvoľte typ odberu')
+                                  :
+                              Text(
+                                  _dropDownValueTypOdberu,
+                                  style: TextStyle(color: Colors.black54)
+                              ),
+                              isExpanded: true,
+                              iconSize: 30.0,
+                              style: TextStyle(color: Colors.black87),
+                              items: ['Celá krv','Krvná plazma','Krvné doštičky'].map((val){
+                                return DropdownMenuItem<String>(
+                                  value:val,
+                                  child: Text(val),
+                                );
+                              },
+                              ).toList(),
+                              onChanged: (val){
+                                setState(() {
+                                  _dropDownValueTypOdberu=val!;
+                                });
+                              }
+                          ),
                         ),
-                        TextFormField(
+                        /*TextFormField(
                           controller: _controllertyp,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -197,7 +260,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             }
                             return null;
                           },
-                        ),
+                        ),*/
 
                         TextField(
                           controller: _controllerdatum,
@@ -217,7 +280,6 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                               },
 
                             );
-
                             if (zvolenyDatum != null) {
                               String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
                               _datum=zvolenyDatum.toString();
@@ -247,6 +309,23 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                           },
                         ),
 
+                        /*FormBuilderDateTimePicker(
+                          name: 'date',
+                          initialEntryMode: DatePickerEntryMode.calendar,
+                          initialValue: DateTime.now(),
+                          inputType: InputType.both,
+                          decoration: InputDecoration(
+                            labelText: 'Appointment Time',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+
+                              },
+                            ),
+                          ),
+                          initialTime: const TimeOfDay(hour: 8, minute: 0),
+                          locale: Locale.fromSubtags(languageCode: 'fr'),
+                        ),*/
                         TextFormField(
                           controller: _controllerzaciatok,
                           decoration: const InputDecoration(
@@ -361,6 +440,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             return null;
                           },
                         ),
+
 
 
                         SizedBox(height: 20),

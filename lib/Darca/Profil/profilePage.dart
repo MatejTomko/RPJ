@@ -4,6 +4,7 @@ import 'package:blood_app/Admin/AdminOC/rezervacia.dart';
 import 'package:blood_app/Admin/AdminOC/rezervaciaCard.dart';
 import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
+import 'package:blood_app/Darca/Profil/rezervaciaCardUser.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -425,16 +426,16 @@ class _profilePageState extends State<profilePage> {
                 ],
               ),
             ),
-            const Text("Tu neukazuje listview ta opravit!")
             //TODO
-            /*ListView.builder(
-                  itemCount: userRezervaciaList.length,
-                  itemBuilder:(context, index) {
-                    String meno=user.meno;
-                    rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
-                    return RezervaciaCardUser(rz);
-                  }) ,*/
-
+            Expanded(child: ListView.builder(
+                itemCount: userRezervaciaList.length,
+                itemBuilder:(context, index) {
+                  String meno=user.meno;
+                  rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
+                  return RezervaciaCardUser(rz);
+                }
+            ),
+            )
           ],
 
         ),

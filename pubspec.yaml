@@ -45,6 +45,8 @@ dependencies:
   syncfusion_flutter_barcodes: ^20.3.59
   intl: ^0.17.0
   flutter_map: ^3.1.0
+  flutter_form_builder: ^7.7.0
+  form_builder_validators: ^8.4.0
 
 
 dev_dependencies:

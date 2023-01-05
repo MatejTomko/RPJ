@@ -17,8 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 import '../../DatabaseManager.dart';
-//TODO
-//tiez upravit nech to neposuva kurzor jak piseme
+
 class upravaOtazkyPage extends StatefulWidget {
   const upravaOtazkyPage({Key? key}) : super(key: key);
 
@@ -56,6 +55,18 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
     fetchDatabaseList();
     super.initState();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
+    _controllerotazka.addListener(() {
+      final String text = _otazka;
+      _controllerotazka.text = _controllerotazka.value.copyWith(
+        text: text,
+      ) as String;
+    });
+    _controllerodpoved.addListener(() {
+      final String text = _odpoved;
+      _controllerodpoved.text = _controllerodpoved.value.copyWith(
+        text: text,
+      ) as String;
+    });
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
@@ -83,7 +94,7 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Editácia Mobilných OC"),
+          title: Text("Editácia Otázok FAQ"),
           backgroundColor: Colors.red[900],
           bottom: PreferredSize(
             preferredSize: Size.fromHeight(40),
@@ -128,10 +139,10 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
                             hintText: 'Otázka',
                             labelText: 'Otázka',
                           ),
-                          onChanged: ((value) {
+                          /*onChanged: ((value) {
                             _otazka=value;
                             _controllerotazka.text=value;
-                          }),
+                          }),*/
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Prosím zadajte otázku';
@@ -146,10 +157,10 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
                             hintText: 'Odpoveď',
                             labelText: 'Odpoveď',
                           ),
-                          onChanged: ((value) {
+                          /*onChanged: ((value) {
                             _odpoved =value;
                             _controllerodpoved.text=value;
-                          }),
+                          }),*/
                           validator: (value) {
                             if (value!.isEmpty) {
                               return 'Prosím zadajte odpoved';
