@@ -85,7 +85,7 @@ class _FirstState extends State<First>{
                 TextButton(
                   onPressed: (){
                     //TODO prepojenie na homescreen pre navstevnika
-                    Navigator.pushNamed(context, "/home");
+                    Navigator.pushNamed(context, "/homenavstevnik");
                   },
                   child: Text(
                     "Pokračovať bez registrácie",
