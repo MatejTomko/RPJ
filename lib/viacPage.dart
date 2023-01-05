@@ -5,7 +5,9 @@ import 'package:blood_app/Navstevnik/Informacie/oceneniaPage.dart';
 import 'package:blood_app/Navstevnik/Lieky/liekyPage.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/ocPage.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazkyPage.dart';
+import 'package:blood_app/first.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +33,7 @@ class _viacPageState extends State<viacPage> {
         ),
       body: Container(
         margin: EdgeInsets.fromLTRB(20,10,20,10),
-        height: 420,
+        height: 490,
         decoration: BoxDecoration(
           border: Border.all(color: Colors.grey),
           borderRadius: BorderRadius.circular(16),
@@ -191,6 +193,34 @@ class _viacPageState extends State<viacPage> {
                       padding: EdgeInsets.fromLTRB(20,20,20,10),
                       child: Text(
                         "Napíšte nám",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Icon(Icons.keyboard_arrow_right, color: Colors.red[800]),
+                  ],
+                ),
+              ),
+              Divider(),
+              GestureDetector(
+                onTap: () async {
+                  /*Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ())
+                  );*/
+                  FirebaseAuth.instance.signOut();//TODO bo to uvidi aj navstevnik ta nech to da na zaciatok apky
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.fromLTRB(20,20,20,10),
+                      child: Text(
+                        "Odhlásiť sa",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,

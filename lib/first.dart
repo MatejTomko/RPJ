@@ -15,11 +15,11 @@ class _FirstState extends State<First>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         title: const Text("Prihlásenie"),
         backgroundColor: Colors.red[900],
       ),
+      backgroundColor: Colors.white,
       body: Center(
         child: SingleChildScrollView(
             child: Column(
@@ -85,7 +85,11 @@ class _FirstState extends State<First>{
                 TextButton(
                   onPressed: (){
                     //TODO prepojenie na homescreen pre navstevnika
-                    Navigator.pushNamed(context, "/home"); // zmenene z homenavstenvik TODO zmenit ked treba
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => HomeNavstevnik())
+                    );
                   },
                   child: Text(
                     "Pokračovať bez registrácie",
