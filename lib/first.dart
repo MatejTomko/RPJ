@@ -2,7 +2,6 @@ import 'package:blood_app/homenavstevnik.dart';
 import 'package:flutter/material.dart';
 import 'package:blood_app/home.dart';
 import 'package:blood_app/Autentifikacia/login.dart';
-import 'package:blood_app/Autentifikacia/registration.dart';
 
 
 class First extends StatefulWidget{
@@ -67,7 +66,7 @@ class _FirstState extends State<First>{
                   child: TextButton(
                     onPressed: (){
                       //TODO prepojenie na home screen
-                      Navigator.pushNamed(context, "/registration");
+                      Navigator.pushNamed(context, "/register");
                     },
                     style: TextButton.styleFrom(
                       shape: const StadiumBorder(

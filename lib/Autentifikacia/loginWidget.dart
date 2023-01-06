@@ -1,4 +1,7 @@
+import 'package:blood_app/Autentifikacia/Utils.dart';
+import 'package:blood_app/Autentifikacia/forgotPasswordPage.dart';
 import 'package:blood_app/home.dart';
+import 'package:blood_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -58,29 +61,44 @@ class _LoginWidgetState extends State<LoginWidget>{
               style: TextStyle(fontSize: 24),
             ),
             onPressed: signIn,
-          )
+          ),
+          SizedBox(height: 24),
+          GestureDetector(
+            child: Text(
+              "Zabudli ste heslo?",
+              style: TextStyle(
+                decoration: TextDecoration.underline,
+                color: Theme.of(context).colorScheme.background,
+                fontSize: 20,
+              ),
+            ),
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ForgotPasswordPage())),
+          ),
         ],
       ),
     ),
   );
 
   Future signIn() async {
-    /*showDialog(
+    showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator()),
-    );*/
+    );
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
+      Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e){
       print(e);
+      
+      Utils.showSnackBar(e.message);
+      Navigator.of(context).pop();
     }
 
-    //navigatorKey.currentState!.popUntil((route) => route.isFirst); //TODO dorobi nech neukazuje ten showdialog
   }
 
 }

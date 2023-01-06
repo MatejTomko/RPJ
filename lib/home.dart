@@ -3,6 +3,9 @@ import 'package:blood_app/Admin/AdminOC/pridavanieOdberuPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaOtazkyPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
+
 import 'package:blood_app/Darca/Odber/odberObjednanie.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
@@ -19,9 +22,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
+import 'Autentifikacia/Utils.dart';
 import 'Navstevnik/Informacie/domovPage.dart';
 
-final navigatorKey = GlobalKey<NavigatorState>();
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -56,7 +59,6 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      navigatorKey: navigatorKey,
       home: MyBottomNavigationBar(),
     );
   }
