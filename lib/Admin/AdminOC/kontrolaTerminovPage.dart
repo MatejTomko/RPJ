@@ -62,9 +62,6 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
 
   }
 
-
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(

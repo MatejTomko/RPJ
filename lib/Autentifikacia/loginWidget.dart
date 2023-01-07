@@ -80,23 +80,23 @@ class _LoginWidgetState extends State<LoginWidget>{
   );
 
   Future signIn() async {
-    showDialog(
+    /*showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) => Center(child: CircularProgressIndicator()),
-    );
+    );*/
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
         email: emailController.text.trim(),
         password: passwordController.text.trim(),
       );
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      //Navigator.of(context).popUntil((route) => route.isFirst);
     } on FirebaseAuthException catch (e){
       print(e);
       
       Utils.showSnackBar(e.message);
-      Navigator.of(context).pop();
+      //Navigator.of(context).pop();
     }
 
   }

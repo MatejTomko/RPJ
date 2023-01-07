@@ -89,7 +89,6 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
 
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -124,96 +123,92 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
           child: TabBarView(
             controller: tabController,
             children: [
-              Container(
-
+              SingleChildScrollView(
+                physics: BouncingScrollPhysics(),
                 child: Form(
                   key: _formKey,
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _controllerotazka,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.question_mark),
-                            hintText: 'Otázka',
-                            labelText: 'Otázka',
-                          ),
-                          /*onChanged: ((value) {
-                            _otazka=value;
-                            _controllerotazka.text=value;
-                          }),*/
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte otázku';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: _controllerodpoved,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.question_answer),
-                            hintText: 'Odpoveď',
-                            labelText: 'Odpoveď',
-                          ),
-                          /*onChanged: ((value) {
-                            _odpoved =value;
-                            _controllerodpoved.text=value;
-                          }),*/
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte odpoved';
-                            }
-                            return null;
-                          },
-                        ),
-
-
-
-                        SizedBox(height: 20),
-                        Container(
-                          height: 50,
-                          width: 250,
-                          child: TextButton(
-                            style:  TextButton.styleFrom(
-                              foregroundColor: Colors.red[100],
-                              backgroundColor: Colors.red[900],
-                              shape: StadiumBorder(),
+                    child: SafeArea(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          TextFormField(
+                            controller: _controllerotazka,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.question_mark),
+                              hintText: 'Otázka',
+                              labelText: 'Otázka',
                             ),
-                            onPressed: () async{
-                              if(_formKey.currentState!.validate() ){
-
-                                //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
-                                var db=FirebaseFirestore.instance.collection("Otazky").add({
-                                  "otazka":_controllerotazka.text,
-                                  "odpoved":_controllerodpoved.text,
-                                });
-
-                                _controllerotazka.clear();
-                                _controllerodpoved.clear();
-
-
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka odoslaná")));
+                            /*onChanged: ((value) {
+                              _otazka=value;
+                              _controllerotazka.text=value;
+                            }),*/
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte otázku';
                               }
+                              return null;
                             },
-                            child: const Text(
-                              "Odoslať",
-                              style: TextStyle(color: Colors.white,fontSize: 25),
+                          ),
+                          TextFormField(
+                            controller: _controllerodpoved,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.question_answer),
+                              hintText: 'Odpoveď',
+                              labelText: 'Odpoveď',
+                            ),
+                            /*onChanged: ((value) {
+                              _odpoved =value;
+                              _controllerodpoved.text=value;
+                            }),*/
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte odpoved';
+                              }
+                              return null;
+                            },
+                          ),
+
+                          SizedBox(height: 20),
+                          Container(
+                            height: 50,
+                            width: 250,
+                            child: TextButton(
+                              style:  TextButton.styleFrom(
+                                foregroundColor: Colors.red[100],
+                                backgroundColor: Colors.red[900],
+                                shape: StadiumBorder(),
+                              ),
+                              onPressed: () async{
+                                if(_formKey.currentState!.validate() ){
+
+                                  //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
+                                  var db=FirebaseFirestore.instance.collection("Otazky").add({
+                                    "otazka":_controllerotazka.text,
+                                    "odpoved":_controllerodpoved.text,
+                                  });
+
+                                  _controllerotazka.clear();
+                                  _controllerodpoved.clear();
+
+
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka odoslaná")));
+                                }
+                              },
+                              child: const Text(
+                                "Odoslať",
+                                style: TextStyle(color: Colors.white,fontSize: 25),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 130,
-                        ),
 
-                      ],
+
+                        ],
+                      ),
                     ),
                   ),
                 ),
-
-
-
               ),
               //prvy widget v tomto je prvy tab a druhy je druhy
               Container(

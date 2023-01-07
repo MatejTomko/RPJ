@@ -24,7 +24,7 @@ class RezervaciaCard extends StatelessWidget {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Id darcu: ${_rezervacia.idDarca}"),
+                      child: Text("ID darcu: ${_rezervacia.idDarca}"),
                     )
                   ],
                 ),

@@ -13,6 +13,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 import '../../DatabaseManager.dart';
 
@@ -141,16 +142,18 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
           child: TabBarView(
             controller: tabController,
             children: [
-              SingleChildScrollView(
-                child: Form(
+              ListView(
+                reverse: true,
+
+                children: [Form(
                   key: _formKey,
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         TextFormField(
                           controller: _controllermiesto,
-                          autofocus: true,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.home),
                             hintText: 'Nazov',
@@ -267,7 +270,6 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                               },
 
                             );
-
                             if (zvolenyDatum != null) {
                               String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
                               _datum=zvolenyDatum.toString();
@@ -277,8 +279,6 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                             }
                           },
                         ),
-
-
 
                         SizedBox(height: 20),
                         Container(
@@ -311,8 +311,6 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                                 _controllerlat.clear();
                                 _controllerlng.clear();
                                 _controllermiesto.clear();
-
-
                                 ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC odoslana")));
                               }
                             },
@@ -325,14 +323,11 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                         const SizedBox(
                           height: 130,
                         ),
-
                       ],
                     ),
                   ),
                 ),
-
-
-
+                ],
               ),
               //prvy widget v tomto je prvy tab a druhy je druhy
               Container(

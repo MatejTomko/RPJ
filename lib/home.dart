@@ -31,6 +31,7 @@ class Home extends StatefulWidget {
 
   @override
   State<Home> createState() => _HomeState();
+
 }
 
 class _HomeState extends State<Home> {
@@ -55,6 +56,7 @@ class _HomeState extends State<Home> {
     //getDocId();
     super.initState();
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -103,9 +105,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
 
   @override
   Widget build(BuildContext context) {
+    bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return Scaffold(
       body: pages[_selectedIndex],
-      bottomNavigationBar: BottomNavigationBar(
+      bottomNavigationBar: isKeyboardOpen
+      ? null
+      : BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type:   BottomNavigationBarType.fixed,

@@ -3,6 +3,7 @@ import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Admin/AdminOC/odberCardVyhladavanie.dart';
 import 'package:blood_app/Darca/Odber/odberCard.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_datetimerangepicker/f_datetimerangepicker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
@@ -41,6 +42,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   var _controllertyp=TextEditingController();
   var _controllervyjazd=TextEditingController();
   var _controllerzaciatok=TextEditingController();
+  var _controllerTrvanieOdberu = TextEditingController();
 
 
   var _controllerVyhladavanie=TextEditingController();
@@ -58,6 +60,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   String _typ="";
   String _vyjazd="";
   String _zaciatok="";
+  String _trvanieOdberu = "";
 
 
   late TabController tabController;
@@ -72,6 +75,42 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   void initState() {
     super.initState();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
+    _controlleridDarca.addListener(() {
+      final String text = _controlleridDarca.text;
+      _controlleridDarca.value = _controlleridDarca.value.copyWith(
+        text: text,
+      );
+    });
+    _controllerkomplikacia.addListener(() {
+      final String text = _controllerkomplikacia.text;
+      _controllerkomplikacia.value = _controllerkomplikacia.value.copyWith(
+        text: text,
+      );
+    });
+    _controllerTrvanieOdberu.addListener(() {
+      final String text = _controllerTrvanieOdberu.text;
+      _controllerTrvanieOdberu.value = _controllerTrvanieOdberu.value.copyWith(
+        text: text,
+      );
+    });
+    _controllermnozstvo.addListener(() {
+      final String text = _controllermnozstvo.text;
+      _controllermnozstvo.value = _controllermnozstvo.value.copyWith(
+        text: text,
+      );
+    });
+    _controllertlakkrvi.addListener(() {
+      final String text = _controllertlakkrvi.text;
+      _controllertlakkrvi.value = _controllertlakkrvi.value.copyWith(
+        text: text,
+      );
+    });
+    _controllervyjazd.addListener(() {
+      final String text = _controllervyjazd.text;
+      _controllervyjazd.value = _controllervyjazd.value.copyWith(
+        text: text,
+      );
+    });
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
@@ -102,9 +141,6 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
 
   }
-  bool _genderHasError = false;
-
-  var genderOptions = ['Male', 'Female', 'Other'];
   String _dropDownValueTypOdberu = "";
 
 
@@ -137,10 +173,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
         body: Theme(
           data: ThemeData(
-            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey),
+            colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
             primarySwatch: Colors.red,
           ),
-
           child: TabBarView(
             controller: tabController,
             children: [
@@ -152,51 +187,85 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                     padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
-                        FormBuilderTextField(
-                          name:"idDarca",
-                          controller: _controlleridDarca,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.home),
-                            hintText: 'idDarca',
-                            labelText: 'idDarca',
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
                           ),
-                          /*onChanged: ((value) {
-                            _idDarca=value;
-                            _controlleridDarca.text=value;
-                          }),*/
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte id darcu';
-                            }
-                            return null;
-                          },
+                          child: FormBuilderTextField(
+                            name:"idDarca",
+                            controller: _controlleridDarca,
+                            cursorColor: Colors.black12,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.person_outline),
+                              hintText: 'ID Darcu',
+                              border: InputBorder.none,
+                            ),
+                            /*onChanged: ((value) {
+                              _idDarca=value;
+                              _controlleridDarca.text=value;
+                            }),*/
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte id darcu';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
                         SizedBox(height: 10),
-                        FormBuilderRadioGroup<String>(
-                          decoration: const InputDecoration(
-                              icon: const Icon(Icons.timelapse_outlined),
-                              labelText: 'Auto odber',
-                              labelStyle: TextStyle(
-                                fontSize: 22,
-                              ),
-                              border: InputBorder.none,
+                        Container(
+                          padding: EdgeInsets.fromLTRB(12,0,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(25),
                           ),
-                          initialValue: null,
-                          name: 'auto_odber',
-                          validator: FormBuilderValidators.compose(
-                              [FormBuilderValidators.required()]),
-                          options:
-                          ['Áno', 'Nie']
-                              .map((moznosti) => FormBuilderFieldOption(
-                            value: moznosti,
-                            child: Text(moznosti),
-                          ))
-                              .toList(growable: false),
-                          onChanged: ((value) {
-                            _autoodber =value!;
-                            _controllerautoodber.text=value;
-                          }),
-                          controlAffinity: ControlAffinity.trailing,
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                    child: const Text(
+                                        "Auto odber"
+                                      ,
+                                      style: TextStyle(
+                                        color: Colors.black54,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              FormBuilderRadioGroup<String>(
+                                decoration: const InputDecoration(
+                                    labelStyle: TextStyle(
+                                      fontSize: 22,
+                                    ),
+                                    border: InputBorder.none,
+                                ),
+                                initialValue: null,
+                                name: 'auto_odber',
+                                validator: FormBuilderValidators.compose(
+                                    [FormBuilderValidators.required()]),
+                                options:
+                                ['Áno', 'Nie']
+                                    .map((moznosti) => FormBuilderFieldOption(
+                                  value: moznosti,
+                                  child: Text(moznosti),
+                                ))
+                                    .toList(growable: false),
+                                onChanged: ((value) {
+                                  _autoodber =value!;
+                                  _controllerautoodber.text=value;
+                                }),
+                                controlAffinity: ControlAffinity.trailing,
+                              ),
+                            ],
+                          ),
                         ),
                         /*TextFormField(
                           controller: _controllerautoodber,
@@ -216,19 +285,25 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             return null;
                           },
                         ),*/
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
-                          child: DropdownButton(
-                              hint: _dropDownValueTypOdberu=="" ?
-                              Text('Zvoľte typ odberu')
-                                  :
-                              Text(
-                                  _dropDownValueTypOdberu,
-                                  style: TextStyle(color: Colors.black54)
+                        SizedBox(height: 10),
+                        Container(
+                          //padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
+                          padding: EdgeInsets.fromLTRB(12,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: FormBuilderDropdown(
+                            name: "typOdberuDropdown",
+                              decoration: const InputDecoration(
+                                hintText: "Zvoľte typ odberu",
+                                enabledBorder: InputBorder.none
                               ),
                               isExpanded: true,
                               iconSize: 30.0,
                               style: TextStyle(color: Colors.black87),
+                              validator: FormBuilderValidators.compose(
+                                  [FormBuilderValidators.required()]),
                               items: ['Celá krv','Krvná plazma','Krvné doštičky'].map((val){
                                 return DropdownMenuItem<String>(
                                   value:val,
@@ -261,52 +336,63 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             return null;
                           },
                         ),*/
-
-                        TextField(
-                          controller: _controllerdatum,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.calendar_month_outlined),
-                            labelText: "Zadajte dátum",
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(12,5,10,5),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          readOnly: true,
-                          onTap: () async{
-                            DateTime? zvolenyDatum = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2101),
-                              selectableDayPredicate: (DateTime date){
-                                return true;
-                              },
-
-                            );
-                            if (zvolenyDatum != null) {
-                              String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
-                              _datum=zvolenyDatum.toString();
-                              _controllerdatum.text = formattedDate;
-                            }else{
-                              print("Dátum nebol zvolený");
-                            }
-                          },
+                          child: TextField(
+                            controller: _controllerdatum,
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.calendar_month_outlined),
+                              hintText: "Dátum",
+                              enabledBorder: InputBorder.none,
+                              focusedBorder: InputBorder.none,
+                            ),
+                            readOnly: true,
+                            onTap: () async{
+                              DateTime? zvolenyDatum = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2101),
+                                selectableDayPredicate: (DateTime date){
+                                  return true;
+                                },
+                              );
+                              if (zvolenyDatum != null) {
+                                String formattedDate = DateFormat('dd.MM.yyyy').format(zvolenyDatum);
+                                _datum=zvolenyDatum.toString();
+                                _controllerdatum.text = formattedDate;
+                              }else{
+                                print("Dátum nebol zvolený");
+                              }
+                            },
+                          ),
                         ),
-
-                        TextFormField(
-                          controller: _controllerkomplikacia,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Komplikácia pri odbere',
-                            labelText: 'Komplikácia',
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(12,5,10,5),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          onChanged: ((value) {
-                            _komplikacia=value;
-                            _controllerkomplikacia.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte typ komplikáciu';
-                            }
-                            return null;
-                          },
+                          child: TextFormField(
+                            controller: _controllerkomplikacia,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.medical_information_outlined),
+                              hintText: 'Komplikácie pri odbere',
+                              border: InputBorder.none,
+                            ),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                _komplikacia="žiadne komplikácie";
+                              }
+                              return null;
+                            },
+                          ),
                         ),
 
                         /*FormBuilderDateTimePicker(
@@ -326,7 +412,45 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                           initialTime: const TimeOfDay(hour: 8, minute: 0),
                           locale: Locale.fromSubtags(languageCode: 'fr'),
                         ),*/
-                        TextFormField(
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(12,5,10,5),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextField(
+                            controller: _controllerTrvanieOdberu,
+                            readOnly: true,
+                            decoration: InputDecoration(
+                              hintText: 'Kliknite na hodiny pre výber času',
+                              border: InputBorder.none,
+                              suffixIcon: IconButton(
+                                onPressed: (){
+                                  DateTimeRangePicker(
+                                      startText: "Od",
+                                      endText: "Do",
+                                      doneText: "Potvrdiť",
+                                      cancelText: "Zrušiť",
+                                      interval: 1,
+                                      mode: DateTimeRangePickerMode.time,
+                                      minimumTime: DateTime.now().subtract(Duration(days: 5)),
+                                      maximumTime: DateTime.now().add(Duration(days: 2)),
+                                      use24hFormat: true,
+                                      onConfirm: (start, end) {
+                                        DateFormat dateFormat = DateFormat("HH:mm");
+                                        print(start);
+                                        print(end);
+                                        _controllerTrvanieOdberu.text = dateFormat.format(start)+" - "+dateFormat.format(end);
+
+                                      }).showPicker(context);
+                                },
+                                icon: Icon(Icons.access_time_outlined),
+                              ),
+                            ),
+                          ),
+                        ),
+                        /*TextFormField(
                           controller: _controllerzaciatok,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -343,9 +467,9 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             }
                             return null;
                           },
-                        ),
+                        ),*/
 
-                        TextFormField(
+                        /*TextFormField(
                           controller: _controllerkoniec,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -362,48 +486,57 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             }
                             return null;
                           },
-                        ),
-
-
-                        TextFormField(
-                          controller: _controllermnozstvo,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Množstvo odberu',
-                            labelText: 'Množstvo odberu',
+                        ),*/
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          onChanged: ((value) {
-                            _mnozstvo=value;
-                            _controllermnozstvo.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte množstvo odberu';
-                            }
-                            return null;
-                          },
-                        ),
+                          child: TextFormField(
+                            controller: _controllermnozstvo,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.water_drop_outlined),
+                              hintText: 'Množstvo odberu',
+                              labelText: 'Množstvo odberu',
+                              border: InputBorder.none,
+                            ),
 
-                        TextFormField(
-                          controller: _controllertlakkrvi,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Tlak krvi',
-                            labelText: 'Tlak krvi',
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte množstvo odberu';
+                              }
+                              return null;
+                            },
                           ),
-                          onChanged: ((value) {
-                            _tlakkrvi=value;
-                            _controllertlakkrvi.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte tlak krvi';
-                            }
-                            return null;
-                          },
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextFormField(
+                            controller: _controllertlakkrvi,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.bloodtype_outlined),
+                              hintText: 'Tlak krvi',
+                              labelText: 'Tlak krvi',
+                              border: InputBorder.none,
+                            ),
+
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte tlak krvi';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
 
-                        TextFormField(
+                        /*TextFormField(
                           controller: _controllertrvanie,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -420,25 +553,30 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             }
                             return null;
                           },
-                        ),
-
-                        TextFormField(
-                          controller: _controllervyjazd,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Výjazd',
-                            labelText: 'Výjazd',
+                        ),*/
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          onChanged: ((value) {
-                            _vyjazd=value;
-                            _controllervyjazd.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte výjazd';
-                            }
-                            return null;
-                          },
+                          child: TextFormField(
+                            controller: _controllervyjazd,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Výjazd',
+                              labelText: 'Výjazd',
+                              border: InputBorder.none,
+                            ),
+
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte výjazd';
+                              }
+                              return null;
+                            },
+                          ),
                         ),
 
 

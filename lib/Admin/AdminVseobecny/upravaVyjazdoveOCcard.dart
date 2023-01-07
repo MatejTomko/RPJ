@@ -18,36 +18,39 @@ class upravaVyjazdoveOCcard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
-          child: Column(
-            children: [
-              InkWell(
-                child: Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text(
-                            "Výjazdove odbery "+_vyjazdoveOC.meno,
-                            style: const TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
+          child: SingleChildScrollView(
+            reverse: true,
+            child: Column(
+              children: [
+                InkWell(
+                  child: Padding(
+                    padding: const EdgeInsets.all(15.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            Text(
+                              "Výjazdove odbery "+_vyjazdoveOC.meno,
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
-                          ),
-                        ],
-                      ),
-                    ],
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
+                  onTap: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => upravaVyjazdoveOCcardDetails(_vyjazdoveOC,userMobilneOcListId)));
+                  },
                 ),
-                onTap: (){
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => upravaVyjazdoveOCcardDetails(_vyjazdoveOC,userMobilneOcListId)));
-                },
-              ),
-            ],
+              ],
+            ),
           )
       ),
     );
