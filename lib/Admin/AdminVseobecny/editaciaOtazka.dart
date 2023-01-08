@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
 
@@ -22,7 +23,7 @@ class editaciaOtazka extends StatefulWidget{
 }
 
 class editaciaOtazkaState extends State<editaciaOtazka>{
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
   final otazky _otazky;
   final String _userOtazkaId;
   int lennazaciatku=1;
@@ -33,6 +34,23 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
   String _odpoved="";
   var _controllerotazka=TextEditingController();
   var _controllerodpoved=TextEditingController();
+
+  @override
+  void initState() {
+    super.initState();
+    _controllerotazka.addListener(() {
+      final String text = _otazka;
+      _controllerotazka.text = _controllerotazka.value.copyWith(
+        text: text,
+      ) as String;
+    });
+    _controllerodpoved.addListener(() {
+      final String text = _odpoved;
+      _controllerodpoved.text = _controllerodpoved.value.copyWith(
+        text: text,
+      ) as String;
+    });
+  }
 
 
 
@@ -60,52 +78,69 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
       ),
 
 
-      body:
-      SingleChildScrollView(
+      body:Theme(
+        data: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+        primarySwatch: Colors.red,
+      ),
 
-        child: Form(
+      child:SingleChildScrollView(
+
+        child: FormBuilder(
           key: _formKey,
           child: Container(
             padding: const EdgeInsets.all(20.0),
             child: Column(
               children: [
-                TextFormField(
-                  controller: _controllerotazka,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.home),
-                    hintText: 'Otázka',
-                    labelText: 'Otázka',
+                Container(
+                  padding: EdgeInsets.fromLTRB(10,2,10,2),
+                  decoration: BoxDecoration(
+                    color:Colors.black12,
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onChanged: ((value) {
-                    _otazka=value;
-                    _controllerotazka.text=value;
-                  }),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Prosím zadajte otázku';
-                    }
-                    return null;
-                  },
+                  child: FormBuilderTextField(
+                    name:"Otázka",
+                    controller: _controllerotazka,
+                    cursorColor: Colors.black12,
+                    decoration: const InputDecoration(
+                      icon: const Icon(Icons.question_mark),
+                      hintText: 'Otázka',
+                      border: InputBorder.none,
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Prosím zadajte otázku';
+                      }
+                      return null;
+                    },
+                  ),
                 ),
-                TextFormField(
-                  controller: _controllerodpoved,
-                  decoration: const InputDecoration(
-                    icon: const Icon(Icons.timelapse_outlined),
-                    hintText: 'Odpoveď',
-                    labelText: 'Odpoveď',
+                SizedBox(height: 10),
+                Container(
+                  padding: EdgeInsets.fromLTRB(10,2,10,2),
+                  decoration: BoxDecoration(
+                    color:Colors.black12,
+                    borderRadius: BorderRadius.circular(30),
                   ),
-                  onChanged: ((value) {
-                    _odpoved =value;
-                    _controllerodpoved.text=value;
+                  child: FormBuilderTextField(
+                    name:"Odpoveď",
+                    controller: _controllerodpoved,
+                    cursorColor: Colors.black12,
+                    decoration: const InputDecoration(
+                      icon: const Icon(Icons.question_answer),
+                      hintText: 'Odpoveď',
+                      border: InputBorder.none,
+                    ),
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return 'Prosím zadajte odpoveď';
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                SizedBox(height: 10),
 
-                  }),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Prosím zadajte odpoveď';
-                    }
-                    return null;
-                  },
-                ),
 
 
 
@@ -143,7 +178,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                   ),
                 ),
                 const SizedBox(
-                  height: 130,
+                  height: 60,
                 ),
 
                 SizedBox(height: 20),
@@ -179,7 +214,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
           ),
         ),
       ),
-
+      ),
     );
   }
 }

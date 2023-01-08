@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
 class odberObjednanie extends StatefulWidget {
@@ -12,7 +13,7 @@ class odberObjednanie extends StatefulWidget {
 }
 
 class odberObjednanieState extends State<odberObjednanie> {
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   int _idDarca=1000;
   var _controllerdatum=TextEditingController();
@@ -33,6 +34,7 @@ class odberObjednanieState extends State<odberObjednanie> {
     }
     return Colors.black;
   }
+
 
   CollectionReference rezervaciaDb=FirebaseFirestore.instance.collection('Rezervacia');
   @override
@@ -143,6 +145,7 @@ class odberObjednanieState extends State<odberObjednanie> {
                       }
                   ),
                 ),//TODO pre daneka - nech odosiela do DB typ odberu
+                //TODO pridat cas
 
                 SizedBox(height: 20),
                 Container(

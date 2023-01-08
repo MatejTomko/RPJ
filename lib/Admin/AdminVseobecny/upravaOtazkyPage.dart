@@ -14,6 +14,7 @@ import 'package:blood_app/Navstevnik/Otazky/otazky.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
 import '../../DatabaseManager.dart';
@@ -35,7 +36,7 @@ class MyScrollBehaviour extends ScrollBehavior{
 }
 
 class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProviderStateMixin{
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   var _controllerotazka=TextEditingController();
   var _controllerodpoved=TextEditingController();
@@ -118,14 +119,15 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
 
         body: Theme(
           data: ThemeData(
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
+            colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+            primarySwatch: Colors.red,
           ),
           child: TabBarView(
             controller: tabController,
             children: [
               SingleChildScrollView(
                 physics: BouncingScrollPhysics(),
-                child: Form(
+                child: FormBuilder(
                   key: _formKey,
                   child: Container(
                     padding: const EdgeInsets.all(20.0),
@@ -133,42 +135,54 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
                       child: Column(
                         mainAxisSize: MainAxisSize.max,
                         children: [
-                          TextFormField(
-                            controller: _controllerotazka,
-                            decoration: const InputDecoration(
-                              icon: const Icon(Icons.question_mark),
-                              hintText: 'Otázka',
-                              labelText: 'Otázka',
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
                             ),
-                            /*onChanged: ((value) {
-                              _otazka=value;
-                              _controllerotazka.text=value;
-                            }),*/
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Prosím zadajte otázku';
-                              }
-                              return null;
-                            },
-                          ),
-                          TextFormField(
-                            controller: _controllerodpoved,
-                            decoration: const InputDecoration(
-                              icon: const Icon(Icons.question_answer),
-                              hintText: 'Odpoveď',
-                              labelText: 'Odpoveď',
+                            child: FormBuilderTextField(
+                              name:"Otázka",
+                              controller: _controllerotazka,
+                              cursorColor: Colors.black12,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.question_mark),
+                                hintText: 'Otázka',
+                                border: InputBorder.none,
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte otázku';
+                                }
+                                return null;
+                              },
                             ),
-                            /*onChanged: ((value) {
-                              _odpoved =value;
-                              _controllerodpoved.text=value;
-                            }),*/
-                            validator: (value) {
-                              if (value!.isEmpty) {
-                                return 'Prosím zadajte odpoved';
-                              }
-                              return null;
-                            },
                           ),
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: FormBuilderTextField(
+                              name:"Odpoveď",
+                              controller: _controllerodpoved,
+                              cursorColor: Colors.black12,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.question_answer),
+                                hintText: 'Odpoveď',
+                                border: InputBorder.none,
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte odpoveď';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+                          SizedBox(height: 10),
 
                           SizedBox(height: 20),
                           Container(

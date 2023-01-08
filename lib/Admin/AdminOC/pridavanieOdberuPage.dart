@@ -29,7 +29,7 @@ class MyScrollBehaviour extends ScrollBehavior{
 }
 
 class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with SingleTickerProviderStateMixin{
-  final _formKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormBuilderState>();
 
   var _controllerautoodber=TextEditingController();
   var _controlleridDarca=TextEditingController();
@@ -147,6 +147,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text("Editacia odberov"),
           backgroundColor: Colors.red[900],
@@ -442,6 +443,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                                         print(start);
                                         print(end);
                                         _controllerTrvanieOdberu.text = dateFormat.format(start)+" - "+dateFormat.format(end);
+                                        _zaciatok=start.toString();
+                                        _koniec=end.toString();
 
                                       }).showPicker(context);
                                 },
@@ -603,14 +606,14 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                                   "datum":_controllerdatum.text,
                                   "idDarca":_controlleridDarca.text,
                                   "vyjazd":_controllervyjazd.text,
-                                  "trvanie":_controllertrvanie.text,
+                                  "trvanie":"4",
                                   "tlakkrvi":_controllertlakkrvi.text,
                                   "mnozstvo":_controllermnozstvo.text,
-                                  "koniec":_controllerkoniec.text,
-                                  "zaciatok":_controllerzaciatok.text,
+                                  "koniec":_koniec,
+                                  "zaciatok":_zaciatok,
                                   "komplikacia":_controllerkomplikacia.text,
                                   "autoodber":_controllerautoodber.text,
-                                  "typ":_controllertyp.text,
+                                  "typ":_dropDownValueTypOdberu,
                                 });
 
                                 _controllerdatum.clear();

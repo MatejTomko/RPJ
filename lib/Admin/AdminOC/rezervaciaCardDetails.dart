@@ -19,6 +19,8 @@ class rezervaciaCardDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
+
       appBar: AppBar(
         title: Text("Detaily Rezervacia/Uprava rezervacie: "),
         backgroundColor: Colors.red[900],

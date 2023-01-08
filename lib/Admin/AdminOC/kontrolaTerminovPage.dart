@@ -65,6 +65,7 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text("Odbery"),
         backgroundColor: Colors.red[900],

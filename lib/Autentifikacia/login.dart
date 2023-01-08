@@ -15,7 +15,8 @@ class _LoginState extends State<Login>{
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+        resizeToAvoidBottomInset: false,
+        backgroundColor: Colors.white,
 
       body: StreamBuilder<User?>(
         stream: FirebaseAuth.instance.authStateChanges(),

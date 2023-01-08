@@ -107,6 +107,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
   Widget build(BuildContext context) {
     bool isKeyboardOpen = MediaQuery.of(context).viewInsets.bottom != 0.0;
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       body: pages[_selectedIndex],
       bottomNavigationBar: isKeyboardOpen
       ? null
