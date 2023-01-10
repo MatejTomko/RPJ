@@ -96,6 +96,7 @@ class _profilePageState extends State<profilePage> {
             }
           }
         }
+        user.pocetodberov=pocetOdberov.toString();
       });
     }
     zachraneneZivoty=pocetOdberov*3;
@@ -339,18 +340,17 @@ class _profilePageState extends State<profilePage> {
                     padding: const EdgeInsets.fromLTRB(24,0,35,0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-
+                      children: [
                         //TODO NEJDE TU DAT CISLA !!!
                         Text(
-                          '0',
+                          pl1,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black54,
                           ),
                         ),
                         Text(
-                          "10",
+                          pl2,
                           style: TextStyle(
                             fontSize: 18,
                             color: Colors.black54,
