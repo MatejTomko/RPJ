@@ -1,3 +1,4 @@
+import 'package:blood_app/DatabaseManager.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
@@ -33,6 +34,54 @@ class odberObjednanieState extends State<odberObjednanie> {
       return Colors.red;
     }
     return Colors.black;
+  }
+
+  DatabaseManager databaseManager=new DatabaseManager();
+  int rezevaciePocet=0;
+  DateTime date=DateTime.parse("1980-01-01 00:00:00.000");
+
+
+  fetchDatabaseList() async {
+    dynamic resultant = await databaseManager.getRezervaciaList();
+    if (resultant == null) {
+      print('Unable to retrieve');
+    } else {
+      setState(() {
+        for (var i = 0; i < resultant.length; i++) {
+          String help = resultant[i]['idDarca'].toString();
+          if (help == "1000") {
+            rezevaciePocet++;
+          }
+        }
+      });
+
+      dynamic resultant2 = await databaseManager.getOdberList();
+      if (resultant2 == null) {
+        print('Unable to retrieve');
+      } else {
+        setState(() {
+          for (var i = 0; i < resultant2.length; i++) {
+            String help = resultant2[i]['idDarca'].toString();
+            if (help == "1000") {
+              String datum=resultant2[i]['datum'].toString();
+              datum+=" 00:00:00.000";
+              print(datum);
+              DateTime datePomocny=DateTime.parse(datum);
+              if(date.compareTo(datePomocny) <0){
+                date=datePomocny;
+              }
+            }
+          }
+          print(date.toString());
+          print(rezevaciePocet);
+        });
+      }
+    }
+  }
+  @override
+  void initState() {
+    fetchDatabaseList();
+    super.initState();
   }
 
 
@@ -158,14 +207,20 @@ class odberObjednanieState extends State<odberObjednanie> {
                       shape: StadiumBorder(),
                     ),
                     onPressed: () async{
-                      if(_formKey.currentState!.validate() ){
-                        await rezervaciaDb.add({
-                          'oc':_dropDownValue,
-                          'idDarca':_idDarca,
-                          'datum':_datum,
-                        }).then((value) => print('Rezervacia odoslaná'));
-                        _controllerdatum.clear();
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Rezervacia odoslaná")));
+                      if(rezevaciePocet==0 && DateTime.now().difference(date).inDays>90) {
+                        if (_formKey.currentState!.validate()) {
+                          await rezervaciaDb.add({
+                            'oc': _dropDownValue,
+                            'idDarca': _idDarca,
+                            'datum': _datum,
+                          }).then((value) => print('Rezervacia odoslaná'));
+                          _controllerdatum.clear();
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text("Rezervacia odoslaná")));
+                        }
+                      }else{
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text("Nemôžte sa prihlásiť na odber")));
                       }
                     },
                     child: const Text(
