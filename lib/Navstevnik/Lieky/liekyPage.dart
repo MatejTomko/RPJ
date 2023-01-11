@@ -61,65 +61,70 @@ class _liekyPageState extends State<liekyPage> {
         title: Text("Lieky"),
         backgroundColor: Colors.red[900],
       ),
-
-      body: Container(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                onChanged: (value) {
-                },
-                controller: liekController,
-                decoration: const InputDecoration(
-                    labelText: "",
-                    hintText: "Vyhľadaj liek",
-                    prefixIcon: Icon(Icons.search),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                    ),
-                ),
-              ),
-            ),
-            Container(
-              height: 50,
-              width: 100,
-              decoration: BoxDecoration(
-                color: Colors.red[900],
-                borderRadius: BorderRadius.circular(50),
-              ),
-              child: TextButton(
-                onPressed: (){
-                  vyrazHladaj=liekController.text;
-                  if(vyrazHladaj.length>2){
-                    fetchDatabaseList();
-                  }else{
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
-
-                  }
-                },
-                style: TextButton.styleFrom(
-                  shape: const StadiumBorder(
-                    side: BorderSide(color: Color.fromRGBO(183, 28, 28, 1), style: BorderStyle.solid),
+      body: Theme(
+        data: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+          primarySwatch: Colors.red,
+        ),
+        child: Container(
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  onChanged: (value) {
+                  },
+                  controller: liekController,
+                  decoration: const InputDecoration(
+                      labelText: "",
+                      hintText: "Vyhľadaj liek",
+                      prefixIcon: Icon(Icons.search),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                      ),
                   ),
                 ),
-                child: const Text(
-                  "Hľadaj",
-                  style: TextStyle(color: Colors.white,fontSize: 25),
+              ),
+              Container(
+                height: 50,
+                width: 100,
+                decoration: BoxDecoration(
+                  color: Colors.red[900],
+                  borderRadius: BorderRadius.circular(50),
+                ),
+                child: TextButton(
+                  onPressed: (){
+                    vyrazHladaj=liekController.text;
+                    if(vyrazHladaj.length>2){
+                      fetchDatabaseList();
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+
+                    }
+                  },
+                  style: TextButton.styleFrom(
+                    shape: const StadiumBorder(
+                      side: BorderSide(color: Color.fromRGBO(183, 28, 28, 1), style: BorderStyle.solid),
+                    ),
+                  ),
+                  child: const Text(
+                    "Hľadaj",
+                    style: TextStyle(color: Colors.white,fontSize: 25),
+                  ),
                 ),
               ),
-            ),
 
-            Expanded(
-              child: ListView.builder(
-                shrinkWrap: true,
-                  itemCount: userLiekyListDisplay.length,
-                  itemBuilder:(context, index) {
-                  lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
-                  return liekyCard(liek1);
-                }),
-            ),
-          ],
+              Expanded(
+                child: ListView.builder(
+                  shrinkWrap: true,
+                    itemCount: userLiekyListDisplay.length,
+                    itemBuilder:(context, index) {
+                    lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
+                    return liekyCard(liek1);
+                  }),
+              ),
+            ],
+          ),
         ),
       ),
     );

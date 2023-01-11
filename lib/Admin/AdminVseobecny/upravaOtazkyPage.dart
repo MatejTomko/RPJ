@@ -230,7 +230,6 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
                   child: ListView.builder(
                       itemCount: userOtazky.length,
                       itemBuilder:(context, index) {
-
                         otazky otazky1=new otazky(userOtazky[index]['odpoved'], userOtazky[index]['otazka']);
                         return upravaOtazkyCard(otazky1, userOtazkyId[index]);
                       }),

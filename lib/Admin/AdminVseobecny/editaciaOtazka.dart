@@ -166,9 +166,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                         _otazky.odpoved=_controllerodpoved.text;
 
                         ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka updatnutá")));
-
-                        //TODO
-                        //Navigator.pushNamed(context, "/upravaOtazkyPage");
+                        Navigator.pop(context);
                       }
                     },
                     child: const Text(
@@ -195,9 +193,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                       await FirebaseFirestore.instance.collection("Otazky").doc(_userOtazkaId).delete();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka vymazana")));
 
-
-                      //TODO
-                      //Navigator.pushNamed(context, "/upravaOtazkyPage");
+                      Navigator.pop(context);
                     },
                     child: const Text(
                       "Vymaž otázku",

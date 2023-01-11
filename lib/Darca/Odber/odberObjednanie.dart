@@ -233,12 +233,12 @@ class odberObjednanieState extends State<odberObjednanie> {
                               doneText: "Potvrdiť",
                               cancelText: "Zrušiť",
                               interval: 1,
-                              mode: DateTimeRangePickerMode.time,
+                              mode: DateTimeRangePickerMode.dateAndTime,
                               minimumTime: DateTime.now().subtract(Duration(days: 5)),
                               maximumTime: DateTime.now().add(Duration(days: 2)),
                               use24hFormat: true,
                               onConfirm: (start,end) {
-                                DateFormat dateFormat = DateFormat("HH:mm");
+                                DateFormat dateFormat = DateFormat("dd.MM.yyyy HH:mm");
                                 _controllercas.text = dateFormat.format(start);
                                 _cas=start.toString();
                               }).showPicker(context);

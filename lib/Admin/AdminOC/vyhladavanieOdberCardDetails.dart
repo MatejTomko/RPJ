@@ -3,9 +3,12 @@ import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCDetails.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:f_datetimerangepicker/f_datetimerangepicker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:syncfusion_flutter_barcodes/barcodes.dart';
 
@@ -29,6 +32,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
   var _controllertyp=TextEditingController();
   var _controllervyjazd=TextEditingController();
   var _controllerzaciatok=TextEditingController();
+  var _controllerTrvanieOdberu = TextEditingController();
 
   String _autoodber="";
   String _idDarca="";
@@ -44,6 +48,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
   String _zaciatok="";
 
   vyhladavanieOdberCardDetails(this._odber, this._odberid);
+  String _dropDownValueTypOdberu = "";
 
 
   @override
@@ -76,240 +81,306 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
         title: Text("Detaily odberu: "),
         backgroundColor: Colors.red[900],
       ),
-      body: Container(
-        margin: EdgeInsets.all(15),
-        child:SingleChildScrollView(
-        child:Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Row(
-              children: [
-                Text(
-                  "Začiatok odberu: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+      body: Theme(
+        data: ThemeData(
+          colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+          primarySwatch: Colors.red,
+        ),
+        child: Container(
+          margin: EdgeInsets.all(15),
+          child:SingleChildScrollView(
+          child:Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Row(
+                children: [
+                  Text(
+                    "Začiatok odberu: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.zaciatok,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.zaciatok,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Koniec odberu: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Koniec odberu: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.koniec,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.koniec,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Trvanie: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Trvanie: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.trvanie+" min.",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.trvanie+" min.",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Komplikácie:",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Komplikácie:",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.komplikacia,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.komplikacia,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Výjazd: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Výjazd: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.vyjazd,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.vyjazd,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Autoodber: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Autoodber: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.autoodber,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.autoodber,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Tlak krvi: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Tlak krvi: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.tlakkrvi,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.tlakkrvi,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Datum: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Datum: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.datum.toString(),
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.datum.toString(),
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Množstvo: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Množstvo: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.mnozstvo+" ml",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.mnozstvo+" ml",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            Row(
-              children: [
-                Text(
-                  "Typ odberu: ",
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
-                    fontWeight: FontWeight.bold,
+                ],
+              ),
+              SizedBox(height: 20),
+              Row(
+                children: [
+                  Text(
+                    "Typ odberu: ",
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                Text(
-                  _odber.typ,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black,
+                  Text(
+                    _odber.typ,
+                    style: TextStyle(
+                      fontSize: 18,
+                      color: Colors.black,
+                    ),
                   ),
-                ),
-              ],
-            ),
-
-
-            Container(
-              child:SingleChildScrollView(
-                child: Form(
-                  key: _formKey,
-                  child: Container(
-                    padding: const EdgeInsets.all(20.0),
-                    child: Column(
-                      children: [
-                        TextFormField(
-                          controller: _controlleridDarca,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.home),
-                            hintText: 'idDarca',
-                            labelText: 'idDarca',
+                ],
+              ),
+              Container(
+                child:SingleChildScrollView(
+                  child: Form(
+                    key: _formKey,
+                    child: Container(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: FormBuilderTextField(
+                              autofocus: true, //TODO DANEK - ked je autofocus ta sa aspon daco da zadat ale ked nie je tak sa potom neda typ odberu vybrat
+                              name:"idDarca",
+                              controller: _controlleridDarca,
+                              cursorColor: Colors.black12,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.person_outline),
+                                hintText: 'ID Darcu',
+                                border: InputBorder.none,
+                              ),
+                              /*onChanged: ((value) {
+                              _idDarca=value;
+                              _controlleridDarca.text=value;
+                            }),*/
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte id darcu';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          onChanged: ((value) {
-                            _idDarca=value;
-                            _controlleridDarca.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte id darcu';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(12,0,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(25),
+                            ),
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.fromLTRB(0,20,0,0),
+                                      child: const Text(
+                                        "Auto odber"
+                                        ,
+                                        style: TextStyle(
+                                          color: Colors.black54,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                FormBuilderRadioGroup<String>(
+                                  decoration: const InputDecoration(
+                                    labelStyle: TextStyle(
+                                      fontSize: 22,
+                                    ),
+                                    border: InputBorder.none,
+                                  ),
+                                  initialValue: null,
+                                  name: 'auto_odber',
+                                  validator: FormBuilderValidators.compose(
+                                      [FormBuilderValidators.required()]),
+                                  options:
+                                  ['Áno', 'Nie']
+                                      .map((moznosti) => FormBuilderFieldOption(
+                                    value: moznosti,
+                                    child: Text(moznosti),
+                                  ))
+                                      .toList(growable: false),
+                                  onChanged: ((value) {
+                                    _autoodber =value!;
+                                    _controllerautoodber.text=value;
+                                  }),
+                                  controlAffinity: ControlAffinity.trailing,
+                                ),
+                              ],
+                            ),
+                          ),
+                          /*TextFormField(
                           controller: _controllerautoodber,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.timelapse_outlined),
@@ -326,8 +397,39 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
-                        TextFormField(
+                        ),*/
+                          SizedBox(height: 10),
+                          Container(
+                            //padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
+                            padding: EdgeInsets.fromLTRB(12,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: FormBuilderDropdown(
+                                name: "typOdberuDropdown",
+                                decoration: const InputDecoration(
+                                    hintText: "Zvoľte typ odberu",
+                                    enabledBorder: InputBorder.none
+                                ),
+                                isExpanded: true,
+                                iconSize: 30.0,
+                                style: TextStyle(color: Colors.black87),
+                                validator: FormBuilderValidators.compose(
+                                    [FormBuilderValidators.required()]),
+                                items: ['Celá krv','Krvná plazma','Krvné doštičky'].map((val){
+                                  return DropdownMenuItem<String>(
+                                    value:val,
+                                    child: Text(val),
+                                  );
+                                },
+                                ).toList(),
+                                onChanged: (val){
+                                    _dropDownValueTypOdberu=val!;
+                                }
+                            ),
+                          ),
+                          /*TextFormField(
                           controller: _controllertyp,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -344,57 +446,124 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
-
-                        TextField(
-                          controller: _controllerdatum,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.calendar_month_outlined),
-                            labelText: "Zadajte dátum",
-                          ),
-                          readOnly: true,
-                          onTap: () async{
-                            DateTime? zvolenyDatum = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2101),
-                              selectableDayPredicate: (DateTime date){
-                                return true;
+                        ),*/
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(12,5,10,5),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextField(
+                              controller: _controllerdatum,
+                              decoration: InputDecoration(
+                                icon: Icon(Icons.calendar_month_outlined),
+                                hintText: "Dátum",
+                                enabledBorder: InputBorder.none,
+                                focusedBorder: InputBorder.none,
+                              ),
+                              readOnly: true,
+                              onTap: () async{
+                                DateTime? zvolenyDatum = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime(2101),
+                                  selectableDayPredicate: (DateTime date){
+                                    return true;
+                                  },
+                                );
+                                if (zvolenyDatum != null) {
+                                  String formattedDate = DateFormat('dd.MM.yyyy').format(zvolenyDatum);
+                                  _datum=zvolenyDatum.toString();
+                                  _controllerdatum.text = formattedDate;
+                                }else{
+                                  print("Dátum nebol zvolený");
+                                }
                               },
-
-                            );
-
-                            if (zvolenyDatum != null) {
-                              String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
-                              _datum=zvolenyDatum.toString();
-                              _controllerdatum.text = formattedDate;
-                            }else{
-                              print("Dátum nebol zvolený");
-                            }
-                          },
-                        ),
-
-                        TextFormField(
-                          controller: _controllerkomplikacia,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Komplikácia pri odbere',
-                            labelText: 'Komplikácia',
+                            ),
                           ),
-                          onChanged: ((value) {
-                            _komplikacia=value;
-                            _controllerkomplikacia.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte typ komplikáciu';
-                            }
-                            return null;
-                          },
-                        ),
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(12,5,10,5),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextFormField(
+                              controller: _controllerkomplikacia,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.medical_information_outlined),
+                                hintText: 'Komplikácie pri odbere',
+                                border: InputBorder.none,
+                              ),
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  _komplikacia="žiadne komplikácie";
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
 
-                        TextFormField(
+                          /*FormBuilderDateTimePicker(
+                          name: 'date',
+                          initialEntryMode: DatePickerEntryMode.calendar,
+                          initialValue: DateTime.now(),
+                          inputType: InputType.both,
+                          decoration: InputDecoration(
+                            labelText: 'Appointment Time',
+                            suffixIcon: IconButton(
+                              icon: const Icon(Icons.close),
+                              onPressed: () {
+
+                              },
+                            ),
+                          ),
+                          initialTime: const TimeOfDay(hour: 8, minute: 0),
+                          locale: Locale.fromSubtags(languageCode: 'fr'),
+                        ),*/
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(12,5,10,5),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextField(
+                              controller: _controllerTrvanieOdberu,
+                              readOnly: true,
+                              decoration: InputDecoration(
+                                hintText: 'Kliknite na hodiny pre výber času',
+                                border: InputBorder.none,
+                                suffixIcon: IconButton(
+                                  onPressed: (){
+                                    DateTimeRangePicker(
+                                        startText: "Od",
+                                        endText: "Do",
+                                        doneText: "Potvrdiť",
+                                        cancelText: "Zrušiť",
+                                        interval: 1,
+                                        mode: DateTimeRangePickerMode.time,
+                                        minimumTime: DateTime.now().subtract(Duration(days: 5)),
+                                        maximumTime: DateTime.now().add(Duration(days: 2)),
+                                        use24hFormat: true,
+                                        onConfirm: (start, end) {
+                                          DateFormat dateFormat = DateFormat("HH:mm");
+                                          print(start);
+                                          print(end);
+                                          _controllerTrvanieOdberu.text = dateFormat.format(start)+" - "+dateFormat.format(end);
+                                          _zaciatok=start.toString();
+                                          _koniec=end.toString();
+
+                                        }).showPicker(context);
+                                  },
+                                  icon: Icon(Icons.access_time_outlined),
+                                ),
+                              ),
+                            ),
+                          ),
+                          /*TextFormField(
                           controller: _controllerzaciatok,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -411,9 +580,9 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        ),*/
 
-                        TextFormField(
+                          /*TextFormField(
                           controller: _controllerkoniec,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -430,48 +599,57 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
+                        ),*/
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextFormField(
+                              controller: _controllermnozstvo,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.water_drop_outlined),
+                                hintText: 'Množstvo odberu',
+                                labelText: 'Množstvo odberu',
+                                border: InputBorder.none,
+                              ),
 
-
-                        TextFormField(
-                          controller: _controllermnozstvo,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Množstvo odberu',
-                            labelText: 'Množstvo odberu',
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte množstvo odberu';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          onChanged: ((value) {
-                            _mnozstvo=value;
-                            _controllermnozstvo.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte množstvo odberu';
-                            }
-                            return null;
-                          },
-                        ),
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: TextFormField(
+                              controller: _controllertlakkrvi,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.bloodtype_outlined),
+                                hintText: 'Tlak krvi',
+                                labelText: 'Tlak krvi',
+                                border: InputBorder.none,
+                              ),
 
-                        TextFormField(
-                          controller: _controllertlakkrvi,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Tlak krvi',
-                            labelText: 'Tlak krvi',
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte tlak krvi';
+                                }
+                                return null;
+                              },
+                            ),
                           ),
-                          onChanged: ((value) {
-                            _tlakkrvi=value;
-                            _controllertlakkrvi.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte tlak krvi';
-                            }
-                            return null;
-                          },
-                        ),
 
-                        TextFormField(
+                          /*TextFormField(
                           controller: _controllertrvanie,
                           decoration: const InputDecoration(
                             icon: const Icon(Icons.place),
@@ -488,116 +666,114 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                             }
                             return null;
                           },
-                        ),
-
-                        TextFormField(
-                          controller: _controllervyjazd,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Výjazd',
-                            labelText: 'Výjazd',
-                          ),
-                          onChanged: ((value) {
-                            _vyjazd=value;
-                            _controllervyjazd.text=value;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte výjazd';
-                            }
-                            return null;
-                          },
-                        ),
-
-
-                        SizedBox(height: 20),
-                        Container(
-                          height: 50,
-                          width: 250,
-                          child: TextButton(
-                            style:  TextButton.styleFrom(
-                              foregroundColor: Colors.red[100],
-                              backgroundColor: Colors.red[900],
-                              shape: StadiumBorder(),
+                        ),*/
+                          SizedBox(height: 10),
+                          Container(
+                            padding: EdgeInsets.fromLTRB(10,2,10,2),
+                            decoration: BoxDecoration(
+                              color:Colors.black12,
+                              borderRadius: BorderRadius.circular(30),
                             ),
-                            onPressed: () async{
-                              if(_formKey.currentState!.validate() ){
+                            child: TextFormField(
+                              controller: _controllervyjazd,
+                              decoration: const InputDecoration(
+                                icon: const Icon(Icons.place),
+                                hintText: 'Výjazd',
+                                labelText: 'Výjazd',
+                                border: InputBorder.none,
+                              ),
+
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return 'Prosím zadajte výjazd';
+                                }
+                                return null;
+                              },
+                            ),
+                          ),
+
+                          SizedBox(height: 20),
+                          Container(
+                            height: 50,
+                            width: 250,
+                            child: TextButton(
+                              style:  TextButton.styleFrom(
+                                foregroundColor: Colors.red[100],
+                                backgroundColor: Colors.red[900],
+                                shape: StadiumBorder(),
+                              ),
+                              onPressed: () async{
+                                if(_formKey.currentState!.validate() ){
+                                  String ideckoDoc=_odberid.substring(1,_odberid.length-1);
+
+                                    /*if(_controllerdatum.text==""){
+                                    String a=DateTime.now().toString().split(" ")[0];
+                                    _controllerdatum.text=a;
+                                  }*/
+                                  //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
+                                  var db=FirebaseFirestore.instance.collection("Odber").doc(ideckoDoc).update({
+                                    "datum":_controllerdatum.text,
+                                    "idDarca":_controlleridDarca.text,
+                                    "vyjazd":_controllervyjazd.text,
+                                    "trvanie":_controllertrvanie.text,
+                                    "tlakkrvi":_controllertlakkrvi.text,
+                                    "mnozstvo":_controllermnozstvo.text,
+                                    "koniec":_controllerkoniec.text,
+                                    "zaciatok":_controllerzaciatok.text,
+                                    "komplikacia":_controllerkomplikacia.text,
+                                    "autoodber":_controllerautoodber.text,
+                                    "typ":_controllertyp.text,
+                                  });
+
+
+                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber upravený")));
+                                }
+                              },
+                              child: const Text(
+                                "Upraviť",
+                                style: TextStyle(color: Colors.white,fontSize: 25),
+                              ),
+                            ),
+                          ),
+                          const SizedBox(
+                            height: 130,
+                          ),
+
+                          SizedBox(height: 20),
+                          Container(
+                            height: 50,
+                            width: 250,
+                            child: TextButton(
+                              style:  TextButton.styleFrom(
+                                foregroundColor: Colors.red[100],
+                                backgroundColor: Colors.red[900],
+                                shape: StadiumBorder(),
+                              ),
+                              onPressed: () async{
                                 String ideckoDoc=_odberid.substring(1,_odberid.length-1);
-
-                                  /*if(_controllerdatum.text==""){
-                                  String a=DateTime.now().toString().split(" ")[0];
-                                  _controllerdatum.text=a;
-                                }*/
-                                //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
-                                var db=FirebaseFirestore.instance.collection("Odber").doc(ideckoDoc).update({
-                                  "datum":_controllerdatum.text,
-                                  "idDarca":_controlleridDarca.text,
-                                  "vyjazd":_controllervyjazd.text,
-                                  "trvanie":_controllertrvanie.text,
-                                  "tlakkrvi":_controllertlakkrvi.text,
-                                  "mnozstvo":_controllermnozstvo.text,
-                                  "koniec":_controllerkoniec.text,
-                                  "zaciatok":_controllerzaciatok.text,
-                                  "komplikacia":_controllerkomplikacia.text,
-                                  "autoodber":_controllerautoodber.text,
-                                  "typ":_controllertyp.text,
-                                });
-
-
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber upravený")));
-                              }
-                            },
-                            child: const Text(
-                              "Upraviť",
-                              style: TextStyle(color: Colors.white,fontSize: 25),
+                                await FirebaseFirestore.instance.collection("Odber").doc(ideckoDoc).delete();
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber vymazany")));
+                                //TODO
+                                //Navigator.pushNamed(context, "/pridavanieodberupage");
+                              },
+                              child: const Text(
+                                "Vymaž Odber",
+                                style: TextStyle(color: Colors.white,fontSize: 25),
+                              ),
                             ),
                           ),
-                        ),
-                        const SizedBox(
-                          height: 130,
-                        ),
-
-                        SizedBox(height: 20),
-                        Container(
-                          height: 50,
-                          width: 250,
-                          child: TextButton(
-                            style:  TextButton.styleFrom(
-                              foregroundColor: Colors.red[100],
-                              backgroundColor: Colors.red[900],
-                              shape: StadiumBorder(),
-                            ),
-                            onPressed: () async{
-                              String ideckoDoc=_odberid.substring(1,_odberid.length-1);
-
-                              await FirebaseFirestore.instance.collection("Odber").doc(ideckoDoc).delete();
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber vymazany")));
-
-
-                              //TODO
-                              //Navigator.pushNamed(context, "/pridavanieodberupage");
-                            },
-                            child: const Text(
-                              "Vymaž Odber",
-                              style: TextStyle(color: Colors.white,fontSize: 25),
-                            ),
+                          const SizedBox(
+                            height: 130,
                           ),
-                        ),
-                        const SizedBox(
-                          height: 130,
-                        ),
-
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-
-
-
-            ),
-          ],
-        ),
+            ],
+          ),
+          ),
         ),
       ),
     );

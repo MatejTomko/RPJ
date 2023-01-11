@@ -137,14 +137,14 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
 
         body: Theme(
           data: ThemeData(
-              colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
+            colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+            primarySwatch: Colors.red,
           ),
           child: TabBarView(
             controller: tabController,
             children: [
               ListView(
                 reverse: true,
-
                 children: [Form(
                   key: _formKey,
                   child: Container(
@@ -152,132 +152,183 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        TextFormField(
-                          controller: _controllermiesto,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.home),
-                            hintText: 'Nazov',
-                            labelText: 'Nazov',
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          /*onChanged: ((value) {
-                            _miesto=value;
-                            _controllermiesto.text=value;
-                          }),*/
-                          validator: (value) {
-                            if (value!.isEmpty || value == null || value.isEmpty) {
-                              return 'Prosím zadajte názov';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: _controllercas,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.timelapse_outlined),
-                            hintText: 'Čas',
-                            labelText: 'Čas',
-                          ),
-                          /*onChanged: ((value) {
-                            _cas =value;
-                            _controllercas.text=value;
-                          }),*/
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte čas';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: _controllerlat,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Miesto na mapach Lat',
-                            labelText: 'Lat',
-                          ),
-                          onChanged: ((value) {
-                            _lat=value;
-                            _controllerlat.text=_lat;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte lokáciu';
-                            }
-                            return null;
-                          },
-                        ),
-                        TextFormField(
-                          controller: _controllerlng,
-                          decoration: const InputDecoration(
-                            icon: const Icon(Icons.place),
-                            hintText: 'Miesto na mapach Lng',
-                            labelText: 'Lng',
-                          ),
-                          onChanged: ((value) {
-                            _lng=value;
-                            _controllerlng.text=_lng;
-                          }),
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              return 'Prosím zadajte lokáciu';
-                            }
-                            return null;
-                          },
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(40.0,8,8,0),
-                          child: DropdownButton(
-                            hint: _oc=="" ?
-                            Text('Vyberte OC')
-                                :
-                            Text(
-                                _oc,
-                                style: TextStyle(color: Colors.black87)
+                          child: TextFormField(
+                            controller: _controllermiesto,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.home),
+                              hintText: 'Názov',
+                              border: InputBorder.none,
                             ),
-                            isExpanded: true,
-                            iconSize: 30.0,
-                            style: TextStyle(color: Colors.black87),
-                            items: ['OC Prešov','OC Poprad'].map((val){
-                              return DropdownMenuItem<String>(
-                                value:val,
-                                child: Text(val),
-                              );
-                            },
-                            ).toList(),
-                            onChanged:(val){
-                              setState(() {
-                                _oc=val!;
-                              });
+                            /*onChanged: ((value) {
+                              _miesto=value;
+                              _controllermiesto.text=value;
+                            }),*/
+                            validator: (value) {
+                              if (value!.isEmpty || value == null || value.isEmpty) {
+                                return 'Prosím zadajte názov';
+                              }
+                              return null;
                             },
                           ),
                         ),
-
-                        TextField(
-                          controller: _controllerdatum,
-                          decoration: InputDecoration(
-                            icon: Icon(Icons.calendar_month_outlined),
-                            labelText: "Zadajte dátum",
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
                           ),
-                          readOnly: true,
-                          onTap: () async{
-                            DateTime? zvolenyDatum = await showDatePicker(
-                              context: context,
-                              initialDate: DateTime.now(),
-                              firstDate: DateTime.now(),
-                              lastDate: DateTime(2101),
-                              selectableDayPredicate: (DateTime date){
-                                return true;
+                          child: TextFormField(
+                            controller: _controllercas,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.timelapse_outlined),
+                              hintText: 'Čas',
+                              border: InputBorder.none,
+                            ),
+                            /*onChanged: ((value) {
+                              _cas =value;
+                              _controllercas.text=value;
+                              DateFormat dateFormat = DateFormat("dd.MM.yyyy HH:mm");
+                            }),*/
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte čas';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextFormField(
+                            controller: _controllerlat,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Miesto na mapach Lat',
+                              labelText: 'Lat',
+                              border: InputBorder.none,
+                            ),
+                            onChanged: ((value) {
+                              _lat=value;
+                              _controllerlat.text=_lat;
+                            }),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte lokáciu';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextFormField(
+                            controller: _controllerlng,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.place),
+                              hintText: 'Miesto na mapach Lng',
+                              labelText: 'Lng',
+                              border: InputBorder.none,
+                            ),
+                            onChanged: ((value) {
+                              _lng=value;
+                              _controllerlng.text=_lng;
+                            }),
+                            validator: (value) {
+                              if (value!.isEmpty) {
+                                return 'Prosím zadajte lokáciu';
+                              }
+                              return null;
+                            },
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.fromLTRB(20.0,8,8,4),
+                            child: DropdownButton(
+                              underline: Container(),
+                              hint: _oc=="" ?
+                              Text('Vyberte OC')
+                                  :
+                              Text(
+                                  _oc,
+                                  style: TextStyle(color: Colors.black87)
+                              ),
+                              isExpanded: true,
+                              iconSize: 30.0,
+                              style: TextStyle(color: Colors.black87),
+                              items: ['OC Prešov','OC Poprad'].map((val){
+                                return DropdownMenuItem<String>(
+                                  value:val,
+                                  child: Text(val),
+                                );
                               },
+                              ).toList(),
+                              onChanged:(val){
+                                setState(() {
+                                  _oc=val!;
+                                });
+                              },
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          padding: EdgeInsets.fromLTRB(10,2,10,2),
+                          decoration: BoxDecoration(
+                            color:Colors.black12,
+                            borderRadius: BorderRadius.circular(30),
+                          ),
+                          child: TextField(
+                            controller: _controllerdatum,
+                            decoration: InputDecoration(
+                              icon: Icon(Icons.calendar_month_outlined),
+                              hintText: "Zadajte dátum",
+                              border: InputBorder.none,
+                            ),
+                            readOnly: true,
+                            onTap: () async{
+                              DateTime? zvolenyDatum = await showDatePicker(
+                                context: context,
+                                initialDate: DateTime.now(),
+                                firstDate: DateTime.now(),
+                                lastDate: DateTime(2101),
+                                selectableDayPredicate: (DateTime date){
+                                  return true;
+                                },
 
-                            );
-                            if (zvolenyDatum != null) {
-                              String formattedDate = DateFormat('yyyy-MM-dd').format(zvolenyDatum);
-                              _datum=zvolenyDatum.toString();
-                              _controllerdatum.text = formattedDate;
-                            }else{
-                              print("Datum nebol zvoleny");
-                            }
-                          },
+                              );
+                              if (zvolenyDatum != null) {
+                                String formattedDate = DateFormat('dd.MM.yyyy').format(zvolenyDatum);
+                                _datum=zvolenyDatum.toString();
+                                _controllerdatum.text = formattedDate;
+                              }else{
+                                print("Datum nebol zvoleny");
+                              }
+                            },
+                          ),
                         ),
 
                         SizedBox(height: 20),
