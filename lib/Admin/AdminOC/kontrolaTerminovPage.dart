@@ -10,8 +10,7 @@ import 'package:flutter/material.dart';
 
 import '../../DatabaseManager.dart';
 
-//TODO
-//aktualne nastavene na OC Prešov, ale pri autentifikacii sa zmeni
+//TODO aktualne nastavene na OC Prešov, ale pri autentifikacii sa zmeni
 class kontrolaTerminovPage extends StatefulWidget {
   const kontrolaTerminovPage({Key? key}) : super(key: key);
 
@@ -23,6 +22,7 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
   String _idDarca="1000";
   List userRezervaciaList=[];
   List userDarcaList=[];
+  List userRezervaciaListId=[];
 
 
 
@@ -35,15 +35,16 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
-    dynamic resultant = await databaseManager.getRezervaciaList();
+    dynamic resultant = await databaseManager.getRezervaciaList2();
     if(resultant==null){
       print('Unable to retrieve');
     }else{
       setState(() {
-        for(var i=0;i< resultant.length;i++){
-          String help=resultant[i]['oc'].toString();
+        for(var i=0;i< resultant[0].length;i++){
+          String help=resultant[0][i]['oc'].toString();
           if(help == "OC Prešov" ){
-            userRezervaciaList.add(resultant[i]);
+            userRezervaciaList.add(resultant[0][i]);
+            userRezervaciaListId.add(resultant[1][i]);
           }
         }
       });
@@ -80,8 +81,8 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> {
                   meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
                 }
               }
-              rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
-              return RezervaciaCard(rz);
+              rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'],meno,userRezervaciaList[index]['typ'],userRezervaciaList[index]['vybavene'],userRezervaciaList[index]['cas']);
+              return RezervaciaCard(rz,userRezervaciaListId[index]);
             }) ,
       ),
     );

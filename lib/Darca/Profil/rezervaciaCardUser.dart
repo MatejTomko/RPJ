@@ -38,6 +38,7 @@ class RezervaciaCardUser extends StatelessWidget {
                 ),
                 Row(children: [
                   Text("Dátum: ${_rezervacia.datum}"),
+                  Text(" Čas: ${_rezervacia.cas}"),
                 ],)
               ],
             ),

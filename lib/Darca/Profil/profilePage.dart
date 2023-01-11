@@ -341,7 +341,6 @@ class _profilePageState extends State<profilePage> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        //TODO NEJDE TU DAT CISLA !!!
                         Text(
                           pl1,
                           style: TextStyle(
@@ -430,8 +429,8 @@ class _profilePageState extends State<profilePage> {
             Expanded(child: ListView.builder(
                 itemCount: userRezervaciaList.length,
                 itemBuilder:(context, index) {
-                  String meno=user.meno;
-                  rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'].toDate(),meno);
+                  String meno=user.meno+" "+user.priezvisko;
+                  rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'],meno,userRezervaciaList[index]['typ'],userRezervaciaList[index]['vybavene'],userRezervaciaList[index]['cas']);
                   return RezervaciaCardUser(rz);
                 }
             ),

@@ -253,11 +253,14 @@ class DatabaseManager{
 
 
   Future<void> createRezervaciaData(
-      String datum,idDarca,oc) async {
+      String datum,idDarca,oc,typ,vybavene,cas) async {
     return await napisteNamList.doc().set({
       'datum':datum,
       'idDarca':idDarca,
       'oc':oc,
+      'typ':typ,
+      'vybavene':vybavene,
+      'cas':cas,
     });
   }
 
@@ -270,6 +273,26 @@ class DatabaseManager{
       })
       );
       return itemsList;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
+  Future getRezervaciaList2() async{
+    List itemsList=[];
+    List id=[];
+    List returnovat=[];
+
+    try{
+      await rezervaciaList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+        id.add(element.id);
+      })
+      );
+      returnovat.add(itemsList);
+      returnovat.add(id);
+      return returnovat;
     }catch(e){
       print(e.toString());
       return null;

@@ -8,8 +8,9 @@ import 'package:flutter/material.dart';
 
 class RezervaciaCard extends StatelessWidget {
   final rezervacia _rezervacia;
+  final String _rezervaciaId;
 
-  RezervaciaCard(this._rezervacia);
+  RezervaciaCard(this._rezervacia,this._rezervaciaId);
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +39,7 @@ class RezervaciaCard extends StatelessWidget {
                 ),
                 Row(children: [
                   Text("Dátum: ${_rezervacia.datum}"),
+                  Text(" Čas: ${_rezervacia.cas}"),
                 ],)
               ],
             ),
@@ -46,7 +48,7 @@ class RezervaciaCard extends StatelessWidget {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => rezervaciaCardDetails(_rezervacia)));
+                    builder: (context) => rezervaciaCardDetails(_rezervacia,_rezervaciaId)));
           },
         ),
       ),
