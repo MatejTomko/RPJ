@@ -19,7 +19,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
   late final odber _odber;
   final String _odberid;
 
-  final _formKey = GlobalKey<FormState>();
+  static final _formKey = GlobalKey<FormState>();
 
   var _controllerautoodber=TextEditingController();
   var _controlleridDarca=TextEditingController();
@@ -65,6 +65,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
     _vyjazd=_odber.vyjazd;
     _zaciatok=_odber.zaciatok;
 
+
     _controllerautoodber.text=_autoodber;
     _controlleridDarca.text=_idDarca;
     _controllerdatum.text=_datum;
@@ -76,6 +77,15 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
     _controllertyp.text=_typ;
     _controllervyjazd.text=_vyjazd;
     _controllerzaciatok.text=_zaciatok;
+    _dropDownValueTypOdberu=_typ;
+    DateTime initialStart=DateTime.parse("2023-01-01 "+_zaciatok+":00.00000");
+    DateTime initialEnd=DateTime.parse("2023-01-01 "+_koniec+":00.00000");
+    print(initialEnd);
+    print(initialStart);
+    DateFormat dateFormat = DateFormat("HH:mm");
+    _controllerTrvanieOdberu.text=dateFormat.format(initialStart)+"-"+dateFormat.format(initialEnd);
+
+
     return Scaffold(
       appBar: AppBar(
         title: Text("Detaily odberu: "),
@@ -306,7 +316,6 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                               borderRadius: BorderRadius.circular(30),
                             ),
                             child: FormBuilderTextField(
-                              autofocus: true, //TODO DANEK - ked je autofocus ta sa aspon daco da zadat ale ked nie je tak sa potom neda typ odberu vybrat
                               name:"idDarca",
                               controller: _controlleridDarca,
                               cursorColor: Colors.black12,
@@ -360,7 +369,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                     ),
                                     border: InputBorder.none,
                                   ),
-                                  initialValue: null,
+                                  initialValue: _autoodber,
                                   name: 'auto_odber',
                                   validator: FormBuilderValidators.compose(
                                       [FormBuilderValidators.required()]),
@@ -414,6 +423,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                 ),
                                 isExpanded: true,
                                 iconSize: 30.0,
+                                initialValue: _typ,
                                 style: TextStyle(color: Colors.black87),
                                 validator: FormBuilderValidators.compose(
                                     [FormBuilderValidators.required()]),
@@ -543,6 +553,8 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                         endText: "Do",
                                         doneText: "Potvrdiť",
                                         cancelText: "Zrušiť",
+                                        initialStartTime: initialStart,
+                                        initialEndTime: initialEnd,
                                         interval: 1,
                                         mode: DateTimeRangePickerMode.time,
                                         minimumTime: DateTime.now().subtract(Duration(days: 5)),
@@ -550,11 +562,11 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                         use24hFormat: true,
                                         onConfirm: (start, end) {
                                           DateFormat dateFormat = DateFormat("HH:mm");
-                                          print(start);
-                                          print(end);
                                           _controllerTrvanieOdberu.text = dateFormat.format(start)+" - "+dateFormat.format(end);
                                           _zaciatok=start.toString();
                                           _koniec=end.toString();
+                                          _controllerkoniec.text=_koniec;
+                                          _controllerzaciatok.text=_zaciatok;
 
                                         }).showPicker(context);
                                   },
@@ -705,7 +717,6 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                               onPressed: () async{
                                 if(_formKey.currentState!.validate() ){
                                   String ideckoDoc=_odberid.substring(1,_odberid.length-1);
-
                                     /*if(_controllerdatum.text==""){
                                     String a=DateTime.now().toString().split(" ")[0];
                                     _controllerdatum.text=a;
@@ -722,10 +733,8 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                     "zaciatok":_controllerzaciatok.text,
                                     "komplikacia":_controllerkomplikacia.text,
                                     "autoodber":_controllerautoodber.text,
-                                    "typ":_controllertyp.text,
+                                    "typ":_dropDownValueTypOdberu,
                                   });
-
-
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber upravený")));
                                 }
                               },

@@ -17,14 +17,12 @@ class DatabaseManager{
 
 
   Future<void> createDarcaData(
-      String adresa,idDarca,krvnaskupina,meno,pocetodberov,poslednyodber,priezvisko,rodnecislo,email) async {
+      String adresa,idDarca,krvnaskupina,meno,priezvisko,rodnecislo,email) async {
     return await darcaList.doc().set({
       'adresa':adresa,
       'idDarca':idDarca,
       'krvnaskupina':krvnaskupina,
       'meno':meno,
-      'pocetodberov':pocetodberov,
-      'poslednyodber':poslednyodber,
       'priezvisko':priezvisko,
       'rodnecislo':rodnecislo,
       'email':email,

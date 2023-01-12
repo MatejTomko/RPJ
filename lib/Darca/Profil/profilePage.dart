@@ -38,7 +38,7 @@ class _profilePageState extends State<profilePage> {
   List userDarcaList = [];
   List userOdberList = [];
   List userRezervaciaList = [];
-  darca user=new darca("", "", "", "", "", "", "",DateTime.now(),"");
+  darca user=new darca("", "", "", "", "", "", "","");
   int pocetOdberov=0;
   int zachraneneZivoty=0;
   int plaketa1=0;
@@ -71,10 +71,9 @@ class _profilePageState extends State<profilePage> {
             user.meno=userDarcaList[i]['meno'];
             user.krvnaskupina=userDarcaList[i]['krvnaskupina'];
             user.idDarca=userDarcaList[i]['idDarca'].toString();
-            user.pocetodberov=userDarcaList[i]['pocetodberov'];
-            user.poslednyodber=userDarcaList[i]['poslednyodber'].toDate();
             user.rodnecislo=userDarcaList[i]['rodnecislo'].toString();
             user.email=userDarcaList[i]['email'].toString();
+            user.pocetodberov=0.toString();
           }
         }
       });
@@ -89,7 +88,7 @@ class _profilePageState extends State<profilePage> {
         for(var i=0;i< userOdberList.length;i++){
           String help=userOdberList[i]['idDarca'].toString();
           if(help == "1000"){
-            if((userOdberList[i]['typ'].toString())=="doštičky"){
+            if((userOdberList[i]['typ'].toString())=="Krvné doštičky"){
               pocetOdberov+=2;
             }else{
               pocetOdberov+=1;
