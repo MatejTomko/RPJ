@@ -69,25 +69,51 @@ class _liekyPageState extends State<liekyPage> {
         child: Container(
           child: Column(
             children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
+              Container(
+                padding: const EdgeInsets.fromLTRB(5,8,5,8),
                 child: TextField(
-                  onChanged: (value) {
+                  textInputAction: TextInputAction.search,
+                  onSubmitted: (value) {
+                    vyrazHladaj=liekController.text;
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
+                    if(vyrazHladaj.length>2){
+                      fetchDatabaseList();
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+                    }
                   },
                   controller: liekController,
-                  decoration: const InputDecoration(
-                      labelText: "",
+                  cursorColor: Colors.black,
+                  decoration: InputDecoration(
                       hintText: "Vyhľadaj liek",
-                      prefixIcon: Icon(Icons.search),
+                      suffixIcon: IconButton(
+                        icon: const Icon(Icons.search),
+                        onPressed: () {
+                          vyrazHladaj=liekController.text;
+                          FocusScopeNode currentFocus = FocusScope.of(context);
+                          if (!currentFocus.hasPrimaryFocus) {
+                            currentFocus.unfocus();
+                          }
+                          if(vyrazHladaj.length>2){
+                            fetchDatabaseList();
+                          }else{
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+                          }
+                        },
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(25.0)),
                       ),
                   ),
                 ),
               ),
-              Container(
+              /*Container(
                 height: 50,
                 width: 100,
+                margin: EdgeInsets.only(bottom: 5),
                 decoration: BoxDecoration(
                   color: Colors.red[900],
                   borderRadius: BorderRadius.circular(50),
@@ -95,11 +121,14 @@ class _liekyPageState extends State<liekyPage> {
                 child: TextButton(
                   onPressed: (){
                     vyrazHladaj=liekController.text;
+                    FocusScopeNode currentFocus = FocusScope.of(context);
+                    if (!currentFocus.hasPrimaryFocus) {
+                      currentFocus.unfocus();
+                    }
                     if(vyrazHladaj.length>2){
                       fetchDatabaseList();
                     }else{
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
-
                     }
                   },
                   style: TextButton.styleFrom(
@@ -112,7 +141,7 @@ class _liekyPageState extends State<liekyPage> {
                     style: TextStyle(color: Colors.white,fontSize: 25),
                   ),
                 ),
-              ),
+              ),*/
 
               Expanded(
                 child: ListView.builder(

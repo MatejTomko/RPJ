@@ -11,50 +11,83 @@ class liekyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Card(
-          child: Container(
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: _lieky.mozemdarovat == "nie" ? Colors.redAccent : Colors.green
-              ),
+      margin: EdgeInsets.fromLTRB(5,5,5,0),
+      decoration: BoxDecoration(
+
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Container(
+        decoration: BoxDecoration(
+            color: _lieky.mozemdarovat == "nie" ? Color.fromRGBO(255, 220, 220, 1) : Color.fromRGBO(220, 255, 220, 1),
+          border: Border.all(
+            color: _lieky.mozemdarovat == "nie" ? Colors.redAccent : Colors.green
+          ),
+          borderRadius: BorderRadius.circular(15)
+        ),
+        padding: const EdgeInsets.all(12.0),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+                child: Padding(
+                  padding: EdgeInsets.all(12),
+                  child: Image.asset("assets/medicine.png"),
+                ),
             ),
-            padding: const EdgeInsets.all(12.0),
-            child: Column(
-              children: [
-                Row(
+            Expanded(
+              flex: 4,
+              child: Column(
                 children: [
-                  Expanded(
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Liek: ${_lieky.liek}"),
-                    ),
-                  )
-                ],
-              ),
-                Row(
+                  Row(
                   children: [
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.only(bottom: 10.0),
-                        child: Text("Kedy najskôr: ${_lieky.kedynajskor}"),
+                        padding: const EdgeInsets.only(bottom: 5.0),
+                        child: Text(
+                            "${_lieky.liek}",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          ),
+                        ),
                       ),
                     )
                   ],
                 ),
-                Row(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10.0),
-                      child: Text("Môžem darovať: ${_lieky.mozemdarovat}"),
-                    )
-                  ],
-                ),
-                Row(children: [
-                  Expanded(child: Text("Poznámka: ${_lieky.poznamka}"),)
-                ],)
-              ],
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 3.0),
+                    child: Expanded(
+                      child: Row(
+                        children: [
+                          Text(
+                            "Môžem darovať: ",
+                          ),
+                          Text(
+                            "${_lieky.mozemdarovat}",
+                            style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                          ),)
+                        ],
+                      ),
+                    ),
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Padding(
+                          padding: const EdgeInsets.only(bottom: 3.0),
+                          child: Text("Kedy najskôr: ${_lieky.kedynajskor}"),
+                        ),
+                      )
+                    ],
+                  ),
+                  Row(children: [
+                    Expanded(child: Text("Poznámka: ${_lieky.poznamka}"),)
+                  ],)
+                ],
+              ),
             ),
-          )
+          ],
+        ),
       ),
     );
   }

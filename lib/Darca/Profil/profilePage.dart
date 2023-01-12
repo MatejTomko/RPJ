@@ -424,7 +424,18 @@ class _profilePageState extends State<profilePage> {
                 ],
               ),
             ),
-            //TODO
+            
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(left: 10),
+              padding: EdgeInsets.fromLTRB(5,10,0,0),
+              child: Text("Moje termíny",
+                style: TextStyle(
+                    fontSize: 20,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
             Expanded(child: ListView.builder(
                 itemCount: userRezervaciaList.length,
                 itemBuilder:(context, index) {
