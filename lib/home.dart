@@ -1,4 +1,5 @@
 import 'package:blood_app/Admin/AdminOC/kontrolaTerminovPage.dart';
+import 'package:blood_app/Admin/AdminOC/pridanieDarcuPage.dart';
 import 'package:blood_app/Admin/AdminOC/pridavanieOdberuPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaOtazkyPage.dart';
@@ -87,6 +88,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     zobrazovanieNapisteNamPage(),
     kontrolaTerminovPage(),
     pridavanieOdberuPage(),
+    pridanieDarcuPage(),
     //liekyPage(),
     //ocPage(),
     // oceneniaPage(),
@@ -173,6 +175,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
             icon: Icon(Icons.help),
             label: "AOdbery",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.help),
+            label: "ADarca",
           ),
         ],
       ),
