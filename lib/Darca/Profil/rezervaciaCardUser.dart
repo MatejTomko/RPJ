@@ -97,7 +97,7 @@ class RezervaciaCardUser extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.end,
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    IconButton(onPressed: (){}, icon: Icon(Icons.cancel_outlined)),//TODO DANEK pridat mazanie ked tam ma byt a prepojenie ked ma byt
+                    //IconButton(onPressed: (){}, icon: Icon(Icons.cancel_outlined)),
                   ],
                 ),
               ),
