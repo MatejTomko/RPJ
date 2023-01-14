@@ -1,4 +1,5 @@
 import 'package:blood_app/DatabaseManager.dart';
+import 'package:blood_app/main.dart';
 import 'package:f_datetimerangepicker/f_datetimerangepicker.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -53,7 +54,7 @@ class odberObjednanieState extends State<odberObjednanie> {
       setState(() {
         for (var i = 0; i < resultant.length; i++) {
           String help = resultant[i]['idDarca'].toString();
-          if (help == "1000") {
+          if (help == idDarcu) {
             rezevaciePocet++;
           }
         }
@@ -66,7 +67,7 @@ class odberObjednanieState extends State<odberObjednanie> {
         setState(() {
           for (var i = 0; i < resultant2.length; i++) {
             String help = resultant2[i]['idDarca'].toString();
-            if (help == "1000") {
+            if (help == idDarcu) {
               String datum=resultant2[i]['datum'].toString();
               datum+=" 00:00:00.000";
               print(datum);

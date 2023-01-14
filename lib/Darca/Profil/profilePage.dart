@@ -7,6 +7,7 @@ import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
 import 'package:blood_app/Darca/Profil/rezervaciaCardUser.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
+import 'package:blood_app/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -19,8 +20,6 @@ class profilePage extends StatefulWidget {
 }
 
 class _profilePageState extends State<profilePage> {
-  int _idDarca=1000;
-
   //document IDs
   String docIds = "";
 
@@ -65,7 +64,7 @@ class _profilePageState extends State<profilePage> {
         userDarcaList=resultant;
         for(var i=0;i< userDarcaList.length;i++){
           String help=userDarcaList[i]['idDarca'].toString();
-          if(help == "1000"){
+          if(help == idDarcu){
             user.adresa=userDarcaList[i]['adresa'];
             user.priezvisko=userDarcaList[i]['priezvisko'];
             user.meno=userDarcaList[i]['meno'];
@@ -87,7 +86,7 @@ class _profilePageState extends State<profilePage> {
         userOdberList=resultant2;
         for(var i=0;i< userOdberList.length;i++){
           String help=userOdberList[i]['idDarca'].toString();
-          if(help == "1000"){
+          if(help == idDarcu){
             if((userOdberList[i]['typ'].toString())=="Krvné doštičky"){
               pocetOdberov+=2;
             }else{
@@ -148,7 +147,7 @@ class _profilePageState extends State<profilePage> {
       setState(() {
         for(var i=0;i< resultant3.length;i++){
           String help=resultant3[i]['idDarca'].toString();
-          if(help == "1000"){
+          if(help == idDarcu){
             userRezervaciaList.add(resultant3[i]);
           }
         }

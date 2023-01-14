@@ -6,10 +6,13 @@ import 'package:blood_app/Navstevnik/Lieky/liekyPage.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/ocPage.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazkyPage.dart';
 import 'package:blood_app/first.dart';
+import 'package:blood_app/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:restart_app/restart_app.dart';
 
 class viacPage extends StatefulWidget {
   const viacPage({Key? key}) : super(key: key);
@@ -206,12 +209,8 @@ class _viacPageState extends State<viacPage> {
               Divider(),
               GestureDetector(
                 onTap: () async{
-                  /*Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => ())
-                  );*/
-                  FirebaseAuth.instance.signOut();//TODO bo to uvidi aj navstevnik ta nech to da na zaciatok apky
+                  FirebaseAuth.instance.signOut();
+                  SystemNavigator.pop();
                 },
                 child: Row(
                   mainAxisSize: MainAxisSize.max,

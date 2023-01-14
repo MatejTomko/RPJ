@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Darca/Odber/odberCard.dart';
+import 'package:blood_app/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -16,7 +17,7 @@ class odberyPage extends StatefulWidget {
 }
 
 class _odberyPageState extends State<odberyPage> {
-  String _idDarca="1000";
+  String _idDarca=idDarcu;
   List userOdberyListPomocny = [];
   List userOdberyListDisplay = [];
 

@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 
+//TODO overovanie rodneho cisla
 class pridanieDarcuPage extends StatefulWidget{
   const pridanieDarcuPage({Key? key}) : super(key: key);
 
@@ -19,7 +20,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
 
 
   var _controlleradresa=TextEditingController();
-  var _controlleremail=TextEditingController();
+  //var _controlleremail=TextEditingController();
   var _controlleriddarca=TextEditingController();
   var _controllerkrvnaskupina=TextEditingController();
   var _controllermeno=TextEditingController();
@@ -37,12 +38,12 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
         text: text,
       );
     });
-    _controlleremail.addListener(() {
+    /*_controlleremail.addListener(() {
       final String text = _controlleremail.text;
       _controlleremail.value = _controlleremail.value.copyWith(
         text: text,
       );
-    });
+    });*/
     _controlleriddarca.addListener(() {
       final String text = _controlleriddarca.text;
       _controlleriddarca.value = _controlleriddarca.value.copyWith(
@@ -169,7 +170,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                             ),
                           ),
                           SizedBox(height: 10),
-                          Container(
+                          /*Container(
                             padding: EdgeInsets.fromLTRB(10,2,10,2),
                             decoration: BoxDecoration(
                               color:Colors.black12,
@@ -191,7 +192,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                 return null;
                               },
                             ),
-                          ),
+                          ),*/
                           SizedBox(height: 10),
                           Container(
                             padding: EdgeInsets.fromLTRB(10,2,10,2),
@@ -290,7 +291,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                   var db=FirebaseFirestore.instance.collection("Darca").add({
                                     "adresa":_controlleradresa.text,
                                     "idDarca":_controlleriddarca.text,
-                                    "email":_controlleremail.text,
+                                    "email":"-",
                                     "krvnaskupina":_controllerkrvnaskupina.text,
                                     "meno":_controllermeno.text,
                                     "priezvisko":_controllerpriezvisko.text,
@@ -299,12 +300,13 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                   });
 
                                   _controlleradresa.clear();
-                                  _controlleremail.clear();
+                                  //_controlleremail.clear();
                                   _controlleriddarca.clear();
                                   _controlleradresa.clear();
                                   _controllerkrvnaskupina.clear();
                                   _controllermeno.clear();
                                   _controllerpriezvisko.clear();
+                                  _controllerrodnecislo.clear();
 
 
                                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Darca pridaný")));

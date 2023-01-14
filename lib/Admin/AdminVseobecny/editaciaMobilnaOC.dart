@@ -81,6 +81,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
     _controllerlat.text=_lat;
     _controllerlng.text=_lng;
     _controllermiesto.text=_miesto;
+    _controllerdatum.text=_datum;
 
     CollectionReference mobilneocDb=FirebaseFirestore.instance.collection('MobilneOC');
 
@@ -115,6 +116,10 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                         hintText: 'Názov',
                         border: InputBorder.none,
                       ),
+                      onChanged: ((value){
+                        _miesto=value;
+                        _controllermiesto.text=_miesto;
+                      }),
                       validator: (value) {
                         if (value!.isEmpty || value == null || value.isEmpty) {
                           return 'Prosím zadajte názov';
@@ -137,11 +142,10 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                         hintText: 'Čas',
                         border: InputBorder.none,
                       ),
-                      /*onChanged: ((value) {
+                      onChanged: ((value) {
                               _cas =value;
                               _controllercas.text=value;
-                              DateFormat dateFormat = DateFormat("dd.MM.yyyy HH:mm");
-                            }),*/
+                      }),
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Prosím zadajte čas';

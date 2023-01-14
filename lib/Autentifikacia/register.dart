@@ -27,7 +27,8 @@ class _RegisterState extends State<Register>{
             }else if(snapshot.hasError){
               return Center(child: Text("Nastalá chyba"));
             }else if(snapshot.hasData){
-              return VerifyEmailPage();
+              //return VerifyEmailPage();
+              return Home();
             }else{
               return SignupWidget();
             }

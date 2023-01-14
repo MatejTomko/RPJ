@@ -43,6 +43,25 @@ class DatabaseManager{
       return null;
     }
   }
+  Future getDarcaList2() async{
+    List itemsList=[];
+    List itemsListId=[];
+    List returnovat=[];
+
+    try{
+      await darcaList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+        itemsListId.add(element.id);
+      })
+      );
+      returnovat.add(itemsList);
+      returnovat.add(itemsListId);
+      return returnovat;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
 
   Future<void> createOdberData(
       String idDarca,mnozstvo,trvanie,datum,typ,autoodber,komplikacia,koniec,tlakkrvi,vyjazd,zaciatok) async {

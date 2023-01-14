@@ -27,35 +27,19 @@ import 'Autentifikacia/Utils.dart';
 import 'Navstevnik/Informacie/domovPage.dart';
 
 
-class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+class HomeAdminOC extends StatefulWidget {
+  const HomeAdminOC({Key? key}) : super(key: key);
 
   @override
-  State<Home> createState() => _HomeState();
+  State<HomeAdminOC> createState() => _HomeAdminOCState();
 
 }
 
-class _HomeState extends State<Home> {
-  /*int _idDarca=1;
-
-  //document IDs
-  String docIds = "";
-
-  //get Database id veci,...
-  Future getDocId() async {
-    await FirebaseFirestore.instance.collection('Darca').get().then(
-        (snapshot) => snapshot.docs.forEach((element) {
-          if(element.reference.id=="1"){
-            docIds=element.reference.id;
-          }
-        })
-    );
-  }*/
-
-
+class _HomeAdminOCState extends State<HomeAdminOC> {
 
   @override
   void initState() {
+    //getDocId();
     super.initState();
   }
 
@@ -80,25 +64,12 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
   List<Widget> pages=
   [
     domovPage(),
-    profilePage(),
-    odberObjednanie(),
-    odberyPage(),
-    viacPage(),
-    upravaMobilnaOCPage(),
-    upravaOtazkyPage(),
-    zobrazovanieNapisteNamPage(),
     kontrolaTerminovPage(),
     pridavanieOdberuPage(),
     pridanieDarcuPage(),
-    //liekyPage(),
-    //ocPage(),
-    // oceneniaPage(),
-    // benefityPage(),
-    // napisteNamPage(),
-    // otazkyPage(),
-
+    viacPage(),
   ];
-  int _selectedIndex= 1;
+  int _selectedIndex= 0;
 
   void _navigateBottomBar(int index){
     setState(() {
@@ -113,8 +84,8 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
       resizeToAvoidBottomInset: false,
       body: pages[_selectedIndex],
       bottomNavigationBar: isKeyboardOpen
-      ? null
-      : BottomNavigationBar(
+          ? null
+          : BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _navigateBottomBar,
         type:   BottomNavigationBarType.fixed,
@@ -125,46 +96,21 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
             label:"Domov",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label:"Profil",
+            icon: Icon(Icons.help),
+            label: "Terminy",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.water_drop),
-              label:"Darovať"
+            icon: Icon(Icons.help),
+            label: "Odbery",
           ),
           BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_month),
-              label:"Odbery"
+            icon: Icon(Icons.help),
+            label: "Darca",
           ),
-
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_outlined),
             label: "Viac",
           ),
-          /*BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "APomocne",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "AOtazkyAdd",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "ANapisteNam",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "ATerminy",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "AOdbery",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "ADarca",
-          ),*/
         ],
       ),
 

@@ -112,7 +112,8 @@ class _ocPageState extends State<ocPage> with SingleTickerProviderStateMixin{
 
       body: Theme(
         data: ThemeData(
-            colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Colors.grey)
+          colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+          primarySwatch: Colors.red,
         ),
         child: TabBarView(
           controller: tabController,
