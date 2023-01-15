@@ -12,6 +12,11 @@ class otazkyCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: Theme(
+        data: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+    primarySwatch: Colors.red,
+    ),
       child: Card(
           child: Padding(
             padding: const EdgeInsets.all(12.0),
@@ -24,9 +29,15 @@ class otazkyCard extends StatelessWidget {
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child:
                         ExpansionTile(
-                          title: Text(_otazky.otazka),
+                          title: Text(_otazky.otazka,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          ),
                           children: <Widget>[
-                            Text(_otazky.odpoved),
+                            Text(_otazky.odpoved,
+
+                            ),
                           ],
                         )
                       ),
@@ -36,6 +47,7 @@ class otazkyCard extends StatelessWidget {
               ],
             ),
           )
+      ),
       ),
     );
   }

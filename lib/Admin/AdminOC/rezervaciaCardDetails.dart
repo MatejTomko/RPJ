@@ -2,6 +2,7 @@ import 'dart:ffi';
 
 import 'package:blood_app/Admin/AdminOC/pridavanieOdberuPage.dart';
 import 'package:blood_app/Admin/AdminOC/rezervacia.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCDetails.dart';
@@ -137,9 +138,7 @@ class rezervaciaCardDetails extends StatelessWidget {
                                     "vybavene":_controllervybavene.text,
                                   });
 
-
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Rezervacia upravená")));
-
+                                  Utils.showSnackBar("Rezervacia upravená");
                               },
                               child: const Text(
                                 "Upraviť",
@@ -164,8 +163,7 @@ class rezervaciaCardDetails extends StatelessWidget {
                               onPressed: () async{
 
                                 await FirebaseFirestore.instance.collection("Rezervacia").doc(_rezervaciaId).delete();
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Rezervacia vymazaná")));
-
+                                Utils.showSnackBar("Rezervacia vymazaná");
 
                                 //TODO
                                 //Navigator.pushNamed(context, "/pridavanieodberupage");

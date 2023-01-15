@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -309,7 +310,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                   _controllerrodnecislo.clear();
 
 
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Darca pridaný")));
+                                  Utils.showSnackBar("Darca pridaný");
                                 }
                               },
                               child: const Text(

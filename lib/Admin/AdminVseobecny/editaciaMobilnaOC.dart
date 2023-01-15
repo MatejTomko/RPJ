@@ -1,6 +1,7 @@
 
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCCard.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCCard.dart';
@@ -310,7 +311,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                           _mobilnaOC.oc=_controlleroc.text;
                           _mobilnaOC.cas=_controllercas.text;
                           //_controllerdatum.clear();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC updatnutá")));
+                          Utils.showSnackBar("Mobilna OC updatnutá");
                         }
                         //TODO
                         //hotovo by Matej
@@ -338,9 +339,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       ),
                       onPressed: () async{
                         await FirebaseFirestore.instance.collection("MobilneOC").doc(_userMobilnaOcId).delete();
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC vymazana")));
-
-
+                        Utils.showSnackBar("Mobilna OC vymazaná");
                         //TODO
                         //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
                       },

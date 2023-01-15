@@ -1,3 +1,4 @@
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazky.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -165,7 +166,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                         _otazky.otazka=_controllerotazka.text;
                         _otazky.odpoved=_controllerodpoved.text;
 
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka updatnutá")));
+                        Utils.showSnackBar("Otázka updatnutá");
                         Navigator.pop(context);
                       }
                     },
@@ -191,7 +192,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                     ),
                     onPressed: () async{
                       await FirebaseFirestore.instance.collection("Otazky").doc(_userOtazkaId).delete();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka vymazana")));
+                      Utils.showSnackBar("Otázka vymazaná");
 
                       Navigator.pop(context);
                     },

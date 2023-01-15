@@ -1,3 +1,4 @@
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/mobilnaOCDetails.dart';
@@ -735,7 +736,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                     "autoodber":_controllerautoodber.text,
                                     "typ":_dropDownValueTypOdberu,
                                   });
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber upravený")));
+                                  Utils.showSnackBar("Odber upravený");
                                 }
                               },
                               child: const Text(
@@ -761,7 +762,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                               onPressed: () async{
                                 String ideckoDoc=_odberid.substring(1,_odberid.length-1);
                                 await FirebaseFirestore.instance.collection("Odber").doc(ideckoDoc).delete();
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber vymazany")));
+                                Utils.showSnackBar("Odber vymazaný");
                                 //TODO
                                 //Navigator.pushNamed(context, "/pridavanieodberupage");
                               },

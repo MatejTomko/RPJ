@@ -1,3 +1,4 @@
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/main.dart';
 import 'package:f_datetimerangepicker/f_datetimerangepicker.dart';
@@ -273,12 +274,10 @@ class odberObjednanieState extends State<odberObjednanie> {
                             'vybavene': "nie",
                           }).then((value) => print('Rezervacia odoslaná'));
                           _controllerdatum.clear();
-                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              content: Text("Rezervacia odoslaná")));
+                          Utils.showSnackBar("Rezervácia odoslaná");
                         }
                       }else{
-                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                            content: Text("Nemôžte sa prihlásiť na odber")));
+                        Utils.showSnackBar("Nemôžte sa prihlásiť na odber");
                       }
                     },
                     child: const Text(

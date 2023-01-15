@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -131,7 +132,7 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
 
 
 
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Notifikácia odoslaná")));
+                              Utils.showSnackBar("Notifikácia odoslaná");
                             }
                           },
                           child: const Text(

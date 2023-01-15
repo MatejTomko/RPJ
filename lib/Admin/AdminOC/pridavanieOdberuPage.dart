@@ -1,4 +1,5 @@
 import 'dart:ffi' as ffi;
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Admin/AdminOC/odberCardVyhladavanie.dart';
 import 'package:blood_app/Darca/Odber/odberCard.dart';
@@ -133,7 +134,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
           }
         }
         if(userOdberyList.length==0){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Žiaden výsledok")));
+          Utils.showSnackBar("Žiaden výsledok");
         }
       });
     }
@@ -627,8 +628,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                                 _controlleridDarca.clear();
                                 _controllerautoodber.clear();
                                 _controllertyp.clear();
+                                Utils.showSnackBar("Odber pridaný");
 
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Odber pridaný")));
                               }
                             },
                             child: const Text(
@@ -685,7 +686,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                             if(vyrazHladaj.length>2){
                               fetchDatabaseList();
                             }else{
-                              ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Minimalne 3 znaky!")));
+                              Utils.showSnackBar("Minimálne 3 znaky!");
                             }
                           },
                           style: TextButton.styleFrom(

@@ -2,6 +2,7 @@ import 'dart:ffi' as ffi;
 
 import 'package:blood_app/Admin/AdminVseobecny/upravaOtazkyCard.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaVyjazdoveOCcard.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOCCard.dart';
 import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
@@ -207,7 +208,7 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
                                   _controllerodpoved.clear();
 
 
-                                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Otázka odoslaná")));
+                                  Utils.showSnackBar("Otázka odoslaná");
                                 }
                               },
                               child: const Text(

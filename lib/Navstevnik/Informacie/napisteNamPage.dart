@@ -1,3 +1,4 @@
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -232,7 +233,7 @@ class napisteNamPageState extends State<napisteNamPage> {
                       _controllersprava.clear();
                       _controlleremail.clear();
                       _controllermeno.clear();
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Správa odoslaná")));
+                      Utils.showSnackBar("Správa odoslaná");
                     }
                   },
                   child: const Text(

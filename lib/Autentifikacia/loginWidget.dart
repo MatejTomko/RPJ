@@ -31,7 +31,12 @@ class _LoginWidgetState extends State<LoginWidget>{
         backgroundColor: Colors.red[900],
       ),
     body:
-    SingleChildScrollView(
+    Theme(
+      data: ThemeData(
+        colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+        primarySwatch: Colors.red,
+      ),
+    child:SingleChildScrollView(
       padding: EdgeInsets.all(16),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -76,6 +81,7 @@ class _LoginWidgetState extends State<LoginWidget>{
           ),
         ],
       ),
+    ),
     ),
   );
 

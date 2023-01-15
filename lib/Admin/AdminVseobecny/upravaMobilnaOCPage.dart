@@ -1,6 +1,7 @@
 import 'dart:ffi' as ffi;
 
 import 'package:blood_app/Admin/AdminVseobecny/upravaVyjazdoveOCcard.dart';
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOCCard.dart';
 import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
@@ -362,7 +363,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                                 _controllerlat.clear();
                                 _controllerlng.clear();
                                 _controllermiesto.clear();
-                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Mobilna OC odoslana")));
+                                Utils.showSnackBar("Mobilná OC odoslaná");
                               }
                             },
                             child: const Text(

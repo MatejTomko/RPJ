@@ -1,6 +1,7 @@
 import 'dart:ffi';
 
 
+import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
 import 'package:blood_app/Navstevnik/Lieky/liekyCard.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
@@ -47,7 +48,7 @@ class _liekyPageState extends State<liekyPage> {
           }
         }
         if(userLiekyListDisplay.length==0){
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Žiaden výsledok")));
+          Utils.showSnackBar("Žiaden výsledok");
         }
       });
     }
@@ -82,7 +83,7 @@ class _liekyPageState extends State<liekyPage> {
                     if(vyrazHladaj.length>2){
                       fetchDatabaseList();
                     }else{
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+                      Utils.showSnackBar("Zadajte minimálne 3 znaky!");
                     }
                   },
                   controller: liekController,
@@ -100,7 +101,8 @@ class _liekyPageState extends State<liekyPage> {
                           if(vyrazHladaj.length>2){
                             fetchDatabaseList();
                           }else{
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
+                            Utils.showSnackBar("Zadajte minimálne 3 znaky!");
+                            //ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Zadajte minimálne 3 znaky!")));
                           }
                         },
                       ),

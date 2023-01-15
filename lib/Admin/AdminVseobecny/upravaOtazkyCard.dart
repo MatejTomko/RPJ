@@ -26,7 +26,11 @@ class upravaOtazkyCard extends StatelessWidget {
                       child: Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child:
-                          Text(_otazky.otazka),
+                          Text(_otazky.otazka,
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                          ),
                       ),
                     )
                   ],
