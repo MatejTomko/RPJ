@@ -24,26 +24,24 @@ class kamennaOCDetails extends StatelessWidget{
         title: Text(_koc.meno),
         backgroundColor: Colors.red[900],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: Container(
         child:SlidingUpPanel(
-          minHeight: 150,
+          minHeight: 100,
           renderPanelSheet: false,
-
           panel: Padding(
-            padding: const EdgeInsets.all(15.0),
+            padding: const EdgeInsets.all(5.0),
             child: Container(
                 decoration: const BoxDecoration(
                   color: Color.fromARGB(255, 253, 253, 253),
                   borderRadius: BorderRadius.all(Radius.circular(24.0)),
                 ),
+                padding: EdgeInsets.all(10),
                 child: Center(
                   child: Padding(
-                    padding: const EdgeInsets.all(12.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-
                         Text(
                           _koc.meno,
                           style: const TextStyle(
@@ -57,7 +55,7 @@ class kamennaOCDetails extends StatelessWidget{
                             fontSize: 16,
                           ),
                         ),
-                        SizedBox(height: 5),
+                        SizedBox(height: 15),
                         const Text(
                           "Otváracie hodiny: ",
                           style: TextStyle(
@@ -146,13 +144,13 @@ class kamennaOCDetails extends StatelessWidget{
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(24.0), topRight: Radius.circular(24.0)),
             ),
-            margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 16.0),
+            margin: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
             child: Center(
               child: Padding(
                 padding: const EdgeInsets.all(12.0),
                 child:
                 Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     Text(
                       _koc.meno,
@@ -192,7 +190,7 @@ class kamennaOCDetails extends StatelessWidget{
                 ),
                 MarkerLayer(
                   markers: [
-                    Marker(point: LatLng(lat, lng), builder: (context) => FlutterLogo() )//TODO daco lepsie nech ukazuje
+                    Marker(point: LatLng(lat, lng), builder: (context) => Icon(Icons.location_on, color: Colors.red[800], size: 64))//TODO daco lepsie nech ukazuje
                   ],
                 ),
               ],

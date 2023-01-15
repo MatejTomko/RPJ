@@ -74,7 +74,7 @@ class RezervaciaCard extends StatelessWidget {
                     Row(
                       children: [
                         //Padding(padding: EdgeInsets.only(right: 5), child: Image.asset("assets/blood-bank.png", width: 24)),
-                        Text("${_rezervacia.oc}", style: TextStyle(fontWeight: FontWeight.w500),),
+                        Text("${_rezervacia.idDarca}", style: TextStyle(fontWeight: FontWeight.w500),),
                       ],
                     ),
                     SizedBox(height: 8),

@@ -15,8 +15,13 @@ class upravaNapisteNamCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       child: Card(
+        margin: EdgeInsets.only(top:5, left: 5,right: 5),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15),
+        ),
+        elevation: 3,
         child:InkWell(
-          child: Padding(
+          child: Container(
             padding: const EdgeInsets.all(12.0),
             child: Column(
               children: [
@@ -26,11 +31,54 @@ class upravaNapisteNamCard extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.only(bottom: 10.0),
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(_napisteNam.menopriezvisko),
-                            Text(_napisteNam.email),
-                            Text(_napisteNam.oblast),
-                            Text(_napisteNam.sprava),
+                            Row(
+                              children: [
+                                Expanded(
+                                  flex: 1,
+                                  child: Container(
+                                    child: Image.asset("assets/otazka-person.png",
+                                        width: 32),
+                                  ),
+                                ),
+                                SizedBox(width: 15),
+                                Expanded(
+                                  flex: 7,
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: [
+                                      Text(_napisteNam.menopriezvisko,
+                                        style: TextStyle(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      SizedBox(height: 1),
+                                      Text(_napisteNam.email,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                      SizedBox(height: 3),
+                                      Text(_napisteNam.oblast,
+                                        style: TextStyle(
+                                          color: Colors.grey.shade600,
+                                          fontWeight: FontWeight.w500
+                                        ),
+                                      ),
+
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 8),
+                            Container(
+                                child: Text(_napisteNam.sprava)
+                            ),
+
+
                           ],
                         ),
                       ),

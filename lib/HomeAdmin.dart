@@ -98,7 +98,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
             label:"Domov",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.add_home_work),
             label: "OC",
           ),
           BottomNavigationBarItem(
@@ -106,15 +106,15 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
             label: "FAQ",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.question_answer_outlined),
             label: "Otázky",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.water_drop),
             label: "Odbery",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.person_outline_outlined),
             label: "Darca",
           ),
           BottomNavigationBarItem(
