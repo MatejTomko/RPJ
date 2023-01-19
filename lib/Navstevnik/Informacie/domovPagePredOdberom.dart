@@ -37,7 +37,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 20),
+                        Image(image: AssetImage("assets/softdrinks.png"),width: 100,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -46,18 +47,20 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Tekutiny",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Tekutiny",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
@@ -83,7 +86,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 20),
+                        Image(image: AssetImage("assets/strava.png"),width: 100,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -92,18 +96,20 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Strava",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Strava",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
@@ -129,7 +135,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 20),
+                        Image(image: AssetImage("assets/oddych.png"),width: 100,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -138,18 +145,20 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Oddychujte",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Oddychujte",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
@@ -161,7 +170,6 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                                         ),
                                       ),
                                     )
-
                                   ],
                                 ),
                               ],
@@ -175,7 +183,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 20),
+                        Image(image: AssetImage("assets/smoke.png"),width: 110,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -184,18 +193,20 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Nefajčite",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Nefajčite",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
@@ -221,7 +232,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 10),
+                        Image(image: AssetImage("assets/alcohol.png"),width: 120,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -230,18 +242,21 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Bez alkoholu",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Bez alkoholu",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
@@ -268,7 +283,8 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                 Card(
                     child: Column(
                       children: [
-                        Image(image: AssetImage("assets/chybaObrazok.png"),width: 100,),
+                        SizedBox(height: 20),
+                        Image(image: AssetImage("assets/namaha2.png"),width: 100,),
                         InkWell(
                           child: Padding(
                             padding: const EdgeInsets.all(15.0),
@@ -277,18 +293,21 @@ class _domovPagePredOdberomState extends State<domovPagePredOdberom> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: Padding(
-                                        padding: const EdgeInsets.only(bottom: 10.0),
-                                        child: Text(
-                                          "Bez námahy",
-                                          style: const TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w500,
-                                          ),
+                                    Container(
+                                      padding: EdgeInsets.only(top: 5,bottom: 5),
+                                      child: Text(
+                                        "Bez námahy",
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w500,
                                         ),
                                       ),
                                     ),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+
                                     Expanded(
                                       child: Padding(
                                         padding: const EdgeInsets.only(bottom: 10.0),
