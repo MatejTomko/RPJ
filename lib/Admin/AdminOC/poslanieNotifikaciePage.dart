@@ -1,11 +1,18 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:http/http.dart' as http;
+
+import '../../DatabaseManager.dart';
+
 
 class poslanieNotifikaciePage extends StatefulWidget{
   const poslanieNotifikaciePage({Key? key}) : super(key: key);
@@ -15,10 +22,59 @@ class poslanieNotifikaciePage extends StatefulWidget{
 
 }
 
+Future sendEmail({
+  required String name,
+  required String email,
+  required String message,
+}) async{
+  final serviceId='service_d2z81rs';
+  final templateId='template_oe4dlbe';
+  final userId='gaHIMydx86ehMFXfn';
+
+  final url=Uri.parse("https://api.emailjs.com/api/v1.0/email/send");
+  final response = await http.post(
+    url,
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: json.encode({
+      'service_id': serviceId,
+      'template_id': templateId,
+      'user_id': userId,
+      'template_params':{
+        'to_name':name,
+        'blood':message,
+        'user_email':email,
+      },
+    }),
+  );
+
+  print(response.body);
+}
+
 class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
   final _formKey = GlobalKey<FormBuilderState>();
 
   var _controllerkrvnaskupina=TextEditingController();
+  String? token=" ";
+  List UserDarcaList=[];
+
+
+  DatabaseManager databaseManager=new DatabaseManager();
+
+  fetchDatabaseList() async{
+    dynamic resultant = await databaseManager.getDarcaList();
+    //display=userKamenneOCList;
+    if(resultant==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        for(var i=0;i< resultant.length;i++){
+          UserDarcaList.add(resultant[i]);
+        }
+      });
+    }
+  }
 
 
 
@@ -26,6 +82,12 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
   @override
   void initState() {
     super.initState();
+    fetchDatabaseList();
+    /*FirebaseMessaging _firebaseMessaging=FirebaseMessaging.instance;
+    _firebaseMessaging.getToken().then((value){
+      token=value;
+      print("My token $token");
+    });*/
 
     _controllerkrvnaskupina.addListener(() {
       final String text = _controllerkrvnaskupina.text;
@@ -126,17 +188,19 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
                               /*var db=FirebaseFirestore.instance.collection("Darca").add({
                                 "krvnaskupina":_controllerkrvnaskupina.text,
                               });*/
-
-
-                              _controllerkrvnaskupina.clear();
-
-
-
+                              //_controllerkrvnaskupina.clear();
+                              //FirebaseMessaging messaging = FirebaseMessaging.instance;
+                              for(var i=0;i<UserDarcaList.length;i++){
+                                if(UserDarcaList[i]['krvnaskupina']==_controllerkrvnaskupina.text){
+                                  String meno=UserDarcaList[i]['meno']+" "+UserDarcaList[i]['priezvisko'];
+                                  sendEmail(name: meno, email: UserDarcaList[i]['email'], message: UserDarcaList[i]['krvnaskupina']);
+                                }
+                              }
                               Utils.showSnackBar("Notifikácia odoslaná");
                             }
                           },
                           child: const Text(
-                            "Pridať",
+                            "Notifikovať darcov",
                             style: TextStyle(color: Colors.white,fontSize: 25),
                           ),
                         ),

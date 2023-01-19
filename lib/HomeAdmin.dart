@@ -1,4 +1,5 @@
 import 'package:blood_app/Admin/AdminOC/kontrolaTerminovPage.dart';
+import 'package:blood_app/Admin/AdminOC/poslanieNotifikaciePage.dart';
 import 'package:blood_app/Admin/AdminOC/pridanieDarcuPage.dart';
 import 'package:blood_app/Admin/AdminOC/pridavanieOdberuPage.dart';
 import 'package:blood_app/Admin/AdminVseobecny/upravaMobilnaOCPage.dart';
@@ -69,6 +70,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     zobrazovanieNapisteNamPage(),
     pridavanieOdberuPage(),
     pridanieDarcuPage(),
+    poslanieNotifikaciePage(),
     viacPage(),
   ];
   int _selectedIndex= 0;
@@ -116,6 +118,10 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
           BottomNavigationBarItem(
             icon: Icon(Icons.person_outline_outlined),
             label: "Darca",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.notification_important),
+            label: "Notif",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.menu_outlined),

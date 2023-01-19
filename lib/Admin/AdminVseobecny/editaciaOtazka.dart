@@ -1,3 +1,4 @@
+import 'package:blood_app/Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
 import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazky.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -167,7 +168,7 @@ class editaciaOtazkaState extends State<editaciaOtazka>{
                         _otazky.odpoved=_controllerodpoved.text;
 
                         Utils.showSnackBar("Otázka updatnutá");
-                        Navigator.pop(context);
+                        Navigator.of(context).pop(true);
                       }
                     },
                     child: const Text(

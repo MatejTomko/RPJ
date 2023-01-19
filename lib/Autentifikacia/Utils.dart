@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 
+import 'package:flutter/material.dart';
 
 class Utils{
   static final messengerKey=GlobalKey<ScaffoldMessengerState>();
@@ -13,4 +13,5 @@ class Utils{
     ..removeCurrentSnackBar()
     ..showSnackBar(snackBar);
   }
+
 }
