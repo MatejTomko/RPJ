@@ -33,28 +33,81 @@ class _domovPageState extends State<domovPage> {
       ),
 
       body:
-          Container(
-            padding: const EdgeInsets.all(15.0),
-            child:SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Darovanie krvi",
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w500,
+          Theme(
+            data: ThemeData(
+              colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
+              primarySwatch: Colors.red,
+            ),
+            child: Container(
+              padding: const EdgeInsets.all(15.0),
+              child:SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Darovanie krvi",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
-                  ),
-                  SizedBox(height: 5),
-                  Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)
+                    SizedBox(height: 5),
+                    Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)
+                      ),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              child: Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(5.0),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image(
+                                          image: AssetImage("assets/predOdberomKrvi.jpg"),
+                                        ),
+                                      ),
+                                      Row(
+                                        children: [
+                                          Container(
+                                            margin: EdgeInsets.all(15),
+                                            child: Text(
+                                              "Pred odberom krvi",
+                                              style: const TextStyle(
+                                                fontSize: 18,
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => domovPagePredOdberom())
+                                );
+                              },
+                            ),
+                          ],
+
+                        )
                     ),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            child: Container(
+                    Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Column(
+                          children: [
+                            InkWell(
                               child: Padding(
                                 padding: const EdgeInsets.all(5.0),
                                 child: Column(
@@ -63,7 +116,7 @@ class _domovPageState extends State<domovPage> {
                                     ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: Image(
-                                        image: AssetImage("assets/predOdberomKrvi.jpg"),
+                                        image: AssetImage("assets/procesDarovania.jpg"),
                                       ),
                                     ),
                                     Row(
@@ -71,7 +124,7 @@ class _domovPageState extends State<domovPage> {
                                         Container(
                                           margin: EdgeInsets.all(15),
                                           child: Text(
-                                            "Pred odberom krvi",
+                                            "Proces darovania krvi",
                                             style: const TextStyle(
                                               fontSize: 18,
                                               fontWeight: FontWeight.w500,
@@ -83,154 +136,107 @@ class _domovPageState extends State<domovPage> {
                                   ],
                                 ),
                               ),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => domovPageProcesDarovania()));
+                              },
                             ),
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => domovPagePredOdberom())
-                              );
-                            },
-                          ),
-                        ],
+                          ],
+                        )
+                    ),
 
-                      )
-                  ),
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(15),
-                                    child: Image(
-                                      image: AssetImage("assets/procesDarovania.jpg"),
+                    Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image(image: AssetImage("assets/poOdbere.jpg"))
                                     ),
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(15),
-                                        child: Text(
-                                          "Proces darovania krvi",
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
+                                    Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.all(15),
+                                          child: Text(
+                                            "Po odbere krvi",
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => domovPagePoOdbere() ));
+                              },
                             ),
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => domovPageProcesDarovania()));
-                            },
-                          ),
-                        ],
-                      )
-                  ),
+                          ],
+                        )
+                    ),
 
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: Image(image: AssetImage("assets/poOdbere.jpg"))
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(15),
-                                        child: Text(
-                                          "Po odbere krvi",
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
+                    Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15)
+                        ),
+                        child: Column(
+                          children: [
+                            InkWell(
+                              child: Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    ClipRRect(
+                                        borderRadius: BorderRadius.circular(15),
+                                        child: Image(image: AssetImage("assets/predOdberomPlazma.jpg"),
+                                        )
+                                    ),
+                                    Row(
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.all(15),
+                                          child: Text(
+                                            "Pred odberom plazmy",
+                                            style: const TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w500,
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
+                                      ],
+                                    ),
+                                  ],
+                                ),
                               ),
+                              onTap: (){
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => domovPagePredOdberomPlazmy() ));
+                              },
                             ),
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => domovPagePoOdbere() ));
-                            },
-                          ),
-                        ],
-                      )
-                  ),
-
-                  Card(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(15)
-                      ),
-                      child: Column(
-                        children: [
-                          InkWell(
-                            child: Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  ClipRRect(
-                                      borderRadius: BorderRadius.circular(15),
-                                      child: Image(image: AssetImage("assets/predOdberomPlazma.jpg"),
-                                      )
-                                  ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        margin: EdgeInsets.all(15),
-                                        child: Text(
-                                          "Pred odberom plazmy",
-                                          style: const TextStyle(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w500,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                            onTap: (){
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => domovPagePredOdberomPlazmy() ));
-                            },
-                          ),
-                        ],
-                      )
-                  ),
-                ],
+                          ],
+                        )
+                    ),
+                  ],
+                ),
               ),
             ),
           )

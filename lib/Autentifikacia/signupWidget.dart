@@ -77,57 +77,106 @@ class _SignupWidgetState extends State<SignupWidget>{
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               SizedBox(height: 40),
-              TextFormField(
-                controller: emailController,
-                cursorColor: Colors.white,
-                textInputAction: TextInputAction.next,
-                decoration: InputDecoration(labelText: "Email"),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: ((value) =>
-                value == null
-                  ? "Zadajte platný email"
-                    : null),
+              Padding(
+                padding: const EdgeInsets.only(bottom: 15),
+                child: Text(
+                  "Registrácia",
+                  style: TextStyle(
+                    color: Colors.red[700],
+                    fontSize: 22,
+                    fontWeight: FontWeight.w500
+                  ),
+                ),
               ),
-              SizedBox(height: 4),
-              TextFormField(
-                controller: passwordController,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "Heslo"),
-                obscureText: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: ((value) => value != null && value.length<6
-                    ? "Zadajte minimálne 6 znakov!" : null),
+              Container(
+                padding: EdgeInsets.fromLTRB(10,2,10,2),
+                decoration: BoxDecoration(
+                  color:Colors.black12,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextFormField(
+                  controller: emailController,
+                  cursorColor: Colors.black,
+                  textInputAction: TextInputAction.next,
+                  decoration: InputDecoration(hintText: "Email",border: InputBorder.none),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ((value) =>
+                  value == null
+                    ? "Zadajte platný email"
+                      : null),
+                ),
               ),
-              SizedBox(height: 4),
-              TextFormField(
-                controller: passwordController2,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "Heslo"),
-                obscureText: true,
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: ((value) => value != null && value.length<6
-                    ? "Zadajte minimálne 6 znakov!" : null),
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.fromLTRB(10,2,10,2),
+                decoration: BoxDecoration(
+                  color:Colors.black12,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextFormField(
+                  controller: passwordController,
+                  cursorColor: Colors.black,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(hintText: "Heslo",border: InputBorder.none),
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ((value) => value != null && value.length<6
+                      ? "Zadajte minimálne 6 znakov!" : null),
+                ),
               ),
-              SizedBox(height: 4),
-              TextFormField(
-                controller: eanController,
-                textInputAction: TextInputAction.done,
-                decoration: InputDecoration(labelText: "Evidečný kód"),
-                autovalidateMode: AutovalidateMode.onUserInteraction,
-                validator: ((value) => value != null && value.length<10
-                    ? "Zadajte Váš evidenčný kód!" : null),
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.fromLTRB(10,2,10,2),
+                decoration: BoxDecoration(
+                  color:Colors.black12,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextFormField(
+                  controller: passwordController2,
+                  cursorColor: Colors.black,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(hintText: "Heslo",border: InputBorder.none),
+                  obscureText: true,
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ((value) => value != null && value.length<6
+                      ? "Zadajte minimálne 6 znakov!" : null),
+                ),
+              ),
+              SizedBox(height: 12),
+              Container(
+                padding: EdgeInsets.fromLTRB(10,2,10,2),
+                decoration: BoxDecoration(
+                  color:Colors.black12,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: TextFormField(
+                  controller: eanController,
+                  cursorColor: Colors.black,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(hintText: "Evidečný kód",border: InputBorder.none),
+                  autovalidateMode: AutovalidateMode.onUserInteraction,
+                  validator: ((value) => value != null && value.length<10
+                      ? "Zadajte Váš evidenčný kód!" : null),
+                ),
               ),
               SizedBox(height: 20),
-              ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  minimumSize: Size.fromHeight(50),
+              Container(
+                height: 50,
+                width: MediaQuery.of(context).size.width - 20,
+                decoration: BoxDecoration(
+                  color: Colors.red[900],
+                  borderRadius: BorderRadius.circular(50),
                 ),
-                icon: Icon(Icons.lock_open,size: 32),
-                label: Text(
-                  "Zaregistrovať sa",
-                  style: TextStyle(fontSize: 24),
+                child: TextButton(
+                  style: TextButton.styleFrom(
+                    minimumSize: Size.fromHeight(50),
+                  ),
+                  child: Text(
+                    "Zaregistrovať sa",
+                    style: TextStyle(fontSize: 22, color: Colors.white),
+                  ),
+                  onPressed: signUp,
                 ),
-                onPressed: signUp,
               )
             ],
           ),

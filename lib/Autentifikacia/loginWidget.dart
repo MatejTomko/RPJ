@@ -41,43 +41,62 @@ class _LoginWidgetState extends State<LoginWidget>{
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          SizedBox(height: 40),
-          TextField(
-            controller: emailController,
-            cursorColor: Colors.white,
-            textInputAction: TextInputAction.next,
-            decoration: InputDecoration(labelText: "Email"),
+          SizedBox(height: 150),
+          Container(
+            padding: EdgeInsets.fromLTRB(10,2,10,2),
+            decoration: BoxDecoration(
+              color:Colors.black12,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: TextField(
+              controller: emailController,
+              cursorColor: Colors.black,
+              textInputAction: TextInputAction.next,
+              decoration: InputDecoration(hintText: "E-mail", border: InputBorder.none),
+            ),
           ),
-          SizedBox(height: 4),
-          TextField(
-            controller: passwordController,
-            textInputAction: TextInputAction.done,
-            decoration: InputDecoration(labelText: "Heslo"),
-            obscureText: true,
+          SizedBox(height: 12),
+          Container(
+            padding: EdgeInsets.fromLTRB(10,2,10,2),
+            decoration: BoxDecoration(
+              color:Colors.black12,
+              borderRadius: BorderRadius.circular(30),
+            ),
+            child: TextField(
+              controller: passwordController,
+              textInputAction: TextInputAction.done,
+              cursorColor: Colors.black,
+              decoration: InputDecoration(hintText: "Heslo", border: InputBorder.none),
+              obscureText: true,
+            ),
           ),
           SizedBox(height: 20),
-          ElevatedButton.icon(
-            style: ElevatedButton.styleFrom(
-              minimumSize: Size.fromHeight(50),
+          Container(
+            height: 50,
+            width: 350,
+            decoration: BoxDecoration(
+              color: Colors.red[900],
+              borderRadius: BorderRadius.circular(50),
             ),
-            icon: Icon(Icons.lock_open,size: 32),
-            label: Text(
-              "Sign in",
-              style: TextStyle(fontSize: 24),
+            child: TextButton(
+              style: TextButton.styleFrom( shape: StadiumBorder()),
+              child: Text(
+                "Prihlásiť sa",
+                style: TextStyle(color: Colors.white,fontSize: 24),
+              ),
+              onPressed: signIn,
             ),
-            onPressed: signIn,
           ),
-          SizedBox(height: 24),
-          GestureDetector(
+          SizedBox(height: 36),
+          TextButton(
             child: Text(
               "Zabudli ste heslo?",
               style: TextStyle(
-                decoration: TextDecoration.underline,
-                color: Theme.of(context).colorScheme.background,
+                color: Colors.red[800],
                 fontSize: 20,
               ),
             ),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ForgotPasswordPage())),
+            onPressed: () => Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ForgotPasswordPage())),
           ),
         ],
       ),
