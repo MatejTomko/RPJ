@@ -289,7 +289,6 @@ class _domovPagePredOdberomPlazmyState extends State<domovPagePredOdberomPlazmy>
                                       ),
                                     ),
                                   ),
-
                                 ],
                               ),
                             ],
@@ -297,15 +296,11 @@ class _domovPagePredOdberomPlazmyState extends State<domovPagePredOdberomPlazmy>
                         )
                     ),
                   ),
-
-
-
                 ],
               ),
             ),
           ),
         )
-
     );
   }
 }

@@ -96,15 +96,15 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
             label:"Domov",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
-            label: "Terminy",
+            icon: Icon(Icons.calendar_month_outlined),
+            label: "Termíny",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.help),
             label: "Odbery",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.help),
+            icon: Icon(Icons.person),
             label: "Darca",
           ),
           BottomNavigationBarItem(

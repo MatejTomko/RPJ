@@ -180,19 +180,26 @@ class napisteNamOdosielanieState extends State<napisteNamOdosielanie>{
                     ),
                     child: Row(
                       children: [
-                        Text(
-                          "Správa: ",
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
+                        Container(
+                          child: Text(
+                            "Správa: ",
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                        Text(
-                          _nam.sprava,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black,
+                        Expanded(
+                          child: Container(
+                            padding: const EdgeInsets.all(5.0),
+                            child: Text(
+                              _nam.sprava,
+                              style: TextStyle(
+                                fontSize: 18,
+                                color: Colors.black,
+                              ),
+                            ),
                           ),
                         ),
                       ],
@@ -205,21 +212,23 @@ class napisteNamOdosielanieState extends State<napisteNamOdosielanie>{
                       color:Colors.black12,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: FormBuilderTextField(
-                      name:"Odpoveď",
-                      controller: _controllerodpoved,
-                      cursorColor: Colors.black12,
-                      decoration: const InputDecoration(
-                        icon: const Icon(Icons.question_answer),
-                        hintText: 'Odpoveď',
-                        border: InputBorder.none,
+                    child: Expanded(
+                      child: FormBuilderTextField(
+                        name:"Odpoveď",
+                        controller: _controllerodpoved,
+                        cursorColor: Colors.black12,
+                        decoration: const InputDecoration(
+                          icon: const Icon(Icons.question_answer),
+                          hintText: 'Odpoveď',
+                          border: InputBorder.none,
+                        ),
+                        validator: (value) {
+                          if (value!.isEmpty) {
+                            return 'Prosím zadajte odpoveď';
+                          }
+                          return null;
+                        },
                       ),
-                      validator: (value) {
-                        if (value!.isEmpty) {
-                          return 'Prosím zadajte odpoveď';
-                        }
-                        return null;
-                      },
                     ),
                   ),
                   SizedBox(height: 20),
