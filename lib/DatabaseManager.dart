@@ -268,6 +268,26 @@ class DatabaseManager{
     }
   }
 
+  Future getNapisteNamList2() async{
+    List itemsList=[];
+    List itemsListId=[];
+    List returnovat=[];
+
+    try{
+      await napisteNamList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+        itemsListId.add(element.id);
+      })
+      );
+      returnovat.add(itemsList);
+      returnovat.add(itemsListId);
+      return returnovat;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
+
 
   Future<void> createRezervaciaData(
       String datum,idDarca,oc,typ,vybavene,cas) async {

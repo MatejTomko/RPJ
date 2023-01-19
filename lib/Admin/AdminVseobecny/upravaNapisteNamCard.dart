@@ -1,5 +1,6 @@
 import 'package:blood_app/Admin/AdminVseobecny/editaciaOtazka.dart';
 import 'package:blood_app/Admin/AdminVseobecny/napisteNam.dart';
+import 'package:blood_app/Admin/AdminVseobecny/napisteNamOdosielanie.dart';
 import 'package:blood_app/Navstevnik/Lieky/lieky.dart';
 import 'package:blood_app/Navstevnik/Otazky/otazky.dart';
 import 'package:flutter/cupertino.dart';
@@ -8,8 +9,9 @@ import '../../Darca/Odber/odber.dart';
 
 class upravaNapisteNamCard extends StatelessWidget {
   final napisteNam _napisteNam;
+  final String _napisteNamId;
 
-  upravaNapisteNamCard(this._napisteNam);
+  upravaNapisteNamCard(this._napisteNam,this._napisteNamId);
 
   @override
   Widget build(BuildContext context) {
@@ -88,12 +90,12 @@ class upravaNapisteNamCard extends StatelessWidget {
               ],
             ),
           ),
-          /*onTap: (){
+          onTap: (){
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => ));
-          },*/
+                    builder: (context) => napisteNamOdosielanie(_napisteNam, _napisteNamId) ));
+          },
         ),
 
 

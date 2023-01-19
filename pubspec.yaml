@@ -53,6 +53,7 @@ dependencies:
   f_datetimerangepicker: ^0.2.0
   restart_app: ^1.1.0+1
   flutter_phoenix: ^1.1.0
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:

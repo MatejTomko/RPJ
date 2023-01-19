@@ -27,6 +27,7 @@ class zobrazovanieNapisteNamPage extends StatefulWidget {
 
 class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage> {
   List userNapisteNamList = [];
+  List userNapisteNamListId = [];
 
   @override
   void initState() {
@@ -37,13 +38,14 @@ class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage>
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
-    dynamic resultant = await databaseManager.getNapisteNamList();
+    dynamic resultant = await databaseManager.getNapisteNamList2();
     if(resultant==null){
       print('Unable to retrieve');
     }else{
       setState(() {
-        for(var i=0;i< resultant.length;i++){
-          userNapisteNamList.add(resultant[i]);
+        for(var i=0;i< resultant[0].length;i++){
+          userNapisteNamList.add(resultant[0][i]);
+          userNapisteNamListId.add(resultant[1][i]);
         }
       });
     }
@@ -68,7 +70,7 @@ class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage>
                   itemCount: userNapisteNamList.length,
                   itemBuilder:(context, index) {
                     napisteNam nm=new napisteNam(userNapisteNamList[index]['email'], userNapisteNamList[index]['menopriezvisko'], userNapisteNamList[index]['oblast'], userNapisteNamList[index]['sprava']);
-                    return upravaNapisteNamCard(nm);
+                    return upravaNapisteNamCard(nm,userNapisteNamListId[index]);
                   }),
             ),
           ],
