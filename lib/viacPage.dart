@@ -35,17 +35,19 @@ class _viacPageState extends State<viacPage> {
           backgroundColor: Colors.red[900],
         ),
       body: Container(
-        margin: EdgeInsets.fromLTRB(20,10,20,10),
-        height: 490,
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Container(
-          margin: EdgeInsets.fromLTRB(15,10,20,10),
+        margin: EdgeInsets.fromLTRB(15,30,15,10),
+        height: MediaQuery.of(context).size.height*0.56,
+        child: Card(
+          elevation: 2,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15)
+          ),
           child: Column(
             children: [
-              GestureDetector(
+              InkWell(
+                customBorder: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topRight: Radius.circular(15),topLeft: Radius.circular(15)),
+                ),
                 onTap: () async {
                   Navigator.push(
                       context,
@@ -53,25 +55,192 @@ class _viacPageState extends State<viacPage> {
                           builder: (context) => ocPage())
                   );
                 },
-                child: Row(
-                  mainAxisSize: MainAxisSize.max,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.fromLTRB(20,20,20,10),
-                      child: Text(
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/hospital-oc.png", scale: 4.5),
+                      Text(
                           "Odberné centrá",
                         style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w500,
                         ),
                       ),
-                    ),
-                    Icon(Icons.keyboard_arrow_right, color: Colors.red[800]),
-                  ],
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
                 ),
               ),
-              Divider(),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => oceneniaPage())
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/medal.png", scale: 4.25),
+                      Text(
+                        "Ocenenia za darovanie",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => benefityPage())
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/increase.png", scale: 4.25),
+                      Text(
+                        "Benefity pre darcov",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => liekyPage())
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/drugs.png", scale: 4.25),
+                      Text(
+                        "Darovanie krvi pri užívaní liekov",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => otazkyPage())
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/faq.png", scale: 4.25),
+                      Text(
+                        "FAQ",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => napisteNamPage())
+                  );
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(20,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/contact-us.png", scale: 4.25),
+                      Text(
+                        "Napíšte nám",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              InkWell(
+                onTap: () async{
+                  FirebaseAuth.instance.signOut();
+                  SystemNavigator.pop();
+                },
+                child: Container(
+                  padding: EdgeInsets.fromLTRB(25,15,20,15),
+                  alignment: Alignment.center,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Image.asset("assets/logout.png", scale: 4.5),
+                      Text(
+                        "Odhlásiť sa",
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      Icon(Icons.keyboard_arrow_right, color: Colors.red[800], size: 25),
+                    ],
+                  ),
+                ),
+              ),
+              Divider(height: 5),
+              /*Divider(),
               GestureDetector(
                 onTap: () async {
                   Navigator.push(
@@ -230,7 +399,7 @@ class _viacPageState extends State<viacPage> {
                   ],
                 ),
               ),
-              Divider(),
+              Divider(),*/
 
             ],
           ),
