@@ -39,6 +39,13 @@ class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage>
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
+    userNapisteNamListMed = [];
+    userNapisteNamListMedId = [];
+    userNapisteNamListTec = [];
+    userNapisteNamListTecId = [];
+    userNapisteNamListIne = [];
+    userNapisteNamListIneId = [];
+
     dynamic resultant = await databaseManager.getNapisteNamList2();
     if(resultant==null){
       print('Unable to retrieve');
@@ -58,6 +65,11 @@ class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage>
         }
       });
     }
+  }
+
+  Future<void>_loadResources(bool reload) async{
+
+    fetchDatabaseList();
   }
 
 
@@ -98,36 +110,51 @@ class _zobrazovanieNapisteNamPageState extends State<zobrazovanieNapisteNamPage>
         controller: tabController,
           children: [
             Container(
-              child: SafeArea(
-              child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: userNapisteNamListMed.length,
-                  itemBuilder:(context, index) {
-                    napisteNam nm=new napisteNam(userNapisteNamListMed[index]['email'], userNapisteNamListMed[index]['menopriezvisko'], userNapisteNamListMed[index]['oblast'], userNapisteNamListMed[index]['sprava']);
-                    return upravaNapisteNamCard(nm,userNapisteNamListMedId[index]);
-                  }),
-            ),
-            ),
-            Container(
-              child: SafeArea(
+              child: RefreshIndicator(
+                onRefresh: () async{
+                  await _loadResources(true);
+                },
+                child: SafeArea(
                 child: ListView.builder(
                     shrinkWrap: true,
-                    itemCount: userNapisteNamListTec.length,
+                    itemCount: userNapisteNamListMed.length,
                     itemBuilder:(context, index) {
-                      napisteNam nm=new napisteNam(userNapisteNamListTec[index]['email'], userNapisteNamListTec[index]['menopriezvisko'], userNapisteNamListTec[index]['oblast'], userNapisteNamListTec[index]['sprava']);
-                      return upravaNapisteNamCard(nm,userNapisteNamListTecId[index]);
+                      napisteNam nm=new napisteNam(userNapisteNamListMed[index]['email'], userNapisteNamListMed[index]['menopriezvisko'], userNapisteNamListMed[index]['oblast'], userNapisteNamListMed[index]['sprava']);
+                      return upravaNapisteNamCard(nm,userNapisteNamListMedId[index]);
                     }),
+            ),
               ),
             ),
             Container(
-              child: SafeArea(
-                child: ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: userNapisteNamListIne.length,
-                    itemBuilder:(context, index) {
-                      napisteNam nm=new napisteNam(userNapisteNamListIne[index]['email'], userNapisteNamListIne[index]['menopriezvisko'], userNapisteNamListIne[index]['oblast'], userNapisteNamListIne[index]['sprava']);
-                      return upravaNapisteNamCard(nm,userNapisteNamListIneId[index]);
-                    }),
+              child: RefreshIndicator(
+                onRefresh: () async{
+                  await _loadResources(true);
+                },
+                child: SafeArea(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: userNapisteNamListTec.length,
+                      itemBuilder:(context, index) {
+                        napisteNam nm=new napisteNam(userNapisteNamListTec[index]['email'], userNapisteNamListTec[index]['menopriezvisko'], userNapisteNamListTec[index]['oblast'], userNapisteNamListTec[index]['sprava']);
+                        return upravaNapisteNamCard(nm,userNapisteNamListTecId[index]);
+                      }),
+                ),
+              ),
+            ),
+            Container(
+              child: RefreshIndicator(
+                onRefresh: () async{
+                  await _loadResources(true);
+                },
+                child: SafeArea(
+                  child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: userNapisteNamListIne.length,
+                      itemBuilder:(context, index) {
+                        napisteNam nm=new napisteNam(userNapisteNamListIne[index]['email'], userNapisteNamListIne[index]['menopriezvisko'], userNapisteNamListIne[index]['oblast'], userNapisteNamListIne[index]['sprava']);
+                        return upravaNapisteNamCard(nm,userNapisteNamListIneId[index]);
+                      }),
+                ),
               ),
             ),
           ],

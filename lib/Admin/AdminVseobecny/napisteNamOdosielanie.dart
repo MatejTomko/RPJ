@@ -242,7 +242,7 @@ class napisteNamOdosielanieState extends State<napisteNamOdosielanie>{
                         shape: StadiumBorder(),
                       ),
                       onPressed: () async{
-                        if(_controllerodpoved.text!=null ){
+                        if(_controllerodpoved.text!= null ){
 
                           sendEmail(name: _meno, email: _email, subject: _sprava, message: _controllerodpoved.text);
                           _controllerodpoved.clear();
@@ -274,6 +274,8 @@ class napisteNamOdosielanieState extends State<napisteNamOdosielanie>{
                       onPressed: () async{
                         await FirebaseFirestore.instance.collection("NapisteNam").doc(_namId).delete();
                         Utils.showSnackBar("Otázka vymazaná");
+                        Navigator.pop(context);
+                        
                         //TODO
                         //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
                       },

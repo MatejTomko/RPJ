@@ -69,7 +69,7 @@ class _SignupWidgetState extends State<SignupWidget>{
             colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.red[600],secondary: Colors.grey),
             primarySwatch: Colors.red,
           ),
-        child:SingleChildScrollView(
+        child: SingleChildScrollView(
           padding: EdgeInsets.all(16),
           child: Form(
             key: formKey,

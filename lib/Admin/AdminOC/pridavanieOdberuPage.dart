@@ -116,7 +116,10 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
   DatabaseManager databaseManager=new DatabaseManager();
 
+
   fetchDatabaseList() async{
+    userOdberyList= [];
+    userOdberyListid=[];
 
     List resulty=await databaseManager.getOdberList2();
     resultant = resulty[0];
@@ -142,6 +145,12 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
 
   }
+
+  Future<void>_loadResources(bool reload) async{
+
+    fetchDatabaseList();
+  }
+
   String _dropDownValueTypOdberu = "";
 
 
@@ -654,64 +663,69 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
               //prvy widget v tomto je prvy tab a druhy je druhy
               Container(
-                child: Expanded(
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: TextField(
-                          onChanged: (value) {
-                          },
-                          controller: _controllerVyhladavanie,
-                          decoration: const InputDecoration(
-                            labelText: "",
-                            hintText: "Vyhľadaj Odber podľa ID darcu",
-                            prefixIcon: Icon(Icons.search),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                child: RefreshIndicator(
+                  onRefresh: () async {
+                    await _loadResources(true);
+                  },
+                  child: Expanded(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: TextField(
+                            onChanged: (value) {
+                            },
+                            controller: _controllerVyhladavanie,
+                            decoration: const InputDecoration(
+                              labelText: "",
+                              hintText: "Vyhľadaj Odber podľa ID darcu",
+                              prefixIcon: Icon(Icons.search),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 50,
-                        width: 100,
-                        decoration: BoxDecoration(
-                          color: Colors.red[900],
-                          borderRadius: BorderRadius.circular(50),
-                        ),
-                        child: TextButton(
-                          onPressed: (){
-                            vyrazHladaj=_controllerVyhladavanie.text;
-                            if(vyrazHladaj.length>2){
-                              fetchDatabaseList();
-                            }else{
-                              Utils.showSnackBar("Minimálne 3 znaky!");
-                            }
-                          },
-                          style: TextButton.styleFrom(
-                            shape: const StadiumBorder(
-                              side: BorderSide(color: Color.fromRGBO(183, 28, 28, 1), style: BorderStyle.solid),
+                        Container(
+                          height: 50,
+                          width: 100,
+                          decoration: BoxDecoration(
+                            color: Colors.red[900],
+                            borderRadius: BorderRadius.circular(50),
+                          ),
+                          child: TextButton(
+                            onPressed: (){
+                              vyrazHladaj=_controllerVyhladavanie.text;
+                              if(vyrazHladaj.length>2){
+                                fetchDatabaseList();
+                              }else{
+                                Utils.showSnackBar("Minimálne 3 znaky!");
+                              }
+                            },
+                            style: TextButton.styleFrom(
+                              shape: const StadiumBorder(
+                                side: BorderSide(color: Color.fromRGBO(183, 28, 28, 1), style: BorderStyle.solid),
+                              ),
+                            ),
+                            child: const Text(
+                              "Hľadaj",
+                              style: TextStyle(color: Colors.white,fontSize: 25),
                             ),
                           ),
-                          child: const Text(
-                            "Hľadaj",
-                            style: TextStyle(color: Colors.white,fontSize: 25),
-                          ),
                         ),
-                      ),
 
-                      Expanded(
-                        child: ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: userOdberyList.length,
-                            itemBuilder:(context, index) {
-                              print(userOdberyList[index]);
-                              odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'],userOdberyList[index]['typ'],userOdberyList[index]['autoodber'],userOdberyList[index]['komplikacia'],userOdberyList[index]['koniec'],userOdberyList[index]['tlakkrvi'],userOdberyList[index]['vyjazd'],userOdberyList[index]['zaciatok'],userOdberyList[index]['trvanie']);
-                              return OdberCardVyhladavanie(odb1,userOdberyListid[index].toString());
-                            }),
-                      ),
-                    ],
+                        Expanded(
+                          child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: userOdberyList.length,
+                              itemBuilder:(context, index) {
+                                print(userOdberyList[index]);
+                                odber odb1=new odber(userOdberyList[index]['idDarca'],userOdberyList[index]['mnozstvo'],userOdberyList[index]['datum'],userOdberyList[index]['typ'],userOdberyList[index]['autoodber'],userOdberyList[index]['komplikacia'],userOdberyList[index]['koniec'],userOdberyList[index]['tlakkrvi'],userOdberyList[index]['vyjazd'],userOdberyList[index]['zaciatok'],userOdberyList[index]['trvanie']);
+                                return OdberCardVyhladavanie(odb1,userOdberyListid[index].toString());
+                              }),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),

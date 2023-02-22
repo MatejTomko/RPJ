@@ -313,8 +313,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                           //_controllerdatum.clear();
                           Utils.showSnackBar("Mobilna OC updatnutá");
                         }
-                        //TODO
-                        //hotovo by Matej
+
                         Navigator.pop(context);
                       },
                       child: const Text(
@@ -342,6 +341,8 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                         Utils.showSnackBar("Mobilna OC vymazaná");
                         //TODO
                         //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
+
+                        Navigator.pop(context);
                       },
                       child: const Text(
                         "Vymaž OC",

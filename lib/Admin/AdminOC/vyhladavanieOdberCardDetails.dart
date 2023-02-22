@@ -738,6 +738,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                   });
                                   Utils.showSnackBar("Odber upravený");
                                 }
+                                Navigator.pop(context);
                               },
                               child: const Text(
                                 "Upraviť",
@@ -765,6 +766,7 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                 Utils.showSnackBar("Odber vymazaný");
                                 //TODO
                                 //Navigator.pushNamed(context, "/pridavanieodberupage");
+                                Navigator.pop(context);
                               },
                               child: const Text(
                                 "Vymaž Odber",

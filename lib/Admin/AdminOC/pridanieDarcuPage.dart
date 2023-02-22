@@ -287,7 +287,6 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                   String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
                                       length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
                                   _controlleriddarca.text=getRandomString(10);
-
                                   //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
                                   var db=FirebaseFirestore.instance.collection("Darca").add({
                                     "adresa":_controlleradresa.text,
@@ -308,8 +307,6 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                                   _controllermeno.clear();
                                   _controllerpriezvisko.clear();
                                   _controllerrodnecislo.clear();
-
-
                                   Utils.showSnackBar("Darca pridaný");
                                 }
                               },

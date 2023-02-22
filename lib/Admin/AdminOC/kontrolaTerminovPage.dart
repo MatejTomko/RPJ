@@ -42,6 +42,14 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> with Single
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
+    userRezervaciaListKrv=[];
+    userRezervaciaListPlazma=[];
+    userRezervaciaListDosticky=[];
+    userDarcaList=[];
+    userRezervaciaListIdKrv=[];
+    userRezervaciaListIdPlazma=[];
+    userRezervaciaListIdDosticky=[];
+
     dynamic resultant = await databaseManager.getRezervaciaList2();
     if(resultant==null){
       print('Unable to retrieve');
@@ -76,6 +84,11 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> with Single
       });
     }
 
+  }
+
+  Future<void>_loadResources(bool reload) async{
+
+    fetchDatabaseList();
   }
 
   @override
@@ -115,53 +128,68 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> with Single
         children: [
           //prvy tab
           Container(
-            child: SafeArea(
-              child: ListView.builder(
-                  itemCount: userRezervaciaListKrv.length,
-                  itemBuilder:(context, index) {
-                    String meno="";
-                    for(var i=0;i<userDarcaList.length;i++){
-                      if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListKrv[index]['idDarca'].toString()){
-                        meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+            child: RefreshIndicator(
+              onRefresh: () async {
+                await _loadResources(true);
+              },
+              child: SafeArea(
+                child: ListView.builder(
+                    itemCount: userRezervaciaListKrv.length,
+                    itemBuilder:(context, index) {
+                      String meno="";
+                      for(var i=0;i<userDarcaList.length;i++){
+                        if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListKrv[index]['idDarca'].toString()){
+                          meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+                        }
                       }
-                    }
-                    rezervacia rz=new rezervacia(userRezervaciaListKrv[index]['idDarca'].toString(), userRezervaciaListKrv[index]['oc'], userRezervaciaListKrv[index]['datum'],meno,userRezervaciaListKrv[index]['typ'],userRezervaciaListKrv[index]['vybavene'],userRezervaciaListKrv[index]['cas']);
-                    return RezervaciaCard(rz,userRezervaciaListIdKrv[index]);
-                  }) ,
+                      rezervacia rz=new rezervacia(userRezervaciaListKrv[index]['idDarca'].toString(), userRezervaciaListKrv[index]['oc'], userRezervaciaListKrv[index]['datum'],meno,userRezervaciaListKrv[index]['typ'],userRezervaciaListKrv[index]['vybavene'],userRezervaciaListKrv[index]['cas']);
+                      return RezervaciaCard(rz,userRezervaciaListIdKrv[index]);
+                    }) ,
+              ),
             ),
           ),
           //druhy tab
           Container(
-            child: SafeArea(
-              child: ListView.builder(
-                  itemCount: userRezervaciaListPlazma.length,
-                  itemBuilder:(context, index) {
-                    String meno="";
-                    for(var i=0;i<userDarcaList.length;i++){
-                      if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListPlazma[index]['idDarca'].toString()){
-                        meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+            child: RefreshIndicator(
+              onRefresh: () async{
+                await _loadResources(true);
+              },
+              child: SafeArea(
+                child: ListView.builder(
+                    itemCount: userRezervaciaListPlazma.length,
+                    itemBuilder:(context, index) {
+                      String meno="";
+                      for(var i=0;i<userDarcaList.length;i++){
+                        if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListPlazma[index]['idDarca'].toString()){
+                          meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+                        }
                       }
-                    }
-                    rezervacia rz=new rezervacia(userRezervaciaListPlazma[index]['idDarca'].toString(), userRezervaciaListPlazma[index]['oc'], userRezervaciaListPlazma[index]['datum'],meno,userRezervaciaListPlazma[index]['typ'],userRezervaciaListPlazma[index]['vybavene'],userRezervaciaListPlazma[index]['cas']);
-                    return RezervaciaCard(rz,userRezervaciaListIdPlazma[index]);
-                  }) ,
+                      rezervacia rz=new rezervacia(userRezervaciaListPlazma[index]['idDarca'].toString(), userRezervaciaListPlazma[index]['oc'], userRezervaciaListPlazma[index]['datum'],meno,userRezervaciaListPlazma[index]['typ'],userRezervaciaListPlazma[index]['vybavene'],userRezervaciaListPlazma[index]['cas']);
+                      return RezervaciaCard(rz,userRezervaciaListIdPlazma[index]);
+                    }) ,
+              ),
             ),
           ),
           //treti tab
           Container(
-            child: SafeArea(
-              child: ListView.builder(
-                  itemCount: userRezervaciaListDosticky.length,
-                  itemBuilder:(context, index) {
-                    String meno="";
-                    for(var i=0;i<userDarcaList.length;i++){
-                      if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListDosticky[index]['idDarca'].toString()){
-                        meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+            child: RefreshIndicator(
+              onRefresh: () async{
+                await _loadResources(true);
+              },
+              child: SafeArea(
+                child: ListView.builder(
+                    itemCount: userRezervaciaListDosticky.length,
+                    itemBuilder:(context, index) {
+                      String meno="";
+                      for(var i=0;i<userDarcaList.length;i++){
+                        if(userDarcaList[i]['idDarca'].toString()==userRezervaciaListDosticky[index]['idDarca'].toString()){
+                          meno=userDarcaList[i]['meno']+" "+userDarcaList[i]['priezvisko'];
+                        }
                       }
-                    }
-                    rezervacia rz=new rezervacia(userRezervaciaListDosticky[index]['idDarca'].toString(), userRezervaciaListDosticky[index]['oc'], userRezervaciaListDosticky[index]['datum'],meno,userRezervaciaListDosticky[index]['typ'],userRezervaciaListDosticky[index]['vybavene'],userRezervaciaListDosticky[index]['cas']);
-                    return RezervaciaCard(rz,userRezervaciaListIdDosticky[index]);
-                  }) ,
+                      rezervacia rz=new rezervacia(userRezervaciaListDosticky[index]['idDarca'].toString(), userRezervaciaListDosticky[index]['oc'], userRezervaciaListDosticky[index]['datum'],meno,userRezervaciaListDosticky[index]['typ'],userRezervaciaListDosticky[index]['vybavene'],userRezervaciaListDosticky[index]['cas']);
+                      return RezervaciaCard(rz,userRezervaciaListIdDosticky[index]);
+                    }) ,
+              ),
             ),
           ),
         ],

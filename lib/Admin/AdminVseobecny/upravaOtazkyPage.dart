@@ -74,6 +74,8 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
+    userOtazkyId=[];
+    userOtazky=[];
 
     resultantOtz = await databaseManager.getOtazkyist();
     resultantOtzId = await databaseManager.getOtazkyListId();
@@ -89,6 +91,11 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
       });
     }
 
+  }
+
+  Future<void>_loadResources(bool reload) async{
+
+    fetchDatabaseList();
   }
 
   @override
@@ -227,13 +234,18 @@ class _upravaOtazkyState extends State<upravaOtazkyPage> with SingleTickerProvid
               ),
               //prvy widget v tomto je prvy tab a druhy je druhy
               Container(
-                child: Expanded(
-                  child: ListView.builder(
-                      itemCount: userOtazky.length,
-                      itemBuilder:(context, index) {
-                        otazky otazky1=new otazky(userOtazky[index]['odpoved'], userOtazky[index]['otazka']);
-                        return upravaOtazkyCard(otazky1, userOtazkyId[index]);
-                      }),
+                child: RefreshIndicator(
+                  onRefresh: () async{
+                    await _loadResources(true);
+                  },
+                  child: Expanded(
+                    child: ListView.builder(
+                        itemCount: userOtazky.length,
+                        itemBuilder:(context, index) {
+                          otazky otazky1=new otazky(userOtazky[index]['odpoved'], userOtazky[index]['otazka']);
+                          return upravaOtazkyCard(otazky1, userOtazkyId[index]);
+                        }),
+                  ),
                 ),
               ),
             ],
