@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
+import 'package:czech/czech.dart' as cz;
 
 //TODO overovanie rodneho cisla
 class pridanieDarcuPage extends StatefulWidget{
@@ -282,32 +283,42 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                               ),
                               onPressed: () async{
                                 if(_formKey.currentState!.validate() ){
-                                  const _chars = '1234567890';
-                                  Random _rnd = Random();
-                                  String getRandomString(int length) => String.fromCharCodes(Iterable.generate(
-                                      length, (_) => _chars.codeUnitAt(_rnd.nextInt(_chars.length))));
-                                  _controlleriddarca.text=getRandomString(10);
-                                  //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
-                                  var db=FirebaseFirestore.instance.collection("Darca").add({
-                                    "adresa":_controlleradresa.text,
-                                    "idDarca":_controlleriddarca.text,
-                                    "email":"-",
-                                    "krvnaskupina":_controllerkrvnaskupina.text,
-                                    "meno":_controllermeno.text,
-                                    "priezvisko":_controllerpriezvisko.text,
-                                    "rodnecislo":_controllerrodnecislo.text,
+                                  if(cz.isCzechPersonalIdNumber(_controllerrodnecislo.text)) {
+                                    const _chars = '1234567890';
+                                    Random _rnd = Random();
+                                    String getRandomString(int length) =>
+                                        String.fromCharCodes(Iterable.generate(
+                                            length, (_) =>
+                                            _chars.codeUnitAt(
+                                                _rnd.nextInt(_chars.length))));
+                                    _controlleriddarca.text =
+                                        getRandomString(10);
+                                    //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
+                                    var db = FirebaseFirestore.instance
+                                        .collection("Darca").add({
+                                      "adresa": _controlleradresa.text,
+                                      "idDarca": _controlleriddarca.text,
+                                      "email": "-",
+                                      "krvnaskupina": _controllerkrvnaskupina
+                                          .text,
+                                      "meno": _controllermeno.text,
+                                      "priezvisko": _controllerpriezvisko.text,
+                                      "rodnecislo": _controllerrodnecislo.text,
 
-                                  });
+                                    });
 
-                                  _controlleradresa.clear();
-                                  //_controlleremail.clear();
-                                  _controlleriddarca.clear();
-                                  _controlleradresa.clear();
-                                  _controllerkrvnaskupina.clear();
-                                  _controllermeno.clear();
-                                  _controllerpriezvisko.clear();
-                                  _controllerrodnecislo.clear();
-                                  Utils.showSnackBar("Darca pridaný");
+                                    _controlleradresa.clear();
+                                    //_controlleremail.clear();
+                                    _controlleriddarca.clear();
+                                    _controlleradresa.clear();
+                                    _controllerkrvnaskupina.clear();
+                                    _controllermeno.clear();
+                                    _controllerpriezvisko.clear();
+                                    _controllerrodnecislo.clear();
+                                    Utils.showSnackBar("Darca pridaný");
+                                  }else{
+                                    Utils.showSnackBar("Neplatné/zaregistrované rodné číslo ");
+                                  }
                                 }
                               },
                               child: const Text(

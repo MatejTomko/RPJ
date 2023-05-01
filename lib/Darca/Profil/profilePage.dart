@@ -54,6 +54,7 @@ class _profilePageState extends State<profilePage> {
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
+  String profilovka="assets/avatar.png";
 
   fetchDatabaseList() async{
     dynamic resultant = await databaseManager.getDarcaList();
@@ -98,46 +99,90 @@ class _profilePageState extends State<profilePage> {
       });
     }
     zachraneneZivoty=pocetOdberov*3;
-    if(pocetOdberov<10){
-      plaketa1=0;
-      plaketa2=10;
-      int pomocny=pocetOdberov-plaketa1;
-      int pomocny2=plaketa2-plaketa1;
-      percent=1.0*pomocny/pomocny2;
-    }else if(pocetOdberov>=10 && pocetOdberov<20){
-      plaketa1=10;
-      plaketa2=20;
-      int pomocny=pocetOdberov-plaketa1;
-      int pomocny2=plaketa2-plaketa1;
-      percent=1.0*pomocny/pomocny2;
-    }else if(pocetOdberov>=20 && pocetOdberov<40){
-      plaketa1=20;
-      plaketa2=40;
-      int pomocny=pocetOdberov-plaketa1;
-      int pomocny2=plaketa2-plaketa1;
-      percent=1.0*pomocny/pomocny2;
-    }else if(pocetOdberov>=40 && pocetOdberov<80){
-      plaketa1=40;
-      plaketa2=80;
-      int pomocny=pocetOdberov-plaketa1;
-      int pomocny2=plaketa2-plaketa1;
-      percent=1.0*pomocny/pomocny2;
-    }else if(pocetOdberov>=80 && pocetOdberov<100){
-      plaketa1=80;
-      plaketa2=100;
-      int pomocny=pocetOdberov-plaketa1;
-      int pomocny2=plaketa2-plaketa1;
-      percent=1.0*pomocny/pomocny2;
-    }else if(pocetOdberov>=100){
-      plaketa1=100;
-      plaketa2=100;
-      percent=1.0;
-      //TODO urobit inak
+    String gender=user.idDarca[2];
+    print(gender);
+    if(gender=="0"||gender=="1") {
+      profilovka="assets/avatar.png";
+      if (pocetOdberov < 10) {
+        plaketa1 = 0;
+        plaketa2 = 10;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 10 && pocetOdberov < 20) {
+        plaketa1 = 10;
+        plaketa2 = 20;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 20 && pocetOdberov < 40) {
+        plaketa1 = 20;
+        plaketa2 = 40;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 40 && pocetOdberov < 80) {
+        plaketa1 = 40;
+        plaketa2 = 80;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 80 && pocetOdberov < 100) {
+        plaketa1 = 80;
+        plaketa2 = 100;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 100) {
+        plaketa1 = 100;
+        plaketa2 = 100;
+        percent = 1.0;
+        //TODO urobit inak
+      }
+      user.pocetodberov = this.pocetOdberov.toString();
+      pl1 = plaketa1.toString();
+      pl2 = plaketa2.toString();
+    }else{
+      profilovka="assets/womanavatar.png";
+      if (pocetOdberov < 10) {
+        plaketa1 = 0;
+        plaketa2 = 10;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 10 && pocetOdberov < 20) {
+        plaketa1 = 10;
+        plaketa2 = 20;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 20 && pocetOdberov < 30) {
+        plaketa1 = 20;
+        plaketa2 = 30;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 30 && pocetOdberov < 60) {
+        plaketa1 = 30;
+        plaketa2 = 60;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 60 && pocetOdberov < 80) {
+        plaketa1 = 60;
+        plaketa2 = 80;
+        int pomocny = pocetOdberov - plaketa1;
+        int pomocny2 = plaketa2 - plaketa1;
+        percent = 1.0 * pomocny / pomocny2;
+      } else if (pocetOdberov >= 80) {
+        plaketa1 = 80;
+        plaketa2 = 80;
+        percent = 1.0;
+      }
+      user.pocetodberov = this.pocetOdberov.toString();
+      pl1 = plaketa1.toString();
+      pl2 = plaketa2.toString();
     }
-    user.pocetodberov=this.pocetOdberov.toString();
-    pl1=plaketa1.toString();
-    pl2=plaketa2.toString();
-    //TODO TOTO JE NA MUZOV HORE, UROBIT AJ PRE ZENY!!
 
 
     dynamic resultant3 = await databaseManager.getRezervaciaList();
@@ -171,7 +216,7 @@ class _profilePageState extends State<profilePage> {
           children: [
             const SizedBox(height: 10),
             const CircleAvatar(
-              backgroundImage: AssetImage("assets/avatar.png"),
+              backgroundImage: AssetImage("assets/avatar.png"), //tu treba dat nech je profilovka zena/muz
               radius: 40.0,
             ),
             Text(
