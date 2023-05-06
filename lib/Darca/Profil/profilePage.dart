@@ -19,6 +19,7 @@ class profilePage extends StatefulWidget {
   State<profilePage> createState() => _profilePageState();
 }
 
+
 class _profilePageState extends State<profilePage> {
   //document IDs
   String docIds = "";
@@ -45,6 +46,7 @@ class _profilePageState extends State<profilePage> {
   double percent=0.0;
   String pl1="";
   String pl2="";
+  String profilovka="";
 
   @override
   void initState() {
@@ -54,7 +56,6 @@ class _profilePageState extends State<profilePage> {
   }
 
   DatabaseManager databaseManager=new DatabaseManager();
-  String profilovka="assets/avatar.png";
 
   fetchDatabaseList() async{
     dynamic resultant = await databaseManager.getDarcaList();
@@ -102,7 +103,7 @@ class _profilePageState extends State<profilePage> {
     String gender=user.idDarca[2];
     print(gender);
     if(gender=="0"||gender=="1") {
-      profilovka="assets/avatar.png";
+      profilovka="m";
       if (pocetOdberov < 10) {
         plaketa1 = 0;
         plaketa2 = 10;
@@ -143,7 +144,7 @@ class _profilePageState extends State<profilePage> {
       pl1 = plaketa1.toString();
       pl2 = plaketa2.toString();
     }else{
-      profilovka="assets/womanavatar.png";
+      profilovka="w";
       if (pocetOdberov < 10) {
         plaketa1 = 0;
         plaketa2 = 10;
@@ -215,8 +216,9 @@ class _profilePageState extends State<profilePage> {
         child: Column(
           children: [
             const SizedBox(height: 10),
-            const CircleAvatar(
-              backgroundImage: AssetImage("assets/avatar.png"), //tu treba dat nech je profilovka zena/muz
+            CircleAvatar(
+              backgroundImage: profilovka=="m" ? AssetImage("assets/avatar.png") : AssetImage("assets/womanavatar.png"), //tu treba dat nech je profilovka zena/muz
+
               radius: 40.0,
             ),
             Text(
