@@ -10,6 +10,7 @@ import 'package:blood_app/Darca/Profil/darca.dart';
 import 'package:blood_app/main.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 class profilePage extends StatefulWidget {
@@ -206,298 +207,298 @@ class _profilePageState extends State<profilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profil darcu"),
-        backgroundColor: Colors.red[900],
-      ),
-      body:
-      Padding(
-        padding: const EdgeInsets.all(1.0),
-        child: Column(
-          children: [
-            const SizedBox(height: 10),
-            CircleAvatar(
-              backgroundImage: profilovka=="m" ? AssetImage("assets/avatar.png") : AssetImage("assets/womanavatar.png"), //tu treba dat nech je profilovka zena/muz
+        appBar: AppBar(
+          title: Text("Profil darcu"),
+          backgroundColor: Colors.red[900],
+        ),
+        body:
+        Padding(
+          padding: const EdgeInsets.all(1.0),
+          child: Column(
+            children: [
+              const SizedBox(height: 10),
+              CircleAvatar(
+                backgroundImage: profilovka=="m" ? AssetImage("assets/avatar.png") : AssetImage("assets/womanavatar.png"), //tu treba dat nech je profilovka zena/muz
 
-              radius: 40.0,
-            ),
-            Text(
-              '${user.meno} ${user.priezvisko}',
-              style: const TextStyle(
-                letterSpacing: 1.5,
-                fontSize: 24.0,
-                fontWeight: FontWeight.bold,
+                radius: 40.0,
               ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15,20,15,5),
-              padding: EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                //border: Border.all(color: Colors.black54),
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey.shade100,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.shade300,
-                    spreadRadius: 1.5,
-                    blurStyle: BlurStyle.normal,
-                    //blurRadius: 1,
-                  ),
-                ],
+              Text(
+                '${user.meno} ${user.priezvisko}',
+                style: const TextStyle(
+                  letterSpacing: 1.5,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Image(
-                          width: 32,
-                          image: AssetImage("assets/heart_beat.png"),
-                          color: Colors.red[700],
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                            '$zachraneneZivoty',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red[700],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          'Zachránené životy',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade500,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Image(
-                          width: 32,
-                          image: AssetImage("assets/blood_drop.png"),
-                          color: Colors.red[700],
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          '${user.krvnaskupina}',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red[700],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          'Krvná skupina',
-                          style: TextStyle(
-                            fontSize:14,
-                            color: Colors.grey.shade500,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  Container(
-                    child: Column(
-                      children: [
-                        Image(
-                          width: 32,
-                          image: AssetImage("assets/blood_bag.png"),
-                          color: Colors.red[700],
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          '$pocetOdberov',
-                          style: TextStyle(
-                            fontSize: 20,
-                            color: Colors.red[700],
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        SizedBox(height: 3),
-                        Text(
-                          'Počet odberov',
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.grey.shade500,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: const EdgeInsets.all(15.0),
-              padding: const EdgeInsets.fromLTRB(0,10,0,20),
-              decoration: BoxDecoration(
-                //border: Border.all(color: Colors.black54),
-                borderRadius: BorderRadius.circular(12),
-                color: Colors.grey.shade100,
-                boxShadow: [
-                  BoxShadow(
+              Container(
+                margin: EdgeInsets.fromLTRB(15,20,15,5),
+                padding: EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  //border: Border.all(color: Colors.black54),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey.shade100,
+                  boxShadow: [
+                    BoxShadow(
                       color: Colors.grey.shade300,
                       spreadRadius: 1.5,
                       blurStyle: BlurStyle.normal,
                       //blurRadius: 1,
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(25,0,0,0),
-                    child: Text(
-                      "Cesta k plakete: ",
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black54,
+                    ),
+                  ],
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Image(
+                            width: 32,
+                            image: AssetImage("assets/heart_beat.png"),
+                            color: Colors.red[700],
+                          ),
+                          SizedBox(height: 3),
+                          Text(
+                            '$zachraneneZivoty',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 3),
+                          Text(
+                            'Zachránené životy',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade500,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                  Container(
-                    padding: EdgeInsets.fromLTRB(15,5,15,0),
-                    child:LinearPercentIndicator(
-                      width: MediaQuery.of(context).size.width - 80,
-                      animation: true,
-                      animationDuration: 1200,
-                      lineHeight: 12.0,
-                      percent: percent,
-                      backgroundColor: Colors.grey[300],
-                      progressColor: Colors.red[800],
-                      barRadius: Radius.circular(12),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.fromLTRB(24,0,35,0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          pl1,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black54,
+                    Container(
+                      child: Column(
+                        children: [
+                          Image(
+                            width: 32,
+                            image: AssetImage("assets/blood_drop.png"),
+                            color: Colors.red[700],
                           ),
-                        ),
-                        Text(
-                          pl2,
-                          style: TextStyle(
-                            fontSize: 18,
-                            color: Colors.black54,
+                          SizedBox(height: 3),
+                          Text(
+                            '${user.krvnaskupina}',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.fromLTRB(15,0,15,0),
-              child: Row(
-                children: [
-                  Expanded(
-                    child: Container(
-                      height: 100,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey.shade100,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => preukazDarcu(user) ));
-                        },
-                        icon: const Icon(
-                          Icons.add_card_sharp,
-                          size: 32,
-                          color: Colors.black,
-                        ),
-                        label: const Text(
-                            "Karta darcu",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.bold,
+                          SizedBox(height: 3),
+                          Text(
+                            'Krvná skupina',
+                            style: TextStyle(
+                              fontSize:14,
+                              color: Colors.grey.shade500,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                     ),
-                  ),
-                  SizedBox(width: 10),
-                  Expanded(
-                    child: Container(
-                      height: 100,
-                      child: ElevatedButton.icon(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.grey.shade100,
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => odberObjednanie() ));
-                        },
-                        icon: const Icon(
-                          Icons.contact_mail,
-                          size: 32,
-                          color: Colors.black,
-                        ),
-                        label: const Text(
-                            "Rezervácia termínu",
-                          style: TextStyle(
-                            color: Colors.black54,
-                            fontWeight: FontWeight.bold,
+                    Container(
+                      child: Column(
+                        children: [
+                          Image(
+                            width: 32,
+                            image: AssetImage("assets/blood_bag.png"),
+                            color: Colors.red[700],
                           ),
-                        ),
+                          SizedBox(height: 3),
+                          Text(
+                            '$pocetOdberov',
+                            style: TextStyle(
+                              fontSize: 20,
+                              color: Colors.red[700],
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(height: 3),
+                          Text(
+                            'Počet odberov',
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.grey.shade500,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  )
-                ],
-              ),
-            ),
-            
-            Container(
-              alignment: Alignment.centerLeft,
-              margin: EdgeInsets.only(left: 10),
-              padding: EdgeInsets.fromLTRB(5,10,0,0),
-              child: Text("Moje termíny",
-                style: TextStyle(
-                    fontSize: 20,
-                  fontWeight: FontWeight.w500,
+                  ],
                 ),
               ),
-            ),
-            Expanded(child: ListView.builder(
-                itemCount: userRezervaciaList.length,
-                itemBuilder:(context, index) {
-                  String meno=user.meno+" "+user.priezvisko;
-                  rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'],meno,userRezervaciaList[index]['typ'],userRezervaciaList[index]['vybavene'],userRezervaciaList[index]['cas']);
-                  return RezervaciaCardUser(rz);
-                }
-            ),
-            )
-          ],
+              Container(
+                margin: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.fromLTRB(0,10,0,20),
+                decoration: BoxDecoration(
+                  //border: Border.all(color: Colors.black54),
+                  borderRadius: BorderRadius.circular(12),
+                  color: Colors.grey.shade100,
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      spreadRadius: 1.5,
+                      blurStyle: BlurStyle.normal,
+                      //blurRadius: 1,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.fromLTRB(25,0,0,0),
+                      child: Text(
+                        "Cesta k plakete: ",
+                        style: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                      ),
+                    ),
+                    Container(
+                      padding: EdgeInsets.fromLTRB(15,5,15,0),
+                      child:LinearPercentIndicator(
+                        width: MediaQuery.of(context).size.width - 80,
+                        animation: true,
+                        animationDuration: 1200,
+                        lineHeight: 12.0,
+                        percent: percent,
+                        backgroundColor: Colors.grey[300],
+                        progressColor: Colors.red[800],
+                        barRadius: Radius.circular(12),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(24,0,35,0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            pl1,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
+                          ),
+                          Text(
+                            pl2,
+                            style: TextStyle(
+                              fontSize: 18,
+                              color: Colors.black54,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                margin: EdgeInsets.fromLTRB(15,0,15,0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey.shade100,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => preukazDarcu(user) ));
+                          },
+                          icon: const Icon(
+                            Icons.add_card_sharp,
+                            size: 32,
+                            color: Colors.black,
+                          ),
+                          label: const Text(
+                            "Karta darcu",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    SizedBox(width: 10),
+                    Expanded(
+                      child: Container(
+                        height: 100,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.grey.shade100,
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => odberObjednanie() ));
+                          },
+                          icon: const Icon(
+                            Icons.contact_mail,
+                            size: 32,
+                            color: Colors.black,
+                          ),
+                          label: const Text(
+                            "Rezervácia termínu",
+                            style: TextStyle(
+                              color: Colors.black54,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              ),
 
-        ),
+              Container(
+                alignment: Alignment.centerLeft,
+                margin: EdgeInsets.only(left: 10),
+                padding: EdgeInsets.fromLTRB(5,10,0,0),
+                child: Text("Moje termíny",
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+              ),
+              Expanded(child: ListView.builder(
+                  itemCount: userRezervaciaList.length,
+                  itemBuilder:(context, index) {
+                    String meno=user.meno+" "+user.priezvisko;
+                    rezervacia rz=new rezervacia(userRezervaciaList[index]['idDarca'].toString(), userRezervaciaList[index]['oc'], userRezervaciaList[index]['datum'],meno,userRezervaciaList[index]['typ'],userRezervaciaList[index]['vybavene'],userRezervaciaList[index]['cas']);
+                    return RezervaciaCardUser(rz);
+                  }
+              ),
+              )
+            ],
+
+          ),
 
 
 
-      )
+        )
     );
   }
 }

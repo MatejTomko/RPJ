@@ -98,7 +98,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     // otazkyPage(),
 
   ];
-  int _selectedIndex= 1;
+  int _selectedIndex= 0;
 
   void _navigateBottomBar(int index){
     setState(() {

@@ -2,9 +2,12 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:blood_app/Autentifikacia/Utils.dart';
+import 'package:blood_app/Constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -21,6 +24,7 @@ class poslanieNotifikaciePage extends StatefulWidget{
   State<poslanieNotifikaciePage> createState() => _poslanieNotifikaciePageState();
 
 }
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin=FlutterLocalNotificationsPlugin();
 
 Future sendEmail({
   required String name,
@@ -58,7 +62,7 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
   var _controllerkrvnaskupina=TextEditingController();
   String? token=" ";
   List UserDarcaList=[];
-
+  List UserNotifikaciaList=[];
 
   DatabaseManager databaseManager=new DatabaseManager();
 
@@ -74,6 +78,9 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
         }
       });
     }
+
+    dynamic resultant2 = await databaseManager.getNotifikovanieList();
+    UserNotifikaciaList=resultant2[0];
   }
 
 
@@ -190,10 +197,21 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
                               });*/
                               //_controllerkrvnaskupina.clear();
                               //FirebaseMessaging messaging = FirebaseMessaging.instance;
+
                               for(var i=0;i<UserDarcaList.length;i++){
                                 if(UserDarcaList[i]['krvnaskupina']==_controllerkrvnaskupina.text){
                                   String meno=UserDarcaList[i]['meno']+" "+UserDarcaList[i]['priezvisko'];
                                   sendEmail(name: meno, email: UserDarcaList[i]['email'], message: UserDarcaList[i]['krvnaskupina']);
+                                }
+                              }
+                              for(var i=0;i<UserNotifikaciaList.length;i++){
+                                if(UserNotifikaciaList[i]['skupina']==_controllerkrvnaskupina.text) {
+                                  print('ANOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo');
+                                  pushNotificationsSpecificDevice(
+                                      token: UserNotifikaciaList[i]['token'],
+                                      title: "test",
+                                      body: "test",
+                                  );
                                 }
                               }
                               Utils.showSnackBar("Notifikácia odoslaná");
@@ -224,6 +242,27 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
 
         )
     );
+  }
+  
+  Future<bool> pushNotificationsSpecificDevice({
+    required String token,
+    required String title,
+    required String body,
+  }) async{
+    String dataNotifications='{ "to" : "$token",'
+        '"notification" : {'
+        ' "title":"$title",'
+        '"body":"$body"'
+        '}'
+        '}';
+    await http.post(Uri.parse(Constants.BASE_URL),
+      headers: <String,String>{
+        'Content-Type':'application/json',
+        'Authorization':'key=${Constants.KEY_SERVER}',
+      },
+      body: dataNotifications,
+    );
+    return true;
   }
 
 }

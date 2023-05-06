@@ -12,8 +12,36 @@ class DatabaseManager{
   final CollectionReference otazkyList = FirebaseFirestore.instance.collection('Otazky');
   final CollectionReference napisteNamList = FirebaseFirestore.instance.collection('NapisteNam');
   final CollectionReference rezervaciaList = FirebaseFirestore.instance.collection('Rezervacia');
+  final CollectionReference NotifikovanieList = FirebaseFirestore.instance.collection('Notifikovanie');
 
 
+  Future<void> createNotifikovanieData(
+      String skupina,token,email) async {
+    return await NotifikovanieList.doc().set({
+      'skupina':skupina,
+      'token':token,
+      'email':token,
+    });
+  }
+
+  Future getNotifikovanieList() async{
+    List itemsList=[];
+    List id=[];
+    List returnovat=[];
+    try{
+      await NotifikovanieList.get().then((snapshot) => snapshot.docs.forEach((element) {
+        itemsList.add(element.data());
+        id.add([element.id]);
+      })
+      );
+      returnovat.add(itemsList);
+      returnovat.add(id);
+      return returnovat;
+    }catch(e){
+      print(e.toString());
+      return null;
+    }
+  }
 
 
   Future<void> createDarcaData(
