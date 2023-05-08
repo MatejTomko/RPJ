@@ -54,6 +54,7 @@ Future main() async {
     route="/";
   }
   runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
     scaffoldMessengerKey: Utils.messengerKey,
     navigatorKey: navigatorKey,
     initialRoute: route,
