@@ -8,6 +8,8 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:czech/czech.dart' as cz;
 
+import '../../DatabaseManager.dart';
+
 //TODO overovanie rodneho cisla
 class pridanieDarcuPage extends StatefulWidget{
   const pridanieDarcuPage({Key? key}) : super(key: key);
@@ -33,6 +35,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
 
   @override
   void initState() {
+    fetchDatabaseList();
     super.initState();
     _controlleradresa.addListener(() {
       final String text = _controlleradresa.text;
@@ -76,6 +79,22 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
         text: text,
       );
     });
+  }
+
+  DatabaseManager databaseManager=new DatabaseManager();
+  List rodnecisla=[];
+
+  fetchDatabaseList() async{
+    dynamic resultant = await databaseManager.getDarcaList();
+    if(resultant==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        for(var i=0;i< resultant.length;i++){
+          rodnecisla.add(resultant[i]['rodnecislo']);
+        }
+      });
+    }
   }
 
   @override
@@ -283,7 +302,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                               ),
                               onPressed: () async{
                                 if(_formKey.currentState!.validate() ){
-                                  if(cz.isCzechPersonalIdNumber(_controllerrodnecislo.text)) {
+                                  if(cz.isCzechPersonalIdNumber(_controllerrodnecislo.text) || rodnecisla.contains(_controllerrodnecislo.text)) {
                                     const _chars = '1234567890';
                                     Random _rnd = Random();
                                     String getRandomString(int length) =>

@@ -206,11 +206,11 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
                               }
                               for(var i=0;i<UserNotifikaciaList.length;i++){
                                 if(UserNotifikaciaList[i]['skupina']==_controllerkrvnaskupina.text) {
-                                  print('ANOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOo');
                                   pushNotificationsSpecificDevice(
                                       token: UserNotifikaciaList[i]['token'],
-                                      title: "test",
-                                      body: "test",
+                                      title: "Potrebná krv",
+                                      body: "Evidujeme nedostatok krvi, ak môžete prihláste sa na odber.Ďakujeme!",
+                                      url: "https://cdn-icons-png.flaticon.com/512/205/205916.png",
                                   );
                                 }
                               }
@@ -248,11 +248,13 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
     required String token,
     required String title,
     required String body,
+    required String url,
   }) async{
     String dataNotifications='{ "to" : "$token",'
         '"notification" : {'
         ' "title":"$title",'
         '"body":"$body"'
+        '"image":"$url"'
         '}'
         '}';
     await http.post(Uri.parse(Constants.BASE_URL),

@@ -7,10 +7,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:f_datetimerangepicker/f_datetimerangepicker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
-
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import '../../DatabaseManager.dart';
 
 class pridavanieOdberuPage extends StatefulWidget {
@@ -30,6 +31,7 @@ class MyScrollBehaviour extends ScrollBehavior{
 }
 
 class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with SingleTickerProviderStateMixin{
+
   final _formKey = GlobalKey<FormBuilderState>();
 
   var _controllerautoodber=TextEditingController();
@@ -46,7 +48,10 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   var _controllerTrvanieOdberu = TextEditingController();
 
 
+
   var _controllerVyhladavanie=TextEditingController();
+
+  String? scanResult;
   String vyrazHladaj="";
 
   String _autoodber="";
@@ -116,6 +121,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
 
   DatabaseManager databaseManager=new DatabaseManager();
 
+  List ideckaDarcoch=[];
+
 
   fetchDatabaseList() async{
     userOdberyList= [];
@@ -138,6 +145,17 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
         }
         if(userOdberyList.length==0){
           Utils.showSnackBar("Žiaden výsledok");
+        }
+      });
+    }
+
+    dynamic resultant2 = await databaseManager.getDarcaList();
+    if(resultant2==null){
+      print('Unable to retrieve');
+    }else{
+      setState(() {
+        for(var i=0;i< resultant2.length;i++){
+          ideckaDarcoch.add(resultant2[i]['idDarca']);
         }
       });
     }
@@ -223,6 +241,28 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                               }
                               return null;
                             },
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Container(
+                          height: 50,
+                          width: 250,
+                          child: TextButton(
+                            style:  TextButton.styleFrom(
+                              foregroundColor: Colors.red[100],
+                              backgroundColor: Colors.red[900],
+                              shape: StadiumBorder(),
+                            ),
+                            onPressed: () async{
+                              await scanBarcode();
+                              if(scanResult!=""){
+                                _controlleridDarca.text=scanResult!;
+                              }
+                            },
+                            child: const Text(
+                              "Scanuj",
+                              style: TextStyle(color: Colors.white,fontSize: 25),
+                            ),
                           ),
                         ),
                         SizedBox(height: 10),
@@ -605,7 +645,7 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                               shape: StadiumBorder(),
                             ),
                             onPressed: () async{
-                              if(_formKey.currentState!.validate() ){
+                              if(_formKey.currentState!.validate() && ideckaDarcoch.contains(_controlleridDarca.text)){
 
                                 /*if(_controllerdatum.text==""){
                                   String a=DateTime.now().toString().split(" ")[0];
@@ -639,6 +679,8 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                                 _controllertyp.clear();
                                 Utils.showSnackBar("Odber pridaný");
 
+                              }else{
+                                Utils.showSnackBar("Údaje niesu v poriadku");
                               }
                             },
                             child: const Text(
@@ -733,5 +775,19 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
           ),
         )
     );
+  }
+
+  Future scanBarcode() async {
+    String scanResult="";
+    try {
+      scanResult = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.BARCODE);
+    }on PlatformException{
+
+    }
+    if(!mounted) return;
+
+    setState(()=> this.scanResult=scanResult);
+
   }
 }
