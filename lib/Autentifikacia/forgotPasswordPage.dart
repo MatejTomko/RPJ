@@ -103,8 +103,23 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage>{
 
       Utils.showSnackBar("Email na obnovenie heslá bol odoslaný");
     } on FirebaseAuthException catch (e){
-      print(e);
-      Utils.showSnackBar(e.message);
+      print(e.message);
+      switch(e.message){
+        case "Given String is empty or null":
+          Utils.showSnackBar("Vypĺnte všetky políčka!");
+          break;
+        case "The email address is badly formatted.":
+          Utils.showSnackBar("Zlý format emailu!");
+          break;
+        case "There is no user record corresponding to this identifier. The user may have been deleted.":
+          Utils.showSnackBar("Neexistujúci používatel!");
+          break;
+        case "The password is invalid or the user does not have a password.":
+          Utils.showSnackBar("Zlý email alebo heslo!");
+          break;
+        default:
+          Utils.showSnackBar(e.message);
+      }
     }
 
     //navigatorKey.currentState!.popUntil((route) => route.isFirst); //TODO dorobi nech neukazuje ten showdialog

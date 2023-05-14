@@ -75,11 +75,13 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
   dynamic resultant;
   dynamic resultantid;
 
+  bool isImageEnabled=false;
 
 
   @override
   void initState() {
     super.initState();
+    fetchDatabaseList2();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
     _controlleridDarca.addListener(() {
       final String text = _controlleridDarca.text;
@@ -144,24 +146,29 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
           }
         }
         if(userOdberyList.length==0){
+          isImageEnabled=true;
           Utils.showSnackBar("Žiaden výsledok");
+        }else{
+          isImageEnabled=false;
         }
       });
     }
 
+  }
+
+  fetchDatabaseList2() async{
     dynamic resultant2 = await databaseManager.getDarcaList();
     if(resultant2==null){
       print('Unable to retrieve');
     }else{
       setState(() {
+        print(resultant2.length);
         for(var i=0;i< resultant2.length;i++){
+
           ideckaDarcoch.add(resultant2[i]['idDarca']);
         }
       });
     }
-
-
-
   }
 
   Future<void>_loadResources(bool reload) async{
@@ -409,6 +416,12 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
                                 lastDate: DateTime(2101),
+                                  builder: (context, child) {
+                                    return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
+                                      primary: Colors.red,
+                                    )),
+                                        child: child!);
+                                  },
                                 selectableDayPredicate: (DateTime date){
                                   return true;
                                 },
@@ -645,13 +658,16 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                               shape: StadiumBorder(),
                             ),
                             onPressed: () async{
-                              if(_formKey.currentState!.validate() && ideckaDarcoch.contains(_controlleridDarca.text)){
+                              print(ideckaDarcoch);
+                                if(_formKey.currentState!.validate() && ideckaDarcoch.contains(_controlleridDarca.text)){
 
                                 /*if(_controllerdatum.text==""){
                                   String a=DateTime.now().toString().split(" ")[0];
                                   _controllerdatum.text=a;
                                 }*/
                                 //var id=FirebaseFirestore.instance.collection("MobilneOC").where("id",whereIn:;
+                                  _zaciatok=_controllerTrvanieOdberu.text.split("-")[0].trim();
+                                  _koniec=_controllerTrvanieOdberu.text.split("-")[1].trim();
                                 var db=FirebaseFirestore.instance.collection("Odber").add({
                                   "datum":_controllerdatum.text,
                                   "idDarca":_controlleridDarca.text,
@@ -754,6 +770,11 @@ class _pridavanieOdberuPageState extends State<pridavanieOdberuPage> with Single
                               style: TextStyle(color: Colors.white,fontSize: 25),
                             ),
                           ),
+                        ),
+                        SizedBox(height: 10,),
+                        Center(
+                          child:
+                          isImageEnabled ? Image.asset("assets/no_result2.png",height: 128,width: 128,): SizedBox(height: 0,),
                         ),
 
                         Expanded(

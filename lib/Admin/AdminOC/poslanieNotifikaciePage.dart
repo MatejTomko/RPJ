@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:math';
 
@@ -65,6 +66,29 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
   List UserNotifikaciaList=[];
 
   DatabaseManager databaseManager=new DatabaseManager();
+  bool _isButtonDisabled = false;
+  late Timer _timer;
+  int _currentTimeValue=0;
+  int _timerDuration=600;
+
+  void _onButtonPressed(){
+    if(!_isButtonDisabled){
+      setState(() {
+        _isButtonDisabled=true;
+      });
+      _timer=Timer.periodic(Duration(seconds: 1), (timer) {
+        setState(() {
+          if(_currentTimeValue<_timerDuration){
+            _currentTimeValue++;
+          }else{
+            _isButtonDisabled=false;
+            _timer.cancel();
+          }
+        });
+      });
+
+    }
+  }
 
   fetchDatabaseList() async{
     dynamic resultant = await databaseManager.getDarcaList();
@@ -83,7 +107,11 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
     UserNotifikaciaList=resultant2[0];
   }
 
-
+  @override
+  void dispose(){
+    _timer.cancel();
+    super.dispose();
+  }
 
 
   @override
@@ -184,13 +212,13 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
                         height: 50,
                         width: 250,
                         child: TextButton(
-                          style:  TextButton.styleFrom(
+                          style:  !_isButtonDisabled? TextButton.styleFrom(
                             foregroundColor: Colors.red[100],
                             backgroundColor: Colors.red[900],
                             shape: StadiumBorder(),
-                          ),
+                          ): TextButton.styleFrom(foregroundColor: Colors.black12, backgroundColor: Colors.black26,shape: StadiumBorder()),
                           onPressed: () async{
-                            if(_formKey.currentState!.validate() ){
+                            if(_formKey.currentState!.validate() && _isButtonDisabled==false ){
 
                               /*var db=FirebaseFirestore.instance.collection("Darca").add({
                                 "krvnaskupina":_controllerkrvnaskupina.text,
@@ -214,6 +242,7 @@ class _poslanieNotifikaciePageState extends State<poslanieNotifikaciePage> {
                                   );
                                 }
                               }
+                              _onButtonPressed();
                               Utils.showSnackBar("Notifikácia odoslaná");
                             }
                           },

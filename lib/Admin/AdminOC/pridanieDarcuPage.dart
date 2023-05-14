@@ -302,7 +302,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                               ),
                               onPressed: () async{
                                 if(_formKey.currentState!.validate() ){
-                                  if(cz.isCzechPersonalIdNumber(_controllerrodnecislo.text) || rodnecisla.contains(_controllerrodnecislo.text)) {
+                                  if(cz.isCzechPersonalIdNumber(_controllerrodnecislo.text) && !(rodnecisla.contains(_controllerrodnecislo.text))) {
                                     const _chars = '1234567890';
                                     Random _rnd = Random();
                                     String getRandomString(int length) =>
@@ -328,7 +328,7 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
 
                                     _controlleradresa.clear();
                                     //_controlleremail.clear();
-                                    _controlleriddarca.clear();
+                                    //_controlleriddarca.clear();
                                     _controlleradresa.clear();
                                     _controllerkrvnaskupina.clear();
                                     _controllermeno.clear();
@@ -347,9 +347,17 @@ class _pridanieDarcuPageState extends State<pridanieDarcuPage> {
                             ),
                           ),
                           const SizedBox(
-                            height: 130,
+                            height: 40,
                           ),
-
+                          TextField(
+                            enabled: false,
+                            controller: _controlleriddarca,
+                            decoration: const InputDecoration(
+                              icon: const Icon(Icons.person_outline),
+                              hintText: 'ID zaregistrovaného darcu',
+                              border: InputBorder.none,
+                            ),
+                          )
                         ],
                       ),
                     ),

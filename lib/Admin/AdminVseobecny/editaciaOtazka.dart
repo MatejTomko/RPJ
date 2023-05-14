@@ -9,8 +9,6 @@ import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
 
-//TODO nech to posunie to upravaOtazkyPage po updatnuti
-//TODO nech ked zadavame daco tak nech to nepreskakju vzdy na prve miesto v inpute
 
 class editaciaOtazka extends StatefulWidget{
   final otazky _otazky;

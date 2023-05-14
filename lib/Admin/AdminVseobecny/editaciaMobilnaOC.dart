@@ -13,9 +13,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:blood_app/Navstevnik/Odberove%20centra/kamennaOC.dart';
 import 'package:blood_app/main.dart';
+import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:intl/intl.dart';
 
-//TODO DANEK ked stlacim spat tak to da na prihlasovaciu obrazovku - opravit
 
 //toto je ked kliknes na vyjazdove odbery oc presov
 class editaciaMobilnaOC extends StatefulWidget{
@@ -51,12 +51,31 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
   var _controllerlng=TextEditingController();
   var _controlleroc=TextEditingController();
 
+
   @override
   void initState() {
     super.initState();
     _controllermiesto.addListener(() {
       final String text = _miesto;
       _controllermiesto.text = _controllermiesto.value.copyWith(
+        text: text,
+      ) as String;
+    });
+    _controllercas.addListener(() {
+      final String text = _cas;
+      _controllercas.text = _controllercas.value.copyWith(
+        text: text,
+      ) as String;
+    });
+    _controllerlat.addListener(() {
+      final String text = _lat;
+      _controllerlat.text = _controllerlat.value.copyWith(
+        text: text,
+      ) as String;
+    });
+    _controllerlng.addListener(() {
+      final String text = _lng;
+      _controllerlng.text = _controllerlng.value.copyWith(
         text: text,
       ) as String;
     });
@@ -110,23 +129,24 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       color:Colors.black12,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: TextFormField(
+                    child: FormBuilderTextField(
                       controller: _controllermiesto,
+                      cursorColor: Colors.black12,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.home),
                         hintText: 'Názov',
                         border: InputBorder.none,
                       ),
-                      onChanged: ((value){
-                        _miesto=value;
-                        _controllermiesto.text=_miesto;
-                      }),
+                      /*onChanged: ((value){
+                        _miesto=value!;
+                        _controllermiesto.text=value;
+                      }),*/
                       validator: (value) {
                         if (value!.isEmpty || value == null || value.isEmpty) {
                           return 'Prosím zadajte názov';
                         }
                         return null;
-                      },
+                      }, name: 'Miesto',
                     ),
                   ),
                   SizedBox(height: 10),
@@ -136,23 +156,25 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       color:Colors.black12,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: TextFormField(
+                    child: FormBuilderTextField(
                       controller: _controllercas,
+                      cursorColor: Colors.black12,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.timelapse_outlined),
                         hintText: 'Čas',
                         border: InputBorder.none,
                       ),
-                      onChanged: ((value) {
-                              _cas =value;
-                              _controllercas.text=value;
-                      }),
+                      /*onChanged: ((value) {
+
+                        _cas =value!;
+                        _controllercas.text=value;
+                      }),*/
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Prosím zadajte čas';
                         }
                         return null;
-                      },
+                      }, name: 'Čas',
                     ),
                   ),
                   SizedBox(height: 10),
@@ -162,24 +184,25 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       color:Colors.black12,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: TextFormField(
+                    child: FormBuilderTextField(
                       controller: _controllerlat,
+                      cursorColor: Colors.black12,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.place),
                         hintText: 'Miesto na mapach Lat',
                         labelText: 'Lat',
                         border: InputBorder.none,
                       ),
-                      onChanged: ((value) {
-                        _lat=value;
-                        _controllerlat.text=_lat;
-                      }),
+                      /*onChanged: ((value) {
+                        _lat=value!;
+                        _controllerlat.text=value;
+                      }),*/
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Prosím zadajte lokáciu';
                         }
                         return null;
-                      },
+                      }, name: 'Lat',
                     ),
                   ),
                   SizedBox(height: 10),
@@ -189,24 +212,25 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                       color:Colors.black12,
                       borderRadius: BorderRadius.circular(30),
                     ),
-                    child: TextFormField(
+                    child: FormBuilderTextField(
                       controller: _controllerlng,
+                      cursorColor: Colors.black12,
                       decoration: const InputDecoration(
                         icon: const Icon(Icons.place),
                         hintText: 'Miesto na mapach Lng',
                         labelText: 'Lng',
                         border: InputBorder.none,
                       ),
-                      onChanged: ((value) {
-                        _lng=value;
-                        _controllerlng.text=_lng;
-                      }),
+                      /*onChanged: ((value) {
+                        _lng=value!;
+                        _controllerlng.text=value;
+                      }),*/
                       validator: (value) {
                         if (value!.isEmpty) {
                           return 'Prosím zadajte lokáciu';
                         }
                         return null;
-                      },
+                      }, name: 'Lng',
                     ),
                   ),
                   SizedBox(height: 10),
@@ -266,6 +290,12 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                           initialDate: DateTime.now(),
                           firstDate: DateTime.now(),
                           lastDate: DateTime(2101),
+                          builder: (context, child) {
+                            return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
+                              primary: Colors.red,
+                            )),
+                                child: child!);
+                          },
                           selectableDayPredicate: (DateTime date){
                             return true;
                           },
@@ -314,7 +344,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                           Utils.showSnackBar("Mobilna OC updatnutá");
                         }
 
-                        Navigator.pop(context);
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                       },
                       child: const Text(
                         "Update",
@@ -342,7 +372,7 @@ class editaciaMobilnaOCState extends State<editaciaMobilnaOC>{
                         //TODO
                         //Navigator.pushNamed(context, "/upravaMobilnaOCPage");
 
-                        Navigator.pop(context);
+                        Navigator.of(context).popUntil((route) => route.isFirst);
                       },
                       child: const Text(
                         "Vymaž OC",

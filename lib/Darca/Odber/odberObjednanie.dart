@@ -1,3 +1,4 @@
+import 'package:blood_app/Admin/AdminOC/pridanieDarcuPage.dart';
 import 'package:blood_app/Autentifikacia/Utils.dart';
 import 'package:blood_app/DatabaseManager.dart';
 import 'package:blood_app/main.dart';
@@ -6,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
+import 'package:flutter_material_pickers/flutter_material_pickers.dart';
 import 'package:form_builder_validators/form_builder_validators.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 class odberObjednanie extends StatefulWidget {
 
@@ -20,7 +23,6 @@ class odberObjednanie extends StatefulWidget {
 class odberObjednanieState extends State<odberObjednanie> {
   final _formKey = GlobalKey<FormBuilderState>();
 
-  int _idDarca=1000;
   var _controllerdatum=TextEditingController();
   var _controllercas=TextEditingController();
 
@@ -90,6 +92,59 @@ class odberObjednanieState extends State<odberObjednanie> {
     super.initState();
   }
 
+  static const List<StateModel> casy=<StateModel>[
+    StateModel("6:00"),
+    StateModel("6:10"),
+    StateModel("6:20"),
+    StateModel("6:30"),
+    StateModel("6:40"),
+    StateModel("6:50"),
+    StateModel("7:00"),
+    StateModel("7:10"),
+    StateModel("7:20"),
+    StateModel("7:30"),
+    StateModel("7:40"),
+    StateModel("7:50"),
+    StateModel("8:00"),
+    StateModel("8:10"),
+    StateModel("8:20"),
+    StateModel("8:30"),
+    StateModel("8:40"),
+    StateModel("8:50"),
+    StateModel("9:00"),
+    StateModel("9:10"),
+    StateModel("9:20"),
+    StateModel("9:30"),
+    StateModel("9:40"),
+    StateModel("9:50"),
+    StateModel("10:00"),
+    StateModel("10:10"),
+    StateModel("10:20"),
+    StateModel("10:30"),
+    StateModel("10:40"),
+    StateModel("10:50"),
+    StateModel("11:00"),
+    StateModel("11:10"),
+    StateModel("11:20"),
+    StateModel("11:30"),
+    StateModel("11:40"),
+    StateModel("11:50"),
+    StateModel("12:00"),
+    StateModel("12:10"),
+    StateModel("12:20"),
+    StateModel("12:30"),
+    StateModel("12:40"),
+    StateModel("12:50"),
+    StateModel("13:00"),
+    StateModel("13:10"),
+    StateModel("13:20"),
+    StateModel("13:30"),
+    StateModel("13:40"),
+    StateModel("13:50"),
+  ];
+
+  StateModel selectedCas=casy[0];
+
 
   CollectionReference rezervaciaDb=FirebaseFirestore.instance.collection('Rezervacia');
   @override
@@ -134,10 +189,16 @@ class odberObjednanieState extends State<odberObjednanie> {
                         context: context,
                         initialDate: DateTime.now(),
                         firstDate: DateTime.now(),
-                        lastDate: DateTime(2101),
+                        lastDate: DateTime.now().add(Duration(days: 14)),
                         selectableDayPredicate: (DateTime date){
-                          return true;
+                            return (date.weekday !=1 && date.weekday !=7 ); //TODO
                         },
+                        builder: (context, child) {
+                          return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
+                            primary: Colors.red,
+                              )),
+                              child: child!);
+                        }
                       );
                       if (zvolenyDatum != null) {
                         String formattedDate = DateFormat('dd.MM.yyyy').format(zvolenyDatum);
@@ -230,7 +291,7 @@ class odberObjednanieState extends State<odberObjednanie> {
                       border: InputBorder.none,
                       suffixIcon: IconButton(
                         onPressed: (){
-                          DateTimeRangePicker(
+                          /*DateTimeRangePicker(
                               startText: "Od",
                               doneText: "Potvrdiť",
                               cancelText: "Zrušiť",
@@ -243,7 +304,19 @@ class odberObjednanieState extends State<odberObjednanie> {
                                 DateFormat dateFormat = DateFormat("dd.MM.yyyy HH:mm");
                                 _controllercas.text = dateFormat.format(start);
                                 _cas=start.toString();
-                              }).showPicker(context);
+                              }).showPicker(context);*/
+                          showMaterialScrollPicker(context: context,
+                              buttonTextColor: Colors.red,
+                              headerColor: Colors.red,
+                              title: "Vyberte si čas",
+                              items: casy,
+                              selectedItem: selectedCas,
+                          onChanged: (value) => setState(() {
+                            selectedCas=value;
+                            _cas=value.toString();
+                            _controllercas.text=selectedCas.toString();
+                            DateFormat dateFormat = DateFormat("dd.MM.yyyy HH:mm");
+                          }));
                         },
                         icon: Icon(Icons.access_time_outlined),
                       ),
@@ -264,14 +337,15 @@ class odberObjednanieState extends State<odberObjednanie> {
                     ),
                     onPressed: () async{
                       if(rezevaciePocet==0 && DateTime.now().difference(date).inDays>90) {
-                        if (_formKey.currentState!.validate()) {
+                        if (_datum!= "" || _dropDownValue2!="" || _dropDownValue!="" || _cas!="") {
+                          _datum=_datum.split(" ")[0];
                           await rezervaciaDb.add({
                             'oc': _dropDownValue,
-                            'idDarca': _idDarca,
+                            'idDarca': idDarcu,
                             'datum': _datum,
                             'cas': _cas,
                             'typ': _dropDownValue2,
-                            'vybavene': "nie",
+                            'vybavene': "Nie",
                           }).then((value) => print('Rezervacia odoslaná'));
                           _controllerdatum.clear();
                           Utils.showSnackBar("Rezervácia odoslaná");
@@ -297,5 +371,13 @@ class odberObjednanieState extends State<odberObjednanie> {
     ),
     );
   }
+}
+
+class StateModel{
+  const StateModel(this.cas);
+  final String cas;
+
+  @override
+  String toString() => cas;
 }
 

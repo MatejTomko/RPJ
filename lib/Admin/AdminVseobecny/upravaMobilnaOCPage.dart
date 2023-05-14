@@ -67,8 +67,26 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
     super.initState();
     tabController = TabController(length: 2,initialIndex: 0, vsync: this);
     _controllermiesto.addListener(() {
-      final String text = _miesto;
+      final String text = _controllermiesto.text;
       _controllermiesto.value = _controllermiesto.value.copyWith(
+        text: text,
+      );
+    });
+    _controllerlat.addListener(() {
+      final String text = _controllerlat.text;
+      _controllerlat.value = _controllerlat.value.copyWith(
+        text: text,
+      );
+    });
+    _controllerlng.addListener(() {
+      final String text = _controllerlng.text;
+      _controllerlng.value = _controllerlng.value.copyWith(
+        text: text,
+      );
+    });
+    _controllercas.addListener(() {
+      final String text = _controllercas.text;
+      _controllercas.value = _controllercas.value.copyWith(
         text: text,
       );
     });
@@ -77,6 +95,10 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
   DatabaseManager databaseManager=new DatabaseManager();
 
   fetchDatabaseList() async{
+    userKamenneOCList= [];
+    userMobilneOCList= [];
+    userMobilneOCListId=[];
+    userVyjazdoveOCList= [];
 
     resultantKam = await databaseManager.getKamenneOCList();
     //display=userKamenneOCList;
@@ -161,6 +183,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                           ),
                           child: TextFormField(
                             controller: _controllermiesto,
+                            cursorColor: Colors.black12,
                             decoration: const InputDecoration(
                               icon: const Icon(Icons.home),
                               hintText: 'Názov',
@@ -187,6 +210,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                           ),
                           child: TextFormField(
                             controller: _controllercas,
+                            cursorColor: Colors.black12,
                             decoration: const InputDecoration(
                               icon: const Icon(Icons.timelapse_outlined),
                               hintText: 'Čas',
@@ -214,16 +238,17 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                           ),
                           child: TextFormField(
                             controller: _controllerlat,
+                            cursorColor: Colors.black12,
                             decoration: const InputDecoration(
                               icon: const Icon(Icons.place),
                               hintText: 'Miesto na mapach Lat',
                               labelText: 'Lat',
                               border: InputBorder.none,
                             ),
-                            onChanged: ((value) {
+                            /*onChanged: ((value) {
                               _lat=value;
                               _controllerlat.text=_lat;
-                            }),
+                            }),*/
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Prosím zadajte lokáciu';
@@ -241,16 +266,17 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                           ),
                           child: TextFormField(
                             controller: _controllerlng,
+                            cursorColor: Colors.black12,
                             decoration: const InputDecoration(
                               icon: const Icon(Icons.place),
                               hintText: 'Miesto na mapach Lng',
                               labelText: 'Lng',
                               border: InputBorder.none,
                             ),
-                            onChanged: ((value) {
+                            /*onChanged: ((value) {
                               _lng=value;
                               _controllerlng.text=_lng;
-                            }),
+                            }),*/
                             validator: (value) {
                               if (value!.isEmpty) {
                                 return 'Prosím zadajte lokáciu';
@@ -315,6 +341,12 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                                 context: context,
                                 initialDate: DateTime.now(),
                                 firstDate: DateTime.now(),
+                                builder: (context, child) {
+                                  return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
+                                    primary: Colors.red,
+                                  )),
+                                      child: child!);
+                                },
                                 lastDate: DateTime(2101),
                                 selectableDayPredicate: (DateTime date){
                                   return true;
@@ -355,7 +387,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                                   "datum":_controllerdatum.text,
                                   "mapy":_controllerlat.text+" "+_controllerlng.text,
                                   "miesto":_controllermiesto.text,
-                                  "oc":_controlleroc.text,
+                                  "oc":_oc,
                                 });
 
                                 _controllerdatum.clear();
@@ -384,6 +416,10 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
               //prvy widget v tomto je prvy tab a druhy je druhy
               Container(
                 child: Expanded(
+                  child: RefreshIndicator(
+                  onRefresh: () async {
+                    await fetchDatabaseList();
+                  },
                   child: ListView.builder(
                       itemCount: userVyjazdoveOCList.length,
                       itemBuilder:(context, index) {
@@ -403,6 +439,7 @@ class _upravaMobilnaOCPageState extends State<upravaMobilnaOCPage> with SingleTi
                         vyjazdoveOC vyjoc=new vyjazdoveOC(userVyjazdoveOCList[index],pomocnyMobilneOC);
                         return upravaVyjazdoveOCcard(vyjoc, pomocnyMobilneOCid);
                       }),
+                  ),
                 ),
               ),
             ],

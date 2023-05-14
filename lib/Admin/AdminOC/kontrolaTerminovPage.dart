@@ -30,6 +30,10 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> with Single
   List userRezervaciaListIdPlazma=[];
   List userRezervaciaListIdDosticky=[];
 
+  bool isImageEnabledkrv=false;
+  bool isImageEnabledplazma=false;
+  bool isImageEnableddosticky=false;
+
 
 
   @override
@@ -71,6 +75,24 @@ class _kontrolaTerminovPageState extends State<kontrolaTerminovPage> with Single
           }
         }
       });
+    }
+
+    if(userRezervaciaListKrv.length==0){
+      isImageEnabledkrv=true;
+    }else{
+      isImageEnabledkrv=false;
+    }
+
+    if(userRezervaciaListDosticky.length==0){
+      isImageEnableddosticky=true;
+    }else{
+      isImageEnableddosticky=false;
+    }
+
+    if(userRezervaciaListPlazma.length==0){
+      isImageEnabledplazma=true;
+    }else{
+      isImageEnabledplazma=false;
     }
 
     dynamic resultant2 = await databaseManager.getDarcaList();

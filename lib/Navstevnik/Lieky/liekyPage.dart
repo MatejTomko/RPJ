@@ -20,10 +20,11 @@ class liekyPage extends StatefulWidget {
 }
 
 class _liekyPageState extends State<liekyPage> {
-  int _idDarca=1000;
+  //int _idDarca=1000;
   List userLiekyListPomocny = [];
   List userLiekyListDisplay = [];
   String vyrazHladaj= "";
+  bool isImageEnabled=false;
   TextEditingController liekController = new TextEditingController();
 
   @override
@@ -48,7 +49,10 @@ class _liekyPageState extends State<liekyPage> {
           }
         }
         if(userLiekyListDisplay.length==0){
+          isImageEnabled=true;
           Utils.showSnackBar("Žiaden výsledok");
+        }else{
+          isImageEnabled=false;
         }
       });
     }
@@ -144,15 +148,23 @@ class _liekyPageState extends State<liekyPage> {
                   ),
                 ),
               ),*/
-
+              Center(
+                child:
+                isImageEnabled ? Image.asset("assets/no_result2.png",height: 128,width: 128,): SizedBox(height: 0,),
+              ),
               Expanded(
                 child: ListView.builder(
                   shrinkWrap: true,
                     itemCount: userLiekyListDisplay.length,
                     itemBuilder:(context, index) {
-                    lieky liek1=new lieky(userLiekyListDisplay[index]['kedy najskôr'],userLiekyListDisplay[index]['liek'],userLiekyListDisplay[index]['môžem darovať'],userLiekyListDisplay[index]['poznámka']);
-                    return liekyCard(liek1);
-                  }),
+                      lieky liek1 = new lieky(
+                          userLiekyListDisplay[index]['kedy najskôr'],
+                          userLiekyListDisplay[index]['liek'],
+                          userLiekyListDisplay[index]['môžem darovať'],
+                          userLiekyListDisplay[index]['poznámka']);
+                      return liekyCard(liek1);
+                  }
+                  ),
               ),
             ],
           ),

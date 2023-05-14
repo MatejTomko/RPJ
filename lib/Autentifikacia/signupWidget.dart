@@ -210,9 +210,23 @@ class _SignupWidgetState extends State<SignupWidget>{
               password: passwordController.text.trim(),
             );
           } on FirebaseAuthException catch (e){
-            print(e);
-
-            Utils.showSnackBar(e.message);
+            print(e.message);
+            switch(e.message){
+              case "Given String is empty or null":
+                Utils.showSnackBar("Vypĺnte všetky políčka!");
+                break;
+              case "The email address is badly formatted.":
+                Utils.showSnackBar("Zlý format emailu!");
+                break;
+              case "There is no user record corresponding to this identifier. The user may have been deleted.":
+                Utils.showSnackBar("Neexistujúci používatel!");
+                break;
+              case "The password is invalid or the user does not have a password.":
+                Utils.showSnackBar("Zlý email alebo heslo!");
+                break;
+              default:
+                Utils.showSnackBar(e.message);
+            }
           }
           Utils.showSnackBar("Ste zaregistrovaný!");
           emailController.clear();

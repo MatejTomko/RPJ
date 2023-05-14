@@ -47,6 +47,7 @@ class _HomeAdminOCState extends State<HomeAdminOC> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: MyBottomNavigationBar(),
     );
   }

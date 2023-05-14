@@ -48,6 +48,8 @@ class _HomeAdminState extends State<HomeAdmin> {
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
+      debugShowCheckedModeBanner: false,
+
       home: MyBottomNavigationBar(),
     );
   }

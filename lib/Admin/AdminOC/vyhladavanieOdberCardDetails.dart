@@ -325,10 +325,10 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                 hintText: 'ID Darcu',
                                 border: InputBorder.none,
                               ),
-                              /*onChanged: ((value) {
-                              _idDarca=value;
+                              onChanged: ((value) {
+                              _idDarca=value!;
                               _controlleridDarca.text=value;
-                            }),*/
+                            }),
                               validator: (value) {
                                 if (value!.isEmpty) {
                                   return 'Prosím zadajte id darcu';
@@ -477,13 +477,20 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                               onTap: () async{
                                 DateTime? zvolenyDatum = await showDatePicker(
                                   context: context,
+                                  builder: (context, child) {
+                                    return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(
+                                      primary: Colors.red,
+                                    )),
+                                        child: child!);
+                                  },
                                   initialDate: DateTime.now(),
-                                  firstDate: DateTime.now(),
+                                  firstDate: DateTime.now().subtract(Duration(days: 365 * 1)),
                                   lastDate: DateTime(2101),
                                   selectableDayPredicate: (DateTime date){
                                     return true;
                                   },
                                 );
+
                                 if (zvolenyDatum != null) {
                                   String formattedDate = DateFormat('dd.MM.yyyy').format(zvolenyDatum);
                                   _datum=zvolenyDatum.toString();
@@ -554,8 +561,6 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                         endText: "Do",
                                         doneText: "Potvrdiť",
                                         cancelText: "Zrušiť",
-                                        initialStartTime: initialStart,
-                                        initialEndTime: initialEnd,
                                         interval: 1,
                                         mode: DateTimeRangePickerMode.time,
                                         minimumTime: DateTime.now().subtract(Duration(days: 5)),
@@ -564,8 +569,8 @@ class vyhladavanieOdberCardDetails extends StatelessWidget {
                                         onConfirm: (start, end) {
                                           DateFormat dateFormat = DateFormat("HH:mm");
                                           _controllerTrvanieOdberu.text = dateFormat.format(start)+" - "+dateFormat.format(end);
-                                          _zaciatok=start.toString();
-                                          _koniec=end.toString();
+                                          _zaciatok=dateFormat.format(start).toString();
+                                          _koniec=dateFormat.format(end).toString();
                                           _controllerkoniec.text=_koniec;
                                           _controllerzaciatok.text=_zaciatok;
 
