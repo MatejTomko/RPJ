@@ -101,7 +101,7 @@ class _profilePageState extends State<profilePage> {
       });
     }
     zachraneneZivoty=pocetOdberov*3;
-    String gender=user.idDarca[2];
+    String gender=user.rodnecislo[2];
     print(gender);
     if(gender=="0"||gender=="1") {
       profilovka="m";

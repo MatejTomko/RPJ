@@ -191,7 +191,7 @@ class odberObjednanieState extends State<odberObjednanie> {
                         firstDate: DateTime.now(),
                         lastDate: DateTime.now().add(Duration(days: 14)),
                         selectableDayPredicate: (DateTime date){
-                            return (date.weekday !=1 && date.weekday !=7 ); //TODO
+                            return (date.weekday !=6 && date.weekday !=7 ); //TODO
                         },
                         builder: (context, child) {
                           return Theme(data: Theme.of(context).copyWith(colorScheme: ColorScheme.light(

@@ -23,6 +23,7 @@ import 'package:blood_app/viacPage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'Admin/AdminOC/pridanieDarcuPage2.dart';
 import 'Admin/AdminVseobecny/zobrazovanieNapisteNamPage.dart';
 import 'Autentifikacia/Utils.dart';
 import 'Navstevnik/Informacie/domovPage.dart';
@@ -71,7 +72,7 @@ class _MyBottomNavigationBarState extends State<MyBottomNavigationBar>
     upravaOtazkyPage(),
     zobrazovanieNapisteNamPage(),
     pridavanieOdberuPage(),
-    pridanieDarcuPage(),
+    pridanieDarcuPage2(),
     poslanieNotifikaciePage(),
     viacPage(),
   ];

@@ -1,3 +1,4 @@
+import 'package:blood_app/Admin/AdminOC/vyhladavanieDarcaCardDetails.dart';
 import 'package:blood_app/Admin/AdminOC/vyhladavanieOdberCardDetails.dart';
 import 'package:blood_app/Darca/Odber/odber.dart';
 import 'package:blood_app/Darca/Odber/odberCardDetails.dart';
@@ -5,11 +6,13 @@ import 'package:blood_app/Darca/Profil/preukazDarcu.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class OdberCardVyhladavanie extends StatelessWidget {
-  final odber _odber;
-  final String _odberid;
+import '../../Darca/Profil/darca.dart';
 
-  OdberCardVyhladavanie(this._odber,this._odberid);
+class darcaCardVyhladavanie extends StatelessWidget {
+  final darca _darca;
+  final String _darcaid;
+
+  darcaCardVyhladavanie(this._darca,this._darcaid);
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +41,7 @@ class OdberCardVyhladavanie extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text(
-                            "${_odber.datum}",
+                            "${_darca.idDarca}",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold
@@ -65,14 +68,13 @@ class OdberCardVyhladavanie extends StatelessWidget {
                     Row(
                       children: [
                         //Padding(padding: EdgeInsets.only(right: 5), child: Image.asset("assets/blood-bank.png", width: 24)),
-                        Text("${_odber.idDarca}", style: TextStyle(fontWeight: FontWeight.w500),),
+                        Text("${_darca.meno}", style: TextStyle(fontWeight: FontWeight.w500),),
                       ],
                     ),
                     SizedBox(height: 8),
                     Row(
                       children: [
-                        Text("Typ odberu: "),
-                        Text("${_odber.typ}", style: TextStyle(fontWeight: FontWeight.w500),),
+                        Text("${_darca.priezvisko}", style: TextStyle(fontWeight: FontWeight.w500),),
                       ],
                     ),
                   ],
@@ -93,7 +95,7 @@ class OdberCardVyhladavanie extends StatelessWidget {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => vyhladavanieOdberCardDetails(_odber,_odberid)));
+                              builder: (context) => vyhladavanieDarcaCardDetails(_darca,_darcaid)));
                     }, icon: Icon(Icons.edit)),
                   ],
                 ),
